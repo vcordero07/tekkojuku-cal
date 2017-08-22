@@ -32,17 +32,19 @@ router.post('/creator/', jsonParser, (req, res) => {
       return res.status(400).send(message);
     }
   }
-  // const item = Instructor.create({
-  //   username: req.body.username,
-  //   email: req.body.email
-  // });
-  // res.status(201).json(item);
   Instructor.create({
     username: req.body.username,
     email: req.body.email
-  }, function(err, instructor) {
-    res.status(203).json(instructor);
-  })
+  }).then(item => {
+    res.status(201).json(item);
+  });
+
+  // Instructor.create({
+  //   username: req.body.username,
+  //   email: req.body.email
+  // }, function(err, instructor) {
+  //   res.status(203).json(instructor);
+  // })
 
 });
 
