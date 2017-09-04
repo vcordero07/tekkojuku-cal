@@ -10,9 +10,9 @@ const {
 } = require('../models/instructor.model');
 
 router.get('/all', (req, res) => {
-  res.json({
-    "instructors": "all"
-  })
+  Instructor.find().exec().then(data => {
+    res.status(200).json(data);
+  });
 });
 
 router.get('/instructor/:id', (req, res) => {
@@ -38,14 +38,23 @@ router.post('/creator/', jsonParser, (req, res) => {
   }).then(item => {
     res.status(201).json(item);
   });
+});
 
-  // Instructor.create({
-  //   username: req.body.username,
-  //   email: req.body.email
-  // }, function(err, instructor) {
-  //   res.status(203).json(instructor);
-  // })
+router.put('/instructor/:id', jsonParser, (req, res) => {
+  Instructor.findByIdAndUpdate(req.params.id, {
+    email: req.body.email,
+    username: req.body.username
+  }).then(data => {
+    res.status(202).json(data);
+  }).catch(err => {
+    console.log(err);
+  });
+});
 
+router.delete('/instructor/:id', (req, res) => {
+  Instructor.delete(req.params.id);
+  console.log(`Deleted instructor from the list \`${req.params.ID}\``);
+  res.status(204).end();
 });
 
 module.exports = router;
