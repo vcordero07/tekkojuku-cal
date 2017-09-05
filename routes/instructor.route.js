@@ -52,9 +52,10 @@ router.put('/instructor/:id', jsonParser, (req, res) => {
 });
 
 router.delete('/instructor/:id', (req, res) => {
-  Instructor.delete(req.params.id);
-  console.log(`Deleted instructor from the list \`${req.params.ID}\``);
-  res.status(204).end();
+  Instructor.findByIdAndRemove(req.params.id).then(() => {
+    console.log(`Deleted instructor from the list \`${req.params.id}\``);
+    res.status(204).end();
+  });
 });
 
 module.exports = router;
