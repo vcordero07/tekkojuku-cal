@@ -1,11 +1,10 @@
 language: node_js
- node_js: node
- cache:
+node_js: node
+cache:
   directories:
-  - node_modules
- env:
+    - node_modules
+env:
   - CI=true
-
 deploy:
   provider: heroku
   api_key:
