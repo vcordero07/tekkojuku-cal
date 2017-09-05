@@ -5,6 +5,8 @@ cache:
     - node_modules
 env:
   - CI=true
+script:
+  - npm test
 deploy:
   provider: heroku
   api_key:
