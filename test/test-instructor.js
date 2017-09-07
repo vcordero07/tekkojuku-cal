@@ -1,6 +1,8 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-
+const {
+  Instructor
+} = require('../models/instructor.model')
 // const {
 //   app,
 //   runServer,
@@ -11,7 +13,7 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 
-describe('asdfasdfasdf', function() {
+describe('Instructor CRUD Methods', function() {
   // before(function() {
   //   return runServer();
   // });
@@ -20,13 +22,18 @@ describe('asdfasdfasdf', function() {
   //   return closeServer();
   // });
 
-  it('it should work', function() {
-    // return chai.request(app)
-    //   .get('/instructor/all')
-    //   .then(function(res) {
-    //     res.should.have.status(200);
-    //   });
-    return true
+  it('it should create an Instructor', function(done) {
+    const instructor = new Instructor({
+      username: "testname",
+      email: "testemail@gmail.com"
+    });
+    instructor.save().then(() => {
+      instructor.isNew.should.equal(false);
+      done()
+    });
+
+    //return true
   });
+
 
 });
