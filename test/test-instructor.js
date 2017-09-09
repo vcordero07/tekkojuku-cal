@@ -27,11 +27,13 @@ describe('Instructor CRUD Methods', function() {
       username: "testname",
       email: "testemail@gmail.com"
     });
+    console.log("a");
     instructor.save().then(() => {
       instructor.isNew.should.equal(false);
-      done()
+      done();
     });
-
+    console.log("b");
+    done();
     //return true
   });
 
