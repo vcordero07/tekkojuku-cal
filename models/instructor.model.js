@@ -7,6 +7,10 @@ const instructorSchema = new Schema({
     type: 'String',
     required: true
   },
+  "password": {
+    type: 'String',
+    required: true
+  },
   "email": 'String',
   "created": {
     type: "Date",

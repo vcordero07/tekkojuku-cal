@@ -6,6 +6,7 @@ let express = require('express'),
   bodyParser = require('body-parser'),
   methodOverride = require('method-override')
 
+let authRoute = require('./routes/auth.route');
 let instructorRoute = require('./routes/instructor.route');
 const mongoUrl = (process.env.MONGO_USE_LOCAL === 'true') ?
   (process.env.MONGO_LOCAL_URL) :
@@ -33,6 +34,8 @@ app.use(methodOverride('_method'));
 app.get('/', (req, res) => {
   res.render('./index');
 });
+
+app.use('/auth', authRoute);
 
 app.use('/instructor', instructorRoute)
 
