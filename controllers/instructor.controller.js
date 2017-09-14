@@ -20,3 +20,34 @@ exports.newInstructor = (req, res) => {
     res.status(201).json(item);
   });
 };
+
+exports.getAllInstructors = (req, res) => {
+  Instructor.find().exec().then(data => {
+    res.status(200).json(data);
+  });
+};
+
+exports.getInstructorId = (req, res) => {
+  res.render('../views/instructor', {
+    "instructor": req.params.id
+  })
+};
+
+exports.updateInstructor = (req, res) => {
+  Instructor.findByIdAndUpdate(req.params.id, {
+    email: req.body.email,
+    username: req.body.username
+  }).then(data => {
+    res.status(202).json(data);
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
+
+exports.deleteInstructor = (req, res) => {
+  Instructor.findByIdAndRemove(req.params.id).then(() => {
+    console.log(`Deleted instructor from the list \`${req.params.id}\``);
+    res.status(204).end();
+  });
+};
