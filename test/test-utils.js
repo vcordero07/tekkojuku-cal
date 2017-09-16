@@ -16,24 +16,6 @@ before(function(done) {
     });
   });
 });
-// mockgoose.prepareStorage().then(() => {
-// 	mongoose.connect('mongodb://localhost/aikido-calendar_test');
-// 	mongoose.connection.on('connected', () => {
-// 	  console.log('db connection is now open');
-// 	});
-// });
-//
-//
-// before((done) => {
-//   mongoose.connect('mongodb://localhost/aikido-calendar_test');
-//   mongoose.connection
-//     .once('open', () => { //mongoose .once **
-//       return done();
-//     })
-//     .on('error', (error) => {
-//       console.warn('Warning', error);
-//     });
-// });
 
 beforeEach((done) => {
   console.log("d");
