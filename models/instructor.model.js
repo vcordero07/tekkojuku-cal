@@ -1,5 +1,4 @@
-let mongoose = require('mongoose');
-
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const instructorSchema = new Schema({
@@ -18,6 +17,16 @@ const instructorSchema = new Schema({
     default: Date.now
   }
 })
+
+instructorSchema.methods.apiRepr = function() {
+  return {
+    id: this._id,
+    username: this.authorName,
+    password: this.content,
+    email: this.title,
+    created: this.created
+  };
+}
 
 const Instructor = mongoose.model('Instructor', instructorSchema);
 

@@ -1,8 +1,8 @@
-var Mongoose = require('mongoose').Mongoose;
-var mongoose = new Mongoose();
+const Mongoose = require('mongoose').Mongoose;
+const mongoose = new Mongoose();
 
-var Mockgoose = require('mockgoose').Mockgoose;
-var mockgoose = new Mockgoose(mongoose);
+const Mockgoose = require('mockgoose').Mockgoose;
+const mockgoose = new Mockgoose(mongoose);
 
 mongoose.Promise = global.Promise;
 
