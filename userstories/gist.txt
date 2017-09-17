@@ -1,0 +1,9 @@
+User stories
+-As an instructor, I should be able to sign up for Tekkojuku-Cal
+-As an instructor, I should be able to log in to Tekkojuku-Cal
+-As an instructor, I should be able to to view the clasess in Tekkojuku-Cal
+-As an instructor, I should be able to cancel only the classes that are assigned to me
+-As an instructor, I should be able to update the message board
+-As an instructor, I should be able to assing the classes to other instructors
+-As an instructor, I should be able to update the time of the classes
+-As an instructor, I should be able to reset my password
