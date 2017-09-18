@@ -1,13 +1,13 @@
 require('dotenv').config()
 
-let express = require('express'),
-  app = express(),
-  mongoose = require('mongoose'),
-  bodyParser = require('body-parser'),
-  methodOverride = require('method-override')
+const express = require('express');
+const app = express();
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 
-let authRoute = require('./routes/auth.route');
-let instructorRoute = require('./routes/instructor.route');
+const authRoute = require('./routes/auth.route');
+const instructorRoute = require('./routes/instructor.route');
 const mongoUrl = (process.env.MONGO_USE_LOCAL === 'true') ?
   (process.env.MONGO_LOCAL_URL) :
   `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PW}@${process.env.MONGO_WEB_URL}${process.env.MONGO_DB}${process.env.MONGO_AUTH}`;
@@ -42,5 +42,49 @@ app.use('/instructor', instructorRoute)
 app.listen(process.env.PORT || 3000, function() {
   console.log('The server is running on port 3000!');
 });
+
+let server;
+
+function runServer(databaseUrl = DATABASE_URL, port = 3000) {
+  return new Promise((resolve, reject) => {
+    mongoose.connect(databaseUrl, err => {
+      if (err) {
+        return reject(err);
+      }
+      server = app.listen(port, () => {
+          console.log(`Your app is listening on port ${port}`);
+          resolve();
+        })
+        .on('error', err => {
+          mongoose.disconnect();
+          reject(err);
+        });
+    });
+  });
+}
+
+function closeServer() {
+  return mongoose.disconnect().then(() => {
+    return new Promise((resolve, reject) => {
+      console.log('Closing server');
+      server.close(err => {
+        if (err) {
+          return reject(err);
+        }
+        resolve();
+      });
+    });
+  });
+}
+
+if (require.main === module) {
+  runServer().catch(err => console.error(err));
+};
+
+module.exports = {
+  runServer,
+  app,
+  closeServer
+};
 
 //https://sleepy-reef-69636.herokuapp.com/ | https://git.heroku.com/sleepy-reef-69636.git

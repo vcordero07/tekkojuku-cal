@@ -80,20 +80,30 @@ describe('Instructor CRUD Methods', function() {
 
   });
 
-  // it('it should create an Instructor', function(done) {
-  //   const instructor = new Instructor({
-  //     username: "testname",
-  //     email: "testemail@gmail.com"
-  //   });
-  //   console.log("a");
-  //   instructor.save().then(() => {
-  //     instructor.isNew.should.equal(false);
-  //     done();
-  //   });
-  //   console.log("b");
-  //   done();
-  //return true
-  // });
+  it('should return posts with right fields', function() {
 
+    let resPost;
+    return chai.request(app)
+      .get('/all')
+      .then(res => {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('array');
+        res.body.should.have.length.of.at.least(1);
+
+        res.body.forEach(post => {
+          post.should.be.a('object');
+          post.should.include.keys('id', 'username', 'password', 'email', 'created');
+        });
+
+        resPost = res.body[0];
+        return Instructor.findById(resPost.id);
+      })
+      .then(post => {
+        resPost.username.should.equal(post.username);
+        resPost.password.should.equal(post.password);
+        resPost.email.should.equal(post.email);
+      });
+  });
 
 });

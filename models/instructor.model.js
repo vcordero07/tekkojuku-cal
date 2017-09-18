@@ -21,9 +21,9 @@ const instructorSchema = new Schema({
 instructorSchema.methods.apiRepr = function() {
   return {
     id: this._id,
-    username: this.authorName,
-    password: this.content,
-    email: this.title,
+    username: this.username,
+    password: this.password,
+    email: this.email,
     created: this.created
   };
 }
