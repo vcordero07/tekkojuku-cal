@@ -1,13 +1,25 @@
 require('dotenv').config()
 
-const express = require('express');
-const app = express();
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const express = require('express');
+const mongoose = require('mongoose');
+const morgan = require('morgan');
+
+const {
+  DATABASE_URL
+} = require('./config');
+
+const {
+  TEST_DATABASE_URL
+} = require('./config');
+
+const app = express();
+
 const methodOverride = require('method-override');
 
 const authRoute = require('./routes/auth.route');
 const instructorRoute = require('./routes/instructor.route');
+
 const mongoUrl = (process.env.MONGO_USE_LOCAL === 'true') ?
   (process.env.MONGO_LOCAL_URL) :
   `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PW}@${process.env.MONGO_WEB_URL}${process.env.MONGO_DB}${process.env.MONGO_AUTH}`;

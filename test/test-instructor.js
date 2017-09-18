@@ -45,18 +45,22 @@ function tearDownDb() {
 
 describe('Instructor CRUD Methods', function() {
   before(function() {
+    console.log('1a');
     return runServer(TEST_DATABASE_URL);
   });
 
   beforeEach(function() {
-    return seedBlogAppData();
+    console.log('1b');
+    return seedTekkojukuCalData();
   });
 
   afterEach(function() {
+    console.log('1c');
     return tearDownDb();
   });
 
   after(function() {
+    console.log('1d');
     return closeServer();
   })
 
