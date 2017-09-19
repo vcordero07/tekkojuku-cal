@@ -4,7 +4,7 @@ const {
 
 exports.newInstructor = (req, res) => {
   console.log(req.body);
-  const requiredFields = ['username', 'email'];
+  const requiredFields = ['username', 'email', 'password'];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -13,12 +13,17 @@ exports.newInstructor = (req, res) => {
       return res.status(400).send(message);
     }
   }
-  Instructor.create({
-    username: req.body.username,
-    email: req.body.email
-  }).then(item => {
-    res.status(201).json(item);
-  });
+  return Instructor.hashPassword(req.body.password)
+    .then((hash) => {
+      Instructor.create({
+        username: req.body.username,
+        email: req.body.email,
+        password: hash
+      }).then(item => {
+        res.status(201).json(item);
+      });
+    })
+
 };
 
 exports.getAllInstructors = (req, res) => {

@@ -16,6 +16,7 @@ const createAuthToken = user => {
 };
 exports.login = (req, res) => {
   // The user provides a username and password to login
+  console.log(req);
   passport.authenticate('basic', {
       session: false
     }),
