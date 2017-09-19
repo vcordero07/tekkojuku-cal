@@ -23,18 +23,18 @@ const instructorRoute = require('./routes/instructor.route');
 const mongoUrl = (process.env.MONGO_USE_LOCAL === 'true') ?
   (process.env.MONGO_LOCAL_URL) :
   `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PW}@${process.env.MONGO_WEB_URL}${process.env.MONGO_DB}${process.env.MONGO_AUTH}`;
-console.log(mongoUrl);
-mongoose.connect(mongoUrl, {
-  useMongoClient: true
-}, (err) => {
-  if (err) {
-    console.error("Error connecting to mongo");
-    throw err
-  }
-  console.log('Mongo is running at');
-}).catch(err => {
-  console.log(err);
-});
+// console.log(mongoUrl);
+// mongoose.connect(mongoUrl, {
+//   useMongoClient: true
+// }, (err) => {
+//   if (err) {
+//     console.error("Error connecting to mongo");
+//     throw err
+//   }
+//   console.log('Mongo is running at');
+// }).catch(err => {
+//   console.log(err);
+// });
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -51,15 +51,17 @@ app.use('/auth', authRoute);
 
 app.use('/instructor', instructorRoute)
 
-app.listen(process.env.PORT || 3000, function() {
-  console.log('The server is running on port 3000!');
-});
+// app.listen(process.env.PORT || 3000, function() {
+//   console.log('The server is running on port 3000!');
+// });
 
 let server;
 
 function runServer(databaseUrl = DATABASE_URL, port = 3000) {
   return new Promise((resolve, reject) => {
-    mongoose.connect(databaseUrl, err => {
+    mongoose.connect(mongoUrl, {
+      useMongoClient: true
+    }, err => {
       if (err) {
         return reject(err);
       }
@@ -71,6 +73,8 @@ function runServer(databaseUrl = DATABASE_URL, port = 3000) {
           mongoose.disconnect();
           reject(err);
         });
+    }).catch((err) => {
+      console.log(err);
     });
   });
 }
