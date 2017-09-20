@@ -1,0 +1,119 @@
+body {
+  background-color: #fff;
+  font-family: 'Roboto', sans-serif;
+}
+
+.logo {
+  height: 120px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.logo img {
+  height: 100%;
+  display: block;
+  margin: auto;
+}
+
+.content {
+  width: 320px;
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  background-color: white;
+  display: block;
+  border-radius: 3px;
+}
+
+h1 {
+  display: block;
+  text-align: center;
+  font-weight: lighter;
+  padding: 25px;
+  margin: 0;
+}
+
+label {
+  display: block;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
+input[type="text"] {
+  width: 286px;
+  display: block;
+  border: 2px solid #e7e7e7;
+  padding: 15px;
+  height: 21px;
+  border-radius: 3px;
+  font-size: 15px;
+}
+
+input[type="email"] {
+  width: 286px;
+  display: block;
+  border: 2px solid #e7e7e7;
+  padding: 15px;
+  height: 21px;
+  border-radius: 3px;
+  font-size: 15px;
+}
+
+input[type="password"] {
+  width: 286px;
+  display: block;
+  border: 2px solid #e7e7e7;
+  padding: 15px;
+  height: 21px;
+  border-radius: 3px;
+  font-size: 15px;
+}
+
+.btn-signup {
+  background-color: #00cc66;
+  color: white;
+  width: 320px;
+  padding: 15px;
+  height: 55px;
+  display: block;
+  border: 2px solid #00cc66;
+  border-radius: 3px;
+  position: relative;
+  top: 15px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.btn-signup:hover {
+  background-color: #339966;
+  border: 2px solid #339966;
+}
+
+.link-forgotpwd {
+  color: grey;
+  display: block;
+  text-align: center;
+  font-size: 15px;
+  position: relative;
+  padding-top: 25px;
+  padding-bottom: 30px;
+}
+
+.login {
+  display: block;
+  margin: auto;
+  text-align: center;
+  font-weight: bold;
+  position: relative;
+  top: 10px;
+}
+
+.login,
+.login a {
+  color: white;
+}
