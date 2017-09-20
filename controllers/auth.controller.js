@@ -1,4 +1,3 @@
-const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const {
   Instructor
@@ -8,22 +7,23 @@ const {
 const createAuthToken = user => {
   return jwt.sign({
     user
-  }, config.JWT_SECRET, {
+  }, process.env.JWT_SECRET, {
     subject: user.username,
-    expiresIn: config.JWT_EXPIRY,
+    expiresIn: process.env.JWT_EXPIRY,
     algorithm: 'HS256'
+  }, (err, token) => {
+    console.log('token:', token);
+    user.token = token;
+    console.log('user:', user);
   });
 };
 exports.login = (req, res) => {
   // The user provides a username and password to login
-  console.log(req);
-  passport.authenticate('basic', {
-      session: false
-    }),
-    (req, res) => {
-      const authToken = createAuthToken(req.user.apiRepr());
-      res.json({
-        authToken
-      });
-    }
+  console.log(req.body);
+  console.log(req.user);
+  const authToken = createAuthToken(req.user.apiRepr());
+  res.json({
+    // authToken
+    "login": "In process"
+  });
 };

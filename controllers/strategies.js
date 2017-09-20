@@ -13,12 +13,13 @@ const {
 const {
   Instructor
 } = require('../models/instructor.model');
-const {
-  JWT_SECRET
-} = require('../config');
+
+const JWT_SECRET = process.env.JWT_SECRET;
+
 
 const basicStrategy = new BasicStrategy((username, password, callback) => {
   let user;
+  console.log('username', username);
   Instructor.findOne({
       username: username
     })
@@ -32,6 +33,7 @@ const basicStrategy = new BasicStrategy((username, password, callback) => {
           message: 'Incorrect username or password'
         });
       }
+
       return user.validatePassword(password);
     })
     .then(isValid => {

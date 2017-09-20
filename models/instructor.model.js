@@ -16,6 +16,9 @@ const instructorSchema = new Schema({
     type: "Date",
     required: true,
     default: Date.now
+  },
+  "token": {
+    type: "String"
   }
 })
 
@@ -27,6 +30,10 @@ instructorSchema.methods.apiRepr = function() {
     email: this.email,
     created: this.created
   };
+}
+
+instructorSchema.methods.validatePassword = function(password) {
+  return bcrypt.compare(password, this.password);
 }
 
 instructorSchema.statics.hashPassword = function(password) {

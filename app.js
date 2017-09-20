@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const passport = require('passport');
 
 const {
   DATABASE_URL
@@ -14,11 +15,14 @@ const {
 } = require('./config');
 
 const app = express();
-
 const methodOverride = require('method-override');
-
 const authRoute = require('./routes/auth.route');
 const instructorRoute = require('./routes/instructor.route');
+
+const {
+  basicStrategy,
+  jwtStrategy
+} = require('./controllers/strategies');
 
 const mongoUrl = (process.env.MONGO_USE_LOCAL === 'true') ?
   (process.env.MONGO_LOCAL_URL) :
@@ -36,11 +40,24 @@ const mongoUrl = (process.env.MONGO_USE_LOCAL === 'true') ?
 //   console.log(err);
 // });
 
-
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
+
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(204);
+  }
+  next();
+});
+
+app.use(passport.initialize());
+passport.use(basicStrategy);
+passport.use(jwtStrategy);
 
 app.set('view engine', 'ejs');
 //app.use(express.static(__dirname + '/public'));
