@@ -1,5 +1,6 @@
 require('dotenv').config()
 
+const path = require('path');
 const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
@@ -55,12 +56,15 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use(express.static(path.resolve(__dirname, './assets')));
+console.log(path.resolve(__dirname, './assets'));
+
 app.use(passport.initialize());
 passport.use(basicStrategy);
 passport.use(jwtStrategy);
 
 app.set('view engine', 'ejs');
-//app.use(express.static(__dirname + '/public'));
+
 app.use(methodOverride('_method'));
 
 app.get('/', (req, res) => {
