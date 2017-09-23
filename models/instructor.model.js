@@ -32,6 +32,16 @@ instructorSchema.methods.apiRepr = function() {
   };
 }
 
+instructorSchema.methods.getToken = function() {
+  return instructorSchema.token;
+};
+
+instructorSchema.methods.setToken = function(token) {
+  // return this; //console.log('this: ', this);
+  instructorSchema.token = token;
+  return true;
+};
+
 instructorSchema.methods.validatePassword = function(password) {
   return bcrypt.compare(password, this.password);
 }
