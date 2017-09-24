@@ -66,7 +66,7 @@ describe('Instructor CRUD Methods', function() {
 
   describe('GET endpoint', function() {
 
-    it('should return all existing posts', function() {
+    it('should return all existing instructors', function() {
 
       let res;
       return chai.request(app)
@@ -84,9 +84,9 @@ describe('Instructor CRUD Methods', function() {
 
   });
 
-  it('should return posts with right fields', function() {
+  it('should return instructors with right fields', function() {
 
-    let resPost;
+    let resInstructor;
     return chai.request(app)
       .get('/all')
       .then(res => {
@@ -100,14 +100,35 @@ describe('Instructor CRUD Methods', function() {
           post.should.include.keys('id', 'username', 'password', 'email', 'created');
         });
 
-        resPost = res.body[0];
-        return Instructor.findById(resPost.id);
+        resInstructor = res.body[0];
+        return Instructor.findById(resInstructor.id);
       })
       .then(post => {
-        resPost.username.should.equal(post.username);
-        resPost.password.should.equal(post.password);
-        resPost.email.should.equal(post.email);
+        resInstructor.username.should.equal(post.username);
+        resInstructor.password.should.equal(post.password);
+        resInstructor.email.should.equal(post.email);
       });
+  });
+
+  describe('DELETE endpoint', function() {
+    it('delete a Instructor by id', function() {
+
+      let post;
+
+      return Instructor
+        .findOne()
+        .then(_post => {
+          post = _post;
+          return chai.request(app).delete(`/instructor/${post.id}`);
+        })
+        .then(res => {
+          res.should.have.status(204);
+          return Instructor.findById(post.id);
+        })
+        .then(_post => {
+          should.not.exist(_post);
+        });
+    });
   });
 
 });
