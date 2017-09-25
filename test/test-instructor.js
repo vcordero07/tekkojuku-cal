@@ -16,10 +16,7 @@ const {
 } = require('../app');
 
 const {
-  DATABASE_URL
-} = require('../config');
-
-const {
+  DATABASE_URL,
   TEST_DATABASE_URL
 } = require('../config');
 

@@ -13,6 +13,7 @@ const {
 } = require('../models/instructor.model');
 
 router.get('/all', instructor.getAllInstructors);
+router.get('/instructor', instructor.getInstructor);
 router.get('/instructor/:id', instructor.getInstructorId);
 router.post('/creator/', jsonParser, instructor.newInstructor);
 router.put('/instructor/:id', jsonParser, instructor.updateInstructor);

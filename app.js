@@ -8,11 +8,9 @@ const morgan = require('morgan');
 const passport = require('passport');
 
 const {
-  DATABASE_URL
-} = require('./config');
-
-const {
-  TEST_DATABASE_URL
+  DATABASE_URL,
+  TEST_DATABASE_URL,
+  PORT
 } = require('./config');
 
 const app = express();
@@ -81,11 +79,11 @@ app.use('/instructor', instructorRoute)
 
 let server;
 
-function runServer(databaseUrl = DATABASE_URL, port = 3000) {
+function runServer(databaseUrl = DATABASE_URL, port = PORT) {
   return new Promise((resolve, reject) => {
     mongoose.connect(mongoUrl, {
       useMongoClient: true
-    }, err => {
+    }, (err) => {
       if (err) {
         return reject(err);
       }
