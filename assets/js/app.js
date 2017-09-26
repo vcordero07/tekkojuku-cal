@@ -8,8 +8,8 @@ let createEventListers = () => {
         type: "POST",
         url: "/auth/login",
         headers: {
-          "Authorization": "Basic " + auth,
-          //"Content-Type": "application/json"
+          "Authorization": "Basic " + auth
+          // "Content-Type": "application/json"
         },
         data: {
           "username": $('#username').val(),
@@ -31,6 +31,7 @@ let createEventListers = () => {
           url: "/auth/getAuthToken"
         }).done(
           function(responseData) {
+            localStorage.setItem("token", responseData);
             console.log('responseData:', responseData);
           });
       })

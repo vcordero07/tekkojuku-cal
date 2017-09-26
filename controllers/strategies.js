@@ -25,6 +25,7 @@ const basicStrategy = new BasicStrategy((username, password, callback) => {
     })
     .then(_user => {
       user = _user;
+      // console.log('_user:', _user);
       if (!user) {
         // Return a rejected promise so we break out of the chain of .thens.
         // Any errors like this will be handled in the catch block.
@@ -37,6 +38,7 @@ const basicStrategy = new BasicStrategy((username, password, callback) => {
       return user.validatePassword(password);
     })
     .then(isValid => {
+      // console.log('isValid:', isValid);
       if (!isValid) {
         return Promise.reject({
           reason: 'LoginError',
@@ -46,6 +48,7 @@ const basicStrategy = new BasicStrategy((username, password, callback) => {
       return callback(null, user);
     })
     .catch(err => {
+      // console.log('err:', err);
       if (err.reason === 'LoginError') {
         return callback(null, false, err);
       }
