@@ -31,7 +31,8 @@ let createEventListers = () => {
           url: "/auth/getAuthToken"
         }).done(
           function(responseData) {
-            localStorage.setItem("token", responseData);
+            localStorage.setItem("token", responseData.tkn);
+            localStorage.setItem("uid", responseData.instructorID);
             console.log('responseData:', responseData);
           });
       })

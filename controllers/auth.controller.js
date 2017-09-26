@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken');
 const {
   Instructor
 } = require('../models/instructor.model');
-let tkn;
+let tkn,
+  instructorID;
 
 const createAuthToken = user => {
   return jwt.sign({
@@ -18,6 +19,7 @@ const createAuthToken = user => {
     // console.log('user.setToken():', user.setToken());
     user.token = token;
     tkn = token;
+    instructorID = user._id;
     console.log('user:', user);
   });
 };
@@ -34,5 +36,8 @@ exports.login = (req, res) => {
 };
 exports.getAuthToken = (req, res) => {
   console.log('Instructor:', Instructor);
-  res.status(200).send(tkn);
+  res.status(200).send({
+    tkn,
+    instructorID
+  });
 };

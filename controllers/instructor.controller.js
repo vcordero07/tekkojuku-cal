@@ -52,18 +52,22 @@ exports.getAllInstructors = (req, res) => {
 // };
 
 exports.getInstructorId = (req, res) => {
-  res.render('../views/instructor', {
-    "instructor": req.params.id
-  })
-  // Instructor
-  //   .findById(req.params.id)
-  //   .then(post => res.json(post.apiRepr()))
-  //   .catch(err => {
-  //     console.error(err);
-  //     res.status(500).json({
-  //       error: 'something went horribly awry'
-  //     });
-  //   });
+  // res.render('../views/instructor', {
+  //   "instructor": req.params.id
+  // })
+  Instructor
+    .findById(req.params.id)
+    .then((data) => {
+      res.status(200).render('../views/instructor', {
+        "instructorData": data
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'something went horribly awry'
+      });
+    });
 };
 
 exports.createInstructor = (req, res) => {
