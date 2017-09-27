@@ -3,13 +3,13 @@ const {
 } = require('../models/instructor.model');
 
 exports.newInstructor = (req, res) => {
-  console.log(req.body);
+  console.log("instructor.controller.js:6", req.body);
   const requiredFields = ['username', 'email', 'password'];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
       const message = `Missing \`${field}\` in request body`
-      console.error(message);
+      console.error("instructor.controller.js:12", message);
       return res.status(400).send(message);
     }
   }
@@ -23,7 +23,7 @@ exports.newInstructor = (req, res) => {
         res.status(201).json(item);
       })
       // .catch(err => {
-      //   console.error(err);
+      //   console.error("instructor.controller.js:26", err);
       //   res.status(500).json({
       //     error: 'Something went wrong'
       //   });
@@ -44,7 +44,7 @@ exports.getAllInstructors = (req, res) => {
 //       res.json(users.map(user => user.apiRepr()));
 //     })
 //     .catch(err => {
-//       console.error(err);
+//       console.error("instructor.controller.js:47", err);
 //       res.status(500).json({
 //         error: 'something went terribly wrong'
 //       });
@@ -63,7 +63,7 @@ exports.getInstructorId = (req, res) => {
       });
     })
     .catch(err => {
-      console.error(err);
+      console.error("instructor.controller.js:66", err);
       res.status(500).json({
         error: 'something went horribly awry'
       });
@@ -81,14 +81,14 @@ exports.updateInstructor = (req, res) => {
   }).then(data => {
     res.status(202).json(data);
   }).catch(err => {
-    console.log(err);
+    console.log("instructor.controller.js:84 - err", err);
   });
   // const requiredFields = ['username', 'password', 'email'];
   // for (let i = 0; i < requiredFields.length; i++) {
   //   const field = requiredFields[i];
   //   if (!(field in req.body)) {
   //     const message = `Missing \`${field}\` in request body`
-  //     console.error(message);
+  //     console.error("instructor.controller.js:91 - message", message);
   //     return res.status(400).send(message);
   //   }
   // }
@@ -111,7 +111,7 @@ exports.updateInstructor = (req, res) => {
 
 exports.deleteInstructor = (req, res) => {
   Instructor.findByIdAndRemove(req.params.id).then(() => {
-    console.log(`Deleted instructor from the list \`${req.params.id}\``);
+    console.log(`instructor.controller.js:114 - Deleted instructor from the list \`${req.params.id}\``);
     res.status(204).end();
   });
 };

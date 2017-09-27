@@ -13,18 +13,18 @@ const createAuthToken = user => {
     expiresIn: process.env.JWT_EXPIRY,
     algorithm: 'HS256'
   }, (err, token) => {
-    console.log('Auth.controller token:', token);
+    console.log('auth.controller.js:16 - Auth.controller token:', token);
     // console.log('user:', user.setToken());
     user.setToken(token);
     // console.log('user.setToken():', user.setToken());
     user.token = token;
     tkn = token;
     instructorID = user._id;
-    console.log('user:', user);
+    console.log('auth.controller.js:23 -user:', user);
   });
 };
 exports.login = (req, res) => {
-  console.log('req.user.getToken():', req.user.getToken());
+  console.log('auth.controller.js:27 -req.user.getToken():', req.user.getToken());
   // The user provides a username and password to login
   // console.log(req.body);
   // console.log(req.user.apiRepr(), req.user.setToken());
@@ -35,7 +35,7 @@ exports.login = (req, res) => {
   });
 };
 exports.getAuthToken = (req, res) => {
-  console.log('Instructor:', Instructor);
+  console.log('auth.controller.js:38 -Instructor:', Instructor);
   res.status(200).send({
     tkn,
     instructorID

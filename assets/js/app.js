@@ -1,5 +1,5 @@
 let createEventListers = () => {
-  console.log('abcasdfasd');
+  console.log('app.js:2 - abcasdfasd');
   $('.tekkojuku_form').submit(function(event) {
     event.preventDefault();
     let auth = btoa($('#username').val() + ':' + $('#password').val());
@@ -21,7 +21,7 @@ let createEventListers = () => {
 
         // }
         // error: function(jqXHR, txtStatus, err) {
-        //   console.log(err);
+        //   console.log("app.js:24", err);
         // }
         // datatype: "json"
       })
@@ -33,7 +33,7 @@ let createEventListers = () => {
           function(responseData) {
             localStorage.setItem("token", responseData.tkn);
             localStorage.setItem("uid", responseData.instructorID);
-            console.log('responseData:', responseData);
+            console.log('app.js:36 - responseData:', responseData);
           });
       })
   });

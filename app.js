@@ -28,17 +28,17 @@ const {
 const mongoUrl = (process.env.MONGO_USE_LOCAL === 'true') ?
   (process.env.MONGO_LOCAL_URL) :
   `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PW}@${process.env.MONGO_WEB_URL}${process.env.MONGO_DB}${process.env.MONGO_AUTH}`;
-// console.log(mongoUrl);
+// console.log("app.js:31", mongoUrl);
 // mongoose.connect(mongoUrl, {
 //   useMongoClient: true
 // }, (err) => {
 //   if (err) {
-//     console.error("Error connecting to mongo");
+//     console.error("app.js:36 - Error connecting to mongo");
 //     throw err
 //   }
-//   console.log('Mongo is running at');
+//   console.log('app.js:39 - Mongo is running at');
 // }).catch(err => {
-//   console.log(err);
+//   console.log("app.js:41", err);
 // });
 
 app.use(bodyParser.urlencoded({
@@ -76,14 +76,14 @@ app.use('/auth', authRoute);
 app.use('/instructor', instructorRoute)
 
 // app.listen(process.env.PORT || 3000, function() {
-//   console.log('The server is running on port 3000!');
+//   console.log('app.js:79 - The server is running on port 3000!');
 // });
 
 let server;
 
 function runServer(databaseUrl = DATABASE_URL, port = 3000) {
   return new Promise((resolve, reject) => {
-    console.log('DATABASE_URL:', DATABASE_URL);
+    console.log('app.js:86 - DATABASE_URL:', DATABASE_URL);
     mongoose.connect(mongoUrl, {
       useMongoClient: true
     }, (err) => {
@@ -91,7 +91,7 @@ function runServer(databaseUrl = DATABASE_URL, port = 3000) {
         return reject(err);
       }
       server = app.listen(port, () => {
-          console.log(`Your app is listening on port ${port}`);
+          console.log(`app.js:94 - Your app is listening on port ${port}`);
           resolve();
         })
         .on('error', err => {
@@ -107,7 +107,7 @@ function runServer(databaseUrl = DATABASE_URL, port = 3000) {
 function closeServer() {
   return mongoose.disconnect().then(() => {
     return new Promise((resolve, reject) => {
-      console.log('Closing server');
+      console.log('app.js:110 - Closing server');
       server.close(err => {
         if (err) {
           return reject(err);
@@ -119,7 +119,7 @@ function closeServer() {
 }
 
 if (require.main === module) {
-  runServer().catch(err => console.error(err));
+  runServer().catch(err => console.error("app.js:122", err));
 };
 
 module.exports = {
