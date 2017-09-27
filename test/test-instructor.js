@@ -26,7 +26,7 @@ const {
 chai.use(chaiHttp);
 
 function seedTekkojukuCalData() {
-  console.log('seeding Tekkojuku cal app data');
+  console.log('test-instructor.js:22 - seeding Tekkojuku cal app data');
   let seedData = [];
   for (let i = 1; i <= 10; i++) {
     seedData.push({
@@ -39,28 +39,28 @@ function seedTekkojukuCalData() {
 }
 
 function tearDownDb() {
-  console.warn('Deleting database');
+  console.warn('test-instructor.js:42 - Deleting database');
   return mongoose.connection.dropDatabase();
 }
 
 describe('Instructor CRUD Methods', function() {
   before(function() {
-    console.log('1a');
+    console.log('test-instructor.js:48 - 1a');
     return runServer(TEST_DATABASE_URL);
   });
 
   beforeEach(function() {
-    console.log('1b');
+    console.log('test-instructor.js:53 - 1b');
     return seedTekkojukuCalData();
   });
 
   afterEach(function() {
-    console.log('1c');
+    console.log('test-instructor.js:58 - 1c');
     return tearDownDb();
   });
 
   after(function() {
-    console.log('1d');
+    console.log('test-instructor.js:63 - 1d');
     return closeServer();
   })
 

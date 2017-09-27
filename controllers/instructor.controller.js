@@ -101,7 +101,7 @@ exports.updateInstructor = (req, res) => {
   //   })
   //   .then(user => res.status(201).json(user.apiRepr()))
   //   .catch(err => {
-  //     console.error(err);
+  //     console.error("instructor.controller.js:104", err);
   //     res.status(500).json({
   //       error: 'Something went wrong'
   //     });

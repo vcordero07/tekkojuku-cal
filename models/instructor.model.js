@@ -37,7 +37,7 @@ instructorSchema.methods.getToken = function() {
 };
 
 instructorSchema.methods.setToken = function(token) {
-  // return this; //console.log('this: ', this);
+  // return this; //console.log('instructor.model.js:40 - this: ', this);
   instructorSchema.token = token;
   return true;
 };

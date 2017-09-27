@@ -19,13 +19,13 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 const basicStrategy = new BasicStrategy((username, password, callback) => {
   let user;
-  console.log('username', username);
+  console.log('strategies.js:22 - username', username);
   Instructor.findOne({
       username: username
     })
     .then(_user => {
       user = _user;
-      // console.log('_user:', _user);
+      // console.log('strategies.js:29 - _user:', _user);
       if (!user) {
         // Return a rejected promise so we break out of the chain of .thens.
         // Any errors like this will be handled in the catch block.
@@ -38,7 +38,7 @@ const basicStrategy = new BasicStrategy((username, password, callback) => {
       return user.validatePassword(password);
     })
     .then(isValid => {
-      // console.log('isValid:', isValid);
+      // console.log('strategies.js:41 - isValid:', isValid);
       if (!isValid) {
         return Promise.reject({
           reason: 'LoginError',
@@ -48,7 +48,7 @@ const basicStrategy = new BasicStrategy((username, password, callback) => {
       return callback(null, user);
     })
     .catch(err => {
-      // console.log('err:', err);
+      // console.log('strategies.js:51 - err:', err);
       if (err.reason === 'LoginError') {
         return callback(null, false, err);
       }
