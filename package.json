@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "mocha",
+    "test": "cross-env MONGO_USE_TEST=true mocha",
     "start": "nodemon app.js"
   },
   "author": "",
@@ -12,6 +12,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
+    "cross-env": "^5.0.5",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.7",
     "express": "^4.15.4",

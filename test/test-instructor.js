@@ -68,19 +68,19 @@ describe('Instructor CRUD Methods', function() {
 
     it('should return all existing instructors', function() {
 
-      // let res;
-      // return chai.request(app)
-      //   .get('/all')
-      //   .then(_res => {
-      //     res = _res;
-      //     res.should.have.status(200);
-      //     res.body.should.have.length.of.at.least(1);
-      //     return Instructor.count();
-      //   })
-      //   .then(count => {
-      //     res.body.should.have.lengthOf(count);
-      //   });
-      return true;
+      let res;
+      return chai.request(app)
+        .get('/instructor/all')
+        .then(_res => {
+          res = _res;
+          res.should.have.status(200);
+          res.body.should.have.length.of.at.least(1);
+          return Instructor.count();
+        })
+        .then(count => {
+          res.body.should.have.lengthOf(count);
+        });
+      // return true;
     });
 
   });

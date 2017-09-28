@@ -25,8 +25,10 @@ const {
   jwtStrategy
 } = require('./controllers/strategies');
 
-const mongoUrl = (process.env.MONGO_USE_LOCAL === 'true') ?
+const mongoUrl = (process.env.MONGO_USE_TEST) ? (process.env.MONGO_TESTING_URL) :
+  (process.env.MONGO_USE_LOCAL === 'true') ?
   (process.env.MONGO_LOCAL_URL) :
+
   `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PW}@${process.env.MONGO_WEB_URL}${process.env.MONGO_DB}${process.env.MONGO_AUTH}`;
 // console.log("app.js:31", mongoUrl);
 // mongoose.connect(mongoUrl, {
@@ -50,6 +52,10 @@ app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+  if (process.env.JWT_TOKEN !== "") {
+    console.log('test log:', process.env.JWT_TOKEN);
+    res.header('Authorization', 'Bearer ' + process.env.JWT_TOKEN);
+  }
   if (req.method === 'OPTIONS') {
     return res.sendStatus(204);
   }
@@ -84,6 +90,7 @@ let server;
 function runServer(databaseUrl = DATABASE_URL, port = 3000) {
   return new Promise((resolve, reject) => {
     console.log('app.js:86 - DATABASE_URL:', DATABASE_URL);
+    console.log('app.js:88 - mongoUrl', mongoUrl);
     mongoose.connect(mongoUrl, {
       useMongoClient: true
     }, (err) => {

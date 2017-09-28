@@ -16,6 +16,7 @@ const createAuthToken = user => {
     console.log('auth.controller.js:16 - Auth.controller token:', token);
     // console.log('user:', user.setToken());
     user.setToken(token);
+    process.env.JWT_TOKEN = token;
     // console.log('user.setToken():', user.setToken());
     user.token = token;
     tkn = token;

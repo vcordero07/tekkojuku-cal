@@ -65,9 +65,13 @@ const jwtStrategy = new JwtStrategy({
     algorithms: ['HS256']
   },
   (payload, done) => {
+    console.log('payload:', payload);
     done(null, payload.user);
   }
 );
+// const jwtStrategy = () => {
+//   console.log(ExtractJwt.fromAuthHeaderWithScheme('Bearer'));
+// }
 
 module.exports = {
   basicStrategy,
