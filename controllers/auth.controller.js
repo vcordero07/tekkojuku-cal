@@ -14,10 +14,10 @@ const createAuthToken = user => {
     algorithm: 'HS256'
   }, (err, token) => {
     console.log('auth.controller.js:16 - Auth.controller token:', token);
-    // console.log('user:', user.setToken());
+    // console.log('auth.controller.js:17 - user:', user.setToken());
     user.setToken(token);
     process.env.JWT_TOKEN = token;
-    // console.log('user.setToken():', user.setToken());
+    // console.log('auth.controller.js:20 - user.setToken():', user.setToken());
     user.token = token;
     tkn = token;
     instructorID = user._id;
@@ -25,10 +25,10 @@ const createAuthToken = user => {
   });
 };
 exports.login = (req, res) => {
-  console.log('auth.controller.js:27 -req.user.getToken():', req.user.getToken());
+  console.log('auth.controller.js:28 -req.user.getToken():', req.user.getToken());
   // The user provides a username and password to login
-  // console.log(req.body);
-  // console.log(req.user.apiRepr(), req.user.setToken());
+  // console.log("auth.controller.js:30", req.body);
+  // console.log("auth.controller.js:31", req.user.apiRepr(), req.user.setToken());
   const authToken = createAuthToken(req.user);
   res.json({
     // authToken
@@ -36,7 +36,7 @@ exports.login = (req, res) => {
   });
 };
 exports.getAuthToken = (req, res) => {
-  console.log('auth.controller.js:38 -Instructor:', Instructor);
+  console.log('auth.controller.js:39 -Instructor:', Instructor);
   res.status(200).send({
     tkn,
     instructorID

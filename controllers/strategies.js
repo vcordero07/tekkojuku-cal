@@ -25,7 +25,7 @@ const basicStrategy = new BasicStrategy((username, password, callback) => {
     })
     .then(_user => {
       user = _user;
-      // console.log('strategies.js:29 - _user:', _user);
+      // console.log('strategies.js:28 - _user:', _user);
       if (!user) {
         // Return a rejected promise so we break out of the chain of .thens.
         // Any errors like this will be handled in the catch block.
@@ -65,12 +65,12 @@ const jwtStrategy = new JwtStrategy({
     algorithms: ['HS256']
   },
   (payload, done) => {
-    console.log('payload:', payload);
+    console.log('strategies.js:68 - payload:', payload);
     done(null, payload.user);
   }
 );
 // const jwtStrategy = () => {
-//   console.log(ExtractJwt.fromAuthHeaderWithScheme('Bearer'));
+//   console.log('strategies.js:73', ExtractJwt.fromAuthHeaderWithScheme('Bearer'));
 // }
 
 module.exports = {

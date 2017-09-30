@@ -26,7 +26,7 @@ const {
 chai.use(chaiHttp);
 
 function seedTekkojukuCalData() {
-  console.log('test-instructor.js:22 - seeding Tekkojuku cal app data');
+  console.log('test-instructor.js:29 - seeding Tekkojuku cal app data');
   let seedData = [];
   for (let i = 1; i <= 10; i++) {
     seedData.push({
