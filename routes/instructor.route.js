@@ -4,26 +4,26 @@ const mongoose = require('mongoose');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
-const instructor = require('../controllers/instructor.controller');
+const instructorController = require('../controllers/instructor.controller');
 const passport = require('passport');
-
+const jwt = require('jsonwebtoken');
 mongoose.Promise = global.Promise;
 
 // const {
 //   Instructor
-// } = require('../models/instructor.model');
+// } = require('../models/instructorController.model');
 
-router.get('/all', instructor.getAllInstructors);
-// router.get('/instructor', instructor.getInstructor);
+router.get('/all', instructorController.getAllInstructors);
+// router.get('/instructor', instructorController.getInstructor);
 
-// router.get('/instructor/:id', passport.authenticate('jwt', {
-//   session: false,
-//   failWithError: true
-// }), instructor.getInstructorId);
+router.get('/instructor/:id', passport.authenticate('jwt', {
+  session: false,
+  failWithError: true
+}), instructorController.getInstructorId);
 
-router.get('/instructor/:id', instructor.getInstructorId);
-router.post('/creator/', jsonParser, instructor.newInstructor);
-router.put('/instructor/:id', jsonParser, instructor.updateInstructor);
-router.delete('/instructor/:id', instructor.deleteInstructor);
+//router.get('/instructor/:id', instructorController.getInstructorId);
+router.post('/creator/', jsonParser, instructorController.newInstructor);
+router.put('/instructor/:id', jsonParser, instructorController.updateInstructor);
+router.delete('/instructor/:id', instructorController.deleteInstructor);
 
 module.exports = router;

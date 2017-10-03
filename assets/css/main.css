@@ -75,13 +75,13 @@ input[type="password"] {
 }
 
 .btn-signup {
-  background-color: #00cc66;
+  background-color: #2c3e50;
   color: white;
   width: 320px;
   padding: 15px;
   height: 55px;
   display: block;
-  border: 2px solid #00cc66;
+  border: 2px solid #2c3e50;
   border-radius: 3px;
   position: relative;
   top: 15px;
@@ -90,8 +90,8 @@ input[type="password"] {
 }
 
 .btn-signup:hover {
-  background-color: #339966;
-  border: 2px solid #339966;
+  background-color: #34495e;
+  border: 2px solid #34495e;
 }
 
 .link-forgotpwd {

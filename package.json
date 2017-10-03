@@ -2,10 +2,10 @@
   "name": "aikido-calendar",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "cross-env MONGO_USE_TEST=true mocha",
-    "start": "nodemon app.js"
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",

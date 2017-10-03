@@ -30,18 +30,6 @@ const mongoUrl = (process.env.MONGO_USE_TEST) ? (process.env.MONGO_TESTING_URL) 
   (process.env.MONGO_LOCAL_URL) :
 
   `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PW}@${process.env.MONGO_WEB_URL}${process.env.MONGO_DB}${process.env.MONGO_AUTH}`;
-// console.log("app.js:33", mongoUrl);
-// mongoose.connect(mongoUrl, {
-//   useMongoClient: true
-// }, (err) => {
-//   if (err) {
-//     console.error("app.js:36 - Error connecting to mongo");
-//     throw err
-//   }
-//   console.log('app.js:41 - Mongo is running at');
-// }).catch(err => {
-//   console.log("app.js:43", err);
-// });
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -80,6 +68,12 @@ app.get('/', (req, res) => {
 app.use('/auth', authRoute);
 
 app.use('/instructor', instructorRoute)
+
+app.use('*', (req, res) => {
+  return res.status(404).json({
+    message: 'Not Found'
+  });
+});
 
 // app.listen(process.env.PORT || 3000, function() {
 //   console.log('app.js:85 - The server is running on port 3000!');

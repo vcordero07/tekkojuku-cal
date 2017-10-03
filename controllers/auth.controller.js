@@ -2,8 +2,8 @@ const jwt = require('jsonwebtoken');
 const {
   Instructor
 } = require('../models/instructor.model');
-let tkn,
-  instructorID;
+let tkn;
+let instructorID;
 
 const createAuthToken = user => {
   return jwt.sign({
