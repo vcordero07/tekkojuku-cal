@@ -1,3 +1,12 @@
+let hideShow = (toHide = [], toShow = []) => {
+  toHide.forEach(function(item, indx) {
+    $(item).hide()
+  });
+  toShow.forEach(function(item, indx) {
+    $(item).show()
+  });
+};
+
 let createEventListers = () => {
   console.log('app.js:2 - abcasdfasd');
   $('.tekkojuku_form').submit(function(event) {
@@ -37,10 +46,21 @@ let createEventListers = () => {
           });
       })
   });
+
+  $('.link-login').on('click', (event) => {
+    hideShow(['.link-login'], ['.link-signup'])
+    $('.form-title').html('Login')
+  });
+
+  $('.link-signup').on('click', (event) => {
+    hideShow(['.link-signup'], ['.link-login'])
+    $('.form-title').html('Sign Up')
+  });
 }
 
 
 const renderApp = () => {
+  hideShow(['.link-signup'], ['.link-login'])
   createEventListers();
 };
 

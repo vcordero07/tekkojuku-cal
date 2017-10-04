@@ -16,12 +16,12 @@ mongoose.Promise = global.Promise;
 router.get('/all', instructorController.getAllInstructors);
 // router.get('/instructor', instructorController.getInstructor);
 
-router.get('/instructor/:id', passport.authenticate('jwt', {
-  session: false,
-  failWithError: true
-}), instructorController.getInstructorId);
+// router.get('/instructor/:id', passport.authenticate('jwt', {
+//   session: false,
+//   failWithError: true
+// }), instructorController.getInstructorId);
 
-//router.get('/instructor/:id', instructorController.getInstructorId);
+router.get('/instructor/:id', instructorController.getInstructorId);
 router.post('/creator/', jsonParser, instructorController.newInstructor);
 router.put('/instructor/:id', jsonParser, instructorController.updateInstructor);
 router.delete('/instructor/:id', instructorController.deleteInstructor);
