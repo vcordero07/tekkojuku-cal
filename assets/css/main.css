@@ -113,6 +113,15 @@ input[type="password"] {
   top: 10px;
 }
 
+.link-signup {
+  display: block;
+  margin: auto;
+  text-align: center;
+  font-weight: bold;
+  position: relative;
+  top: 10px;
+}
+
 .login,
 .login a {
   color: #000;
