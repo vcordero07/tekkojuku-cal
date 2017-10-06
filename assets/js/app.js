@@ -18,11 +18,10 @@ let createEventListers = () => {
         type: "POST",
         url: "/auth/login",
         headers: {
-          //"Authorization": "Basic " + auth,
-          "Content-Type": "application/json",
+          // "Authorization": "Basic " + auth,
+          // "Content-Type": "application/json",
           "Accept": "application/json",
           "Authorization": "OAuth oauth_token=ACCESSTOKEN"
-          // "Content-Type": "application/json"
         },
         data: {
           "username": $('#username').val(),
@@ -30,7 +29,7 @@ let createEventListers = () => {
           "email": $('#email').val()
         },
         beforeSend: function(xhr) {
-          xhr.setRequestHeader("Authorization", "Bearer " + auth);
+          xhr.setRequestHeader("Authorization", "Basic " + auth);
         },
         success: function(data) {
           console.log(data);
@@ -51,12 +50,12 @@ let createEventListers = () => {
         $.ajax({
           type: "GET",
           url: "/auth/getAuthToken",
-          beforeSend: function(xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
-          },
+          // beforeSend: function(xhr) {
+          //   xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
+          // },
         }).done(
           function(responseData) {
-            accessToken = responseData.tkn;
+            //  accessToken = responseData.tkn;
 
 
             localStorage.setItem("token", responseData.tkn);
