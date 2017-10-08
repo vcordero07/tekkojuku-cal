@@ -3,6 +3,39 @@ body {
   background: #000;
 }
 
+.navbar {
+  display: flex;
+  flex: 1 1 10%;
+  justify-content: space-between;
+  background-color: white;
+  padding: 8px 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.22);
+  align-items: center;
+  max-height: 75px;
+}
+
+.navbar-item {
+  display: flex;
+  padding: 0;
+  list-style-type: none;
+  justify-content: space-between;
+}
+
+.navbar-item ul li a {
+  color: #red;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 0 15px;
+  cursor: pointer;
+}
+
+
+}
+.main-content {
+  padding: 2%;
+  /*flex: 1 1 90%;*/
+  /*min-height: 100vh;*/
+}
 video {
   position: fixed;
   top: 50%;
@@ -17,11 +50,9 @@ video {
   background-size: cover;
   transition: 1s opacity;
 }
-
 .stopfade {
   opacity: .5;
 }
-
 #atlantic-light {
   font-family: Agenda-Light, Agenda Light, Agenda, Arial Narrow, sans-serif;
   font-weight: 100;
@@ -34,13 +65,12 @@ video {
   font-size: 1.2rem;
 }
 
-h1 {
+/*h1 {
   font-size: 3rem;
   text-transform: uppercase;
   margin-top: 0;
   letter-spacing: .3rem;
-}
-
+}*/
 #atlantic-light button {
   display: block;
   width: 80%;
@@ -54,12 +84,11 @@ h1 {
   cursor: pointer;
   transition: .3s background;
 }
-
 #atlantic-light button:hover {
   background: rgba(0, 0, 0, 0.5);
 }
 
-a {
+/*a {
   display: inline-block;
   color: #fff;
   text-decoration: none;
@@ -70,18 +99,17 @@ a {
 
 a:hover {
   background: rgba(0, 0, 0, 0.9);
-}
-
+}*/
 @media screen and (max-width: 500px) {
   div {
     width: 70%;
   }
 }
-
 @media screen and (max-device-width: 800px) {
   html {
     background: url(https://thenewcode.com/assets/images/atlantic-light.jpg) #000 no-repeat center center fixed;
   }
+
   #bgvid {
     display: none;
   }
