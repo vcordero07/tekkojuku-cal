@@ -52,14 +52,15 @@ video {
   height: auto;
   z-index: -100;
   transform: translateX(-50%) translateY(-50%);
-  background: url('//demosthenes.info/assets/images/atlantic-light.jpg') no-repeat;
+  /*background: url('./img/ATJB.jpg') no-repeat;*/
+
   background-size: cover;
   transition: 1s opacity;
 }
 .stopfade {
   opacity: .5;
 }
-#atlantic-light {
+#ATJB {
   font-family: Agenda-Light, Agenda Light, Agenda, Arial Narrow, sans-serif;
   font-weight: 100;
   background: rgba(0, 0, 0, 0.3);
@@ -77,7 +78,7 @@ video {
   margin-top: 0;
   letter-spacing: .3rem;
 }*/
-#atlantic-light button {
+.pause-btn {
   display: block;
   width: 80%;
   padding: .4rem;
@@ -90,7 +91,7 @@ video {
   cursor: pointer;
   transition: .3s background;
 }
-#atlantic-light button:hover {
+.pause-btn:hover {
   background: rgba(0, 0, 0, 0.5);
 }
 
@@ -113,7 +114,7 @@ a:hover {
 }
 @media screen and (max-device-width: 800px) {
   html {
-    background: url(https://thenewcode.com/assets/images/atlantic-light.jpg) #000 no-repeat center center fixed;
+    background: url(./img/ATJB.jpg) #000 no-repeat center center fixed;
   }
 
   #bgvid {
