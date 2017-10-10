@@ -7,40 +7,46 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <link rel="stylesheet" href="./css/bgVid.css">
+  <!-- <link rel="stylesheet" href="./css/bgVid.css"> -->
+  <link rel="stylesheet" href="./css/main.css">
   <title>Tekkojuku-Calendar</title>
 </head>
 
 <body>
-  <header class="navbar">
+  <!-- <header class="navbar">
     <div class="navbar-logo">
       <img src="./img/tekkojuku-logo.png" alt="Aikido Tekkojuku logo">
     </div>
     <nav>
       <ul class="navbar-item">
-        <li>Calendar</li>
-        <li>Instructors</li>
-        <li>Login</li>
-        <li>Info</li>
+        <li><a href="#">Calendar</a></li>
+        <li><a href="#">Instructors</a></li>
+        <li><a href="#">Login</a></li>
+        <li><a href="#">Info</a></li>
       </ul>
     </nav>
   </header>
   <div class="main-content">
-    <!-- poster="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/ATJB.jpg"  -->
-    <video id="bgvid" playsinline autoplay muted loop>
+      <video id="bgvid" playsinline autoplay muted loop> -->
+
   <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
-<source src="./videos/ATJB3.webm" type="video/webm">
+  <!-- <source src="./videos/ATJB3.webm" type="video/webm">
 <source src="./videos/ATJB3.mp4" type="video/mp4">
 </video>
     <div id="ATJB">
       <h1>Aikido Tekkojuku Boston Calendar</h1>
-      <p>Welcome</p>
+      <p>Aikido Tekkojuku Boston (ATJB) was founded to promote the practice and teaching of the Japanese martial art of Aikido, as created by O Sensei Morihei Ueshiba, in an atmosphere of mutual respect conducive to training for all, irrespective of race,
+        ethnicity, gender, ability or age. All seven founding instructors of ATJB were long-time students of the late Mitsunari Kanai Shihan, himself an "uchi deshi" (disciple) of Aikido's founder, O'Sensei Morihei Ueshiba. Kanai Shihan, a world-renowned
+        Aikido practitioner and instructor, passed away in March of 2004. The founding instructors decided to honor his memory and love of Aikido by opening ATJB.</p> -->
 
 
-      <button class="pause-btn">Pause</button>
+  <!-- <button class="pause-btn">Pause</button> -->
+
+  <!-- <button class="pause-btn" type="button" name="login">login</button>
     </div>
-  </div>
-  <!-- <main class="container">
+  </div> -->
+  <!-- ----------------------------------------------------  -->
+  <main class="container">
     <header class="logo">
       <img class="logo-1" src="./img/tekkojuku-logo.png" alt="Aikido Tekkojuku logo">
       <img class="logo-2" src="./img/tekkojuku-logo.png" alt="Aikido Tekkojuku logo">
@@ -54,11 +60,11 @@
         <input type="email" name="email" id="email" placeholder="foo@bar.com" required>
 
         <label for="password">Password</label>
-        <input type="password" name="password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="password" placeholder="1234Pswd" required> -->
+        <input type="password" name="password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="password" placeholder="1234Pswd" required>
 
-  <!-- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" -->
+        <!-- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" -->
 
-  <!-- <button type="submit" name="button" class="btn-signup">Sign up</button>
+        <button type="submit" name="button" class="btn-signup">Sign up</button>
         <a class="link-forgotpwd" href="/forgot-password/new">Forgot Password?</a>
 
       </form>
@@ -71,9 +77,12 @@
     <div class="link-signup">
       New? Create an account <a href="#">Sign Up</a>
     </div>
-  </main> -->
+
+    <div class="login-error"></div>
+  </main>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="./js/bgVid.js"></script>
+  <script src="./js/app.js"></script>
+  <!-- <script src="./js/bgVid.js"></script> -->
 </body>
 
 </html>

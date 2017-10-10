@@ -1,28 +1,17 @@
 const passport = require('passport');
-const {
-  BasicStrategy
-} = require('passport-http');
-const {
-  // Assigns the Strategy export to the name JwtStrategy using object
-  // destructuring
-  // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Assigning_to_new_variable_names
-  Strategy: JwtStrategy,
-  ExtractJwt
-} = require('passport-jwt');
+const { BasicStrategy } = require('passport-http');
 
-const {
-  Instructor
-} = require('../models/instructor.model');
-
+// Assigns the Strategy export to the name JwtStrategy using object
+// destructuring
+// https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Assigning_to_new_variable_names
+const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
+const { Instructor } = require('../models/instructor.model');
 const JWT_SECRET = process.env.JWT_SECRET;
-
 
 const basicStrategy = new BasicStrategy((username, password, callback) => {
   let user;
   console.log('strategies.js:22 - username', username);
-  Instructor.findOne({
-      username: username
-    })
+  Instructor.findOne({ username: username })
     .then(_user => {
       user = _user;
       // console.log('strategies.js:28 - _user:', _user);
@@ -73,7 +62,4 @@ const jwtStrategy = new JwtStrategy({
 //   console.log('strategies.js:73', ExtractJwt.fromAuthHeaderWithScheme('Bearer'));
 // }
 
-module.exports = {
-  basicStrategy,
-  jwtStrategy
-};
+module.exports = { basicStrategy, jwtStrategy };
