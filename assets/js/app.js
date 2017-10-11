@@ -34,11 +34,15 @@ let createEventListers = () => {
         success: function(data) {
           console.log('data:', data);
           if (!data.tkn) {
+            console.log('a37app.js');
             incorrectLogin();
           } else {
+            console.log('b39app.js:');
             $('.login-error').remove();
             localStorage.setItem('token', data.tkn);
-            $(location).attr('href', BASE_URL + '/browse?auth_token=' + data.tkn);
+            // $(location).attr('href', BASE_URL + '/calendar?auth_token=' + data.tkn);
+            $(location).attr('href', BASE_URL + '/calendar');
+            console.log('location:', $(location).attr('href', BASE_URL + '/calendar'));
           }
 
         },
@@ -71,19 +75,19 @@ let createEventListers = () => {
   }
 
   $('.link-login').on('click', (event) => {
-    hideShow(['.link-login'], ['.link-signup'])
+    hideShow(['.link-login', '.btn-signup'], ['.link-signup', '.btn-login'])
     $('.form-title').html('Login')
   });
 
   $('.link-signup').on('click', (event) => {
-    hideShow(['.link-signup'], ['.link-login'])
+    hideShow(['.link-signup', '.btn-login'], ['.link-login', '.btn-signup'])
     $('.form-title').html('Sign Up')
   });
 }
 
 
 const renderApp = () => {
-  hideShow(['.link-signup', '.logo-2'], ['.link-login'])
+  hideShow(['.link-login', '.logo-2', '.btn-signup'], ['.link-signup'])
   createEventListers();
 };
 

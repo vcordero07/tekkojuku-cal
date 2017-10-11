@@ -10,9 +10,7 @@ const jsonParser = bodyParser.json();
 
 const auth = require('../controllers/auth.controller');
 
-router.post('/login/', passport.authenticate('basic', {
-  session: false
-}), auth.login);
+router.post('/login/', passport.authenticate('basic', { session: false }), auth.login);
 
 // router.post('/refresh', passport.authenticate('jwt', {
 //     session: false
