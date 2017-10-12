@@ -1,6 +1,4 @@
-const {
-  Instructor
-} = require('../models/instructor.model');
+const { Instructor } = require('../models/instructor.model');
 
 exports.newInstructor = (req, res) => {
   console.log("instructor.controller.js:6", req.body);

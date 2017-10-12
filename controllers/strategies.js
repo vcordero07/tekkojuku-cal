@@ -48,7 +48,8 @@ const basicStrategy = new BasicStrategy((username, password, callback) => {
 const jwtStrategy = new JwtStrategy({
     secretOrKey: JWT_SECRET,
     // Look for the JWT as a Bearer auth header
-    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
+    // jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
+    jwtFromRequest: ExtractJwt.fromUrlQueryParameter('jwttoken'),
     // jwtFromRequest: Instructor.getToken(),
     // Only allow HS256 tokens - the same as the ones we issue
     algorithms: ['HS256']

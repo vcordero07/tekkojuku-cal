@@ -7,23 +7,15 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const passport = require('passport');
 
-const {
-  DATABASE_URL
-} = require('./config');
-
-const {
-  TEST_DATABASE_URL
-} = require('./config');
+const { DATABASE_URL } = require('./config');
+const { TEST_DATABASE_URL } = require('./config');
 
 const app = express();
 const methodOverride = require('method-override');
 const authRoute = require('./routes/auth.route');
 const instructorRoute = require('./routes/instructor.route');
 
-const {
-  basicStrategy,
-  jwtStrategy
-} = require('./controllers/strategies');
+const { basicStrategy, jwtStrategy } = require('./controllers/strategies');
 
 const mongoUrl = (process.env.MONGO_USE_TEST) ? (process.env.MONGO_TESTING_URL) :
   (process.env.MONGO_USE_LOCAL === 'true') ?
@@ -37,16 +29,23 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
+  console.log('setting req.header', req.headers.authorization);
+  if (process.env.JWT_TOKEN !== "") {
+    req.headers.authorization = process.env.JWT_TOKEN;
+    req.query = process.env.JWT_TOKEN;
+  }
+  console.log('xsetting req.header', req.headers.authorization);
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
   if (process.env.JWT_TOKEN !== "") {
-    console.log('app.js:56:', process.env.JWT_TOKEN);
+    console.log('test log:', process.env.JWT_TOKEN);
     res.header('Authorization', 'Bearer ' + process.env.JWT_TOKEN);
   }
   if (req.method === 'OPTIONS') {
     return res.sendStatus(204);
   }
+
   next();
 });
 
@@ -93,9 +92,7 @@ function runServer(databaseUrl = DATABASE_URL, port = 3000) {
   return new Promise((resolve, reject) => {
     console.log('app.js:92 - DATABASE_URL:', DATABASE_URL);
     console.log('app.js:93 - mongoUrl', mongoUrl);
-    mongoose.connect(mongoUrl, {
-      useMongoClient: true
-    }, (err) => {
+    mongoose.connect(mongoUrl, { useMongoClient: true }, (err) => {
       if (err) {
         return reject(err);
       }
@@ -131,10 +128,4 @@ if (require.main === module) {
   runServer().catch(err => console.error("app.js:129", err));
 };
 
-module.exports = {
-  runServer,
-  app,
-  closeServer
-};
-
-//https://sleepy-reef-69636.herokuapp.com/ | https://git.heroku.com/sleepy-reef-69636.git
+module.exports = { runServer, app, closeServer };

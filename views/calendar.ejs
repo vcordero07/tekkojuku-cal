@@ -8,24 +8,16 @@
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css"> -->
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <link rel=" stylesheet " href="font-awesome-4.7.0/css/font-awesome.css " type="text/css " />
-  <link rel="stylesheet " href="font-awesome-4.7.0/css/font-awesome.min.css " type="text/css " />
-  <link rel="stylesheet " href="./css/bgVid.css ">
+  <link rel=" stylesheet " href="/font-awesome-4.7.0/css/font-awesome.css " type="text/css " />
+  <link rel="stylesheet " href="/font-awesome-4.7.0/css/font-awesome.min.css " type="text/css " />
+  <!-- <link rel="stylesheet " href="./css/bgVid.css "> -->
+  <link rel="stylesheet " href="/css/calendar.css ">
   <title>Tekkojuku-Calendar</title>
 </head>
 
 <body>
 
-  <!-- <div class="sidebar one-edge-shadow ">
-    <div class="logo "><img src="./img/tekkojuku-logo.png " alt="Aikido Tekkojuku logo"></div>
-    <nav class="row ">
-      <div class="col-xs-3 col-md-12 "><a href=" " class="nav-item " data-toggle="tooltip " data-placement="top " title="Home "><i class="fa fa-home "></i><span class="nav-btns "> Home</span></a></div>
-      <div class="col-xs-3 col-md-12 "><a href="# " class="nav-item " data-toggle="tooltip " data-placement="top " title="Calendar "><i class="fa fa-calendar "></i><span class="nav-btns "> Calendar</span></a></div>
-      <div class="col-xs-3 col-md-12 "><a href="# " class="nav-item active " data-toggle="tooltip " data-placement="top " title="Instructors "><i class="fa fa-users "></i><span class="nav-btns "> Instructors</span></a></div>
-      <div class="col-xs-3 col-md-12 "><a href="# " class="nav-item info-btn " data-toggle="tooltip " data-placement="top " title="Info "> <i class="fa fa-info-circle "></i><span class="nav-btns "> Info</span></a></div>
-    </nav>
-  </div> -->
-  <header class="navbar">
+  <!-- <header class="navbar">
     <div class="navbar-logo">
       <img src="./img/tekkojuku-logo.png" alt="Aikido Tekkojuku logo">
     </div>
@@ -37,15 +29,33 @@
         <li><a alt="Info" href="#">Info</a></li>
       </ul>
     </nav>
-  </header>
-  <!-- <div class="main-content ">
-    <div class="googleCalendar">
-      <iframe src="https://calendar.google.com/calendar/embed?src=aikidotekkojuku11%40gmail.com&ctz=America/New_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-    </div>
-  </div> -->
+  </header> -->
+
+
+  <div id="calendar">
+
+  </div>
+  <button id="prev-month" data-offset='-1'>Prev</button>
+  <button id="next-month" data-offset='1'>Next</button>
+
+  <!-- Make sure to put this on the root of the body tag, just before the closing </body> -->
+  <div id="calendar-event-modal">
+    <form id="calendar-modal-form">
+      <div>
+        <input type="text" name="date" value="">
+        <input type="text" name="content" value="">
+      </div>
+      <div>
+        <button type="submit" name="calendar-submit">Save</button>
+        <div id="calendar-modal-cancel">cancel</div>
+      </div>
+    </form>
+
+  </div>
+
   <script src="https://code.jquery.com/jquery-3.2.1.min.js " integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=" anonymous "></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.js"></script>
-  <script src="./js/app.js "></script>
+  <script src="/js/calendar.js "></script>
 </body>
 
 </html>

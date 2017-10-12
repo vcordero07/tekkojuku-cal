@@ -28,7 +28,7 @@ ul {
 }
 
 li a {
-  color: #555;
+  color: #445252;
   text-decoration: none;
   text-transform: uppercase;
   padding: 0 15px;
@@ -93,6 +93,12 @@ video {
 }
 .pause-btn:hover {
   background: rgba(0, 0, 0, 0.5);
+}
+.pause-btn a {
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: #fff;
 }
 
 /*a {

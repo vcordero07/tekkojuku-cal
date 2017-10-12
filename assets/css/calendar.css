@@ -1,0 +1,44 @@
+body,
+html {
+  background-color: rgba(0, 0, 0, .5);
+  height: 100%;
+}
+
+#calendar {
+  border: 1px solid;
+  width: 100%;
+}
+
+#calendar .calendar-day {
+  background-color: rgba(255, 255, 255, .7);
+  border: 1px solid rgba(0, 0, 0, .5);
+  float: left;
+  height: 14.25%;
+  width: 14.25%
+}
+
+#calendar .calendar-day:hover {
+  background-color: rgba(255, 255, 255, .3);
+}
+
+#calendar-event-modal {
+  background-color: white;
+  border-radius: 5px;
+  display: none;
+  height: 60%;
+  left: 0;
+  margin-left: 20%;
+  margin-top: 20%;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  width: 60%;
+}
+
+#calendar-event-modal button {
+  float: left;
+}
+
+#calendar-modal-cancel {
+  float: right;
+}
