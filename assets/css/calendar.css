@@ -1,12 +1,13 @@
-body,
+/*body,
 html {
   background-color: rgba(0, 0, 0, .5);
   height: 100%;
-}
+}*/
 
 #calendar {
   border: 1px solid;
   width: 100%;
+  /*background-color: #445252;*/
 }
 
 #calendar .calendar-day {
@@ -22,7 +23,7 @@ html {
 }
 
 #calendar-event-modal {
-  background-color: white;
+  background-color: red;
   border-radius: 5px;
   display: none;
   height: 60%;
@@ -41,4 +42,8 @@ html {
 
 #calendar-modal-cancel {
   float: right;
+}
+
+.main-content {
+  background-color: #445252;
 }

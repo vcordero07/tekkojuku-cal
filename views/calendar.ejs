@@ -10,16 +10,16 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel=" stylesheet " href="/font-awesome-4.7.0/css/font-awesome.css " type="text/css " />
   <link rel="stylesheet " href="/font-awesome-4.7.0/css/font-awesome.min.css " type="text/css " />
-  <!-- <link rel="stylesheet " href="./css/bgVid.css "> -->
+  <link rel="stylesheet " href="/css/bgVid.css ">
   <link rel="stylesheet " href="/css/calendar.css ">
   <title>Tekkojuku-Calendar</title>
 </head>
 
 <body>
 
-  <!-- <header class="navbar">
+  <header class="navbar">
     <div class="navbar-logo">
-      <img src="./img/tekkojuku-logo.png" alt="Aikido Tekkojuku logo">
+      <img src="/img/tekkojuku-logo.png" alt="Aikido Tekkojuku logo">
     </div>
     <nav>
       <ul class="navbar-item">
@@ -29,30 +29,32 @@
         <li><a alt="Info" href="#">Info</a></li>
       </ul>
     </nav>
-  </header> -->
+  </header>
+
+  <div class="main-content">
 
 
-  <div id="calendar">
+    <div id="calendar">
 
+    </div>
+    <button id="prev-month" data-offset='-1'>Prev</button>
+    <button id="next-month" data-offset='1'>Next</button>
+
+    <!-- Make sure to put this on the root of the body tag, just before the closing </body> -->
+    <div id="calendar-event-modal">
+      <form id="calendar-modal-form">
+        <div>
+          <input type="text" name="date" value="">
+          <input type="text" name="content" value="">
+        </div>
+        <div>
+          <button type="submit" name="calendar-submit">Save</button>
+          <div id="calendar-modal-cancel">cancel</div>
+        </div>
+      </form>
+
+    </div>
   </div>
-  <button id="prev-month" data-offset='-1'>Prev</button>
-  <button id="next-month" data-offset='1'>Next</button>
-
-  <!-- Make sure to put this on the root of the body tag, just before the closing </body> -->
-  <div id="calendar-event-modal">
-    <form id="calendar-modal-form">
-      <div>
-        <input type="text" name="date" value="">
-        <input type="text" name="content" value="">
-      </div>
-      <div>
-        <button type="submit" name="calendar-submit">Save</button>
-        <div id="calendar-modal-cancel">cancel</div>
-      </div>
-    </form>
-
-  </div>
-
   <script src="https://code.jquery.com/jquery-3.2.1.min.js " integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=" anonymous "></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.js"></script>
   <script src="/js/calendar.js "></script>

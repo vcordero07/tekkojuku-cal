@@ -1,5 +1,5 @@
 $(document).ready((e) => {
-  renderCalendarMonthYear(2, 2017);
+  renderCalendarMonthYear(10, 2017);
 })
 
 /***

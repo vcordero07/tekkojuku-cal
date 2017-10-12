@@ -29,12 +29,12 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
-  console.log('setting req.header', req.headers.authorization);
+  // console.log('setting req.header', req.headers.authorization);
   if (process.env.JWT_TOKEN !== "") {
     req.headers.authorization = process.env.JWT_TOKEN;
     req.query = process.env.JWT_TOKEN;
   }
-  console.log('xsetting req.header', req.headers.authorization);
+  // console.log('xsetting req.header', req.headers.authorization);
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
