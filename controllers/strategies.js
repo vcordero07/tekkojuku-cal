@@ -4,9 +4,21 @@ const { BasicStrategy } = require('passport-http');
 // Assigns the Strategy export to the name JwtStrategy using object
 // destructuring
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Assigning_to_new_variable_names
-const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
+
+// const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+
+const mongoose = require('mongoose');
+
 const { Instructor } = require('../models/instructor.model');
 const JWT_SECRET = process.env.JWT_SECRET;
+
+const opts = {
+  jwtFromRequest: ExtractJwt.fromExtractors([ExtractJwt.fromAuthHeaderWithScheme('Bearer'), ExtractJwt.fromUrlQueryParameter('auth_token')]),
+  secretOrKey: JWT_SECRET,
+  algorithms: ['HS256']
+}
 
 const basicStrategy = new BasicStrategy((username, password, callback) => {
   let user;
@@ -45,22 +57,36 @@ const basicStrategy = new BasicStrategy((username, password, callback) => {
     });
 });
 
-const jwtStrategy = new JwtStrategy({
-    secretOrKey: JWT_SECRET,
-    // Look for the JWT as a Bearer auth header
-    // jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
-    jwtFromRequest: ExtractJwt.fromUrlQueryParameter('jwttoken'),
-    // jwtFromRequest: Instructor.getToken(),
-    // Only allow HS256 tokens - the same as the ones we issue
-    algorithms: ['HS256']
-  },
-  (payload, done) => {
-    console.log('strategies.js:68 - payload:', payload);
-    done(null, payload.user);
-  }
-);
+// const jwtStrategy = new JwtStrategy({
+//     secretOrKey: JWT_SECRET,
+//     // Look for the JWT as a Bearer auth header
+//     // jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
+//     jwtFromRequest: ExtractJwt.fromUrlQueryParameter('jwttoken'),
+//     // jwtFromRequest: Instructor.getToken(),
+//     // Only allow HS256 tokens - the same as the ones we issue
+//     algorithms: ['HS256']
+//   },
+//   (payload, done) => {
+//     console.log('strategies.js:68 - payload:', payload);
+//     done(null, payload.user);
+//   }
+// );
 // const jwtStrategy = () => {
 //   console.log('strategies.js:73', ExtractJwt.fromAuthHeaderWithScheme('Bearer'));
 // }
+const jwtStrategy = new JwtStrategy(opts, (payload, done) => {
+  console.log('strategies.js:68 - payload:', payload);
+  Instructor.findOne({ Username: payload.sub }, (err, user) => {
+    console.log('strategies.js:80 - err:', err);
+    console.log('strategies.js:81 - user:', user);
+    if (err) {
+      return done(err, false);
+    }
+    if (user) {
+      return done(null, user);
+    }
+  })
+  // done(null, payload.user);
+});
 
 module.exports = { basicStrategy, jwtStrategy };

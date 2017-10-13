@@ -29,17 +29,17 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
-  // console.log('setting req.header', req.headers.authorization);
+  // console.log('server.js:32 - setting req.header', req.headers.authorization);
   if (process.env.JWT_TOKEN !== "") {
     req.headers.authorization = process.env.JWT_TOKEN;
     req.query = process.env.JWT_TOKEN;
   }
-  // console.log('xsetting req.header', req.headers.authorization);
+  // console.log('server.js:37 - xsetting req.header', req.headers.authorization);
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
   if (process.env.JWT_TOKEN !== "") {
-    console.log('test log:', process.env.JWT_TOKEN);
+    console.log('server.js:42 - test log:', process.env.JWT_TOKEN);
     res.header('Authorization', 'Bearer ' + process.env.JWT_TOKEN);
   }
   if (req.method === 'OPTIONS') {
@@ -50,7 +50,7 @@ app.use(function(req, res, next) {
 });
 
 app.use(express.static(path.resolve(__dirname, './assets')));
-console.log("app.js:66", path.resolve(__dirname, './assets'));
+console.log("server.js:53 - path", path.resolve(__dirname, './assets'));
 
 app.use(passport.initialize());
 passport.use(basicStrategy);
@@ -83,21 +83,21 @@ app.use('*', (req, res) => {
 });
 
 // app.listen(process.env.PORT || 3000, function() {
-//   console.log('app.js:85 - The server is running on port 3000!');
+//   console.log('server.js:85 - The server is running on port 3000!');
 // });
 
 let server;
 
 function runServer(databaseUrl = DATABASE_URL, port = 3000) {
   return new Promise((resolve, reject) => {
-    console.log('app.js:92 - DATABASE_URL:', DATABASE_URL);
-    console.log('app.js:93 - mongoUrl', mongoUrl);
+    console.log('server.js:92 - DATABASE_URL:', DATABASE_URL);
+    console.log('server.js:93 - mongoUrl', mongoUrl);
     mongoose.connect(mongoUrl, { useMongoClient: true }, (err) => {
       if (err) {
         return reject(err);
       }
       server = app.listen(port, () => {
-          console.log(`app.js:101 - Your app is listening on port ${port}`);
+          console.log(`server.js:101 - Your app is listening on port ${port}`);
           resolve();
         })
         .on('error', err => {
@@ -105,7 +105,7 @@ function runServer(databaseUrl = DATABASE_URL, port = 3000) {
           reject(err);
         });
     }).catch((err) => {
-      console.log("app.js:109", err);
+      console.log("server.js:109", err);
     });
   });
 }
@@ -113,7 +113,7 @@ function runServer(databaseUrl = DATABASE_URL, port = 3000) {
 function closeServer() {
   return mongoose.disconnect().then(() => {
     return new Promise((resolve, reject) => {
-      console.log('app.js:117 - Closing server');
+      console.log('server.js:117 - Closing server');
       server.close(err => {
         if (err) {
           return reject(err);
@@ -125,7 +125,7 @@ function closeServer() {
 }
 
 if (require.main === module) {
-  runServer().catch(err => console.error("app.js:129", err));
+  runServer().catch(err => console.error("server.js:129", err));
 };
 
 module.exports = { runServer, app, closeServer };

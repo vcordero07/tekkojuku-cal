@@ -53,7 +53,7 @@ exports.getInstructorId = (req, res) => {
   // res.render('../views/instructor', {
   //   "instructor": req.params.id
   // })
-  console.log('req, res:', req, res);
+  console.log('instructor.controller.js:56 - req, res:', req, res);
   Instructor
     .findById(req.params.id)
     .then((data) => {

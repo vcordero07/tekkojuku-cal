@@ -52,6 +52,4 @@ instructorSchema.statics.hashPassword = function(password) {
 
 const Instructor = mongoose.model('Instructor', instructorSchema);
 
-module.exports = {
-  Instructor
-};
+module.exports = { Instructor };

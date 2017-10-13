@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { Instructor } = require('../models/instructor.model');
+const passport = require('passport');
 let tkn;
 let instructorID;
 
@@ -21,6 +22,7 @@ const createAuthToken = user => {
       console.log('auth.controller.js:23 -user:', user);
     });
 };
+
 exports.login = (req, res) => {
   console.log('auth.controller.js:28 -req.user.getToken():', req.user.getToken());
   // The user provides a username and password to login
@@ -29,6 +31,31 @@ exports.login = (req, res) => {
   const authToken = createAuthToken(req.user);
   return res.json({ authToken }); // "msg": "Your log in request is in progress!"
 };
+// exports.login = (req, res) => {
+//   console.log('req, res:', req, res);
+//   passport.authenticate('basic', { session: false }, function(err, user, info) {
+//     console.log('err:', err);
+//     console.log('user:', user);
+//     console.log('info:', info);
+//     if (err) {
+//       return res.json({ "msg": 'err' + err });
+//     }
+//     if (!user) {
+//       return res.json({ "msg": 'User does not exist' });
+//     }
+//     const authToken = createAuthToken(user.apiRepr());
+//     return res.json({ authToken });
+//
+//   })(req, res);
+// };
+// console.log('auth.controller.js:28 -req.user.getToken():', req.user.getToken());
+// // The user provides a username and password to login
+// // console.log("auth.controller.js:30", req.body);
+// // console.log("auth.controller.js:31", req.user.apiRepr(), req.user.setToken());
+// const authToken = createAuthToken(req.user);
+// return res.json({ authToken }); // "msg": "Your log in request is in progress!"
+
+
 exports.getAuthToken = (req, res) => {
   console.log('auth.controller.js:39 -Instructor:', Instructor);
   res.status(200).send({

@@ -8,11 +8,11 @@ let hideShow = (toHide = [], toShow = []) => {
 };
 
 let createEventListers = () => {
-  console.log('app.js:2 - abcasdfasd');
+  console.log('app.js:11 - abcasdfasd');
   $('.tekkojuku_form').submit(function(event) {
     event.preventDefault();
     let auth = btoa($('#username').val() + ':' + $('#password').val());
-    //console.log('info:', info);
+    //console.log('app.js:15 - info:', info);
     let accessToken;
     $.ajax({
         type: "POST",
@@ -32,17 +32,17 @@ let createEventListers = () => {
         //   xhr.setRequestHeader("Authorization", "Basic " + auth);
         // },
         success: function(data) {
-          console.log('data:', data);
+          console.log('app.js:35 - data:', data);
           if (!data.tkn) {
-            console.log('a37app.js');
+            console.log('app.js:37 - a');
             incorrectLogin();
           } else {
-            console.log('b39app.js:');
+            console.log('app.js:40 - b:');
             $('.login-error').remove();
             localStorage.setItem('token', data.tkn);
             // $(location).attr('href', BASE_URL + '/calendar?auth_token=' + data.tkn);
             $(location).attr('href', BASE_URL + '/calendar');
-            console.log('location:', $(location).attr('href', BASE_URL + '/calendar'));
+            console.log('app.js:45 - location:', $(location).attr('href', BASE_URL + '/calendar'));
           }
 
         },
@@ -59,7 +59,7 @@ let createEventListers = () => {
           function(responseData) {
             localStorage.setItem("token", responseData.tkn);
             localStorage.setItem("uid", responseData.instructorID);
-            console.log('app.js:36 - responseData:', responseData);
+            console.log('app.js:62 - responseData:', responseData);
           });
       })
   });

@@ -5,23 +5,11 @@ const mongoose = require('mongoose');
 
 const should = chai.should();
 
-const {
-  Instructor
-} = require('../models/instructor.model')
+const { Instructor } = require('../models/instructor.model')
 
-const {
-  app,
-  runServer,
-  closeServer
-} = require('../app');
-
-const {
-  DATABASE_URL
-} = require('../config');
-
-const {
-  TEST_DATABASE_URL
-} = require('../config');
+const { app, runServer, closeServer } = require('../app');
+const { DATABASE_URL } = require('../config');
+const { TEST_DATABASE_URL } = require('../config');
 
 chai.use(chaiHttp);
 
@@ -121,7 +109,7 @@ describe('Instructor CRUD Methods', function() {
         .findOne()
         .then(_post => {
           post = _post;
-          return chai.request(app).delete(`/instructor/instructor/${post._id}`);
+          return chai.request(app).delete(`/instructor/${post._id}`);
         })
         .then(res => {
           res.should.have.status(204);
