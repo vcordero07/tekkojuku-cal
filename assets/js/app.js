@@ -52,16 +52,16 @@ let createEventListers = () => {
         datatype: "jsonp"
       })
       .done((data) => {
-        $.ajax({
-          type: "GET",
-          url: "/auth/getAuthToken",
-        }).done(
-          function(responseData) {
-            localStorage.setItem("token", responseData.tkn);
-            localStorage.setItem("uid", responseData.instructorID);
-            console.log('app.js:62 - responseData:', responseData);
-          });
-      })
+        // $.ajax({
+        //   type: "GET",
+        //   url: "/auth/getAuthToken",
+        // }).done(
+        //   function(responseData) {
+        //     localStorage.setItem("token", responseData.tkn);
+        //     localStorage.setItem("uid", responseData.instructorID);
+        //     console.log('app.js:62 - responseData:', responseData);
+        console.log('test: this is working', data);
+      });
   });
 
   function incorrectLogin() {

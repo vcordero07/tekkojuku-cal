@@ -29,7 +29,7 @@ exports.login = (req, res) => {
   // console.log("auth.controller.js:30", req.body);
   // console.log("auth.controller.js:31", req.user.apiRepr(), req.user.setToken());
   const authToken = createAuthToken(req.user);
-  return res.json({ authToken }); // "msg": "Your log in request is in progress!"
+  return res.json({ "id": req.user._id }); // "msg": "Your log in request is in progress!"
 };
 // exports.login = (req, res) => {
 //   console.log('req, res:', req, res);

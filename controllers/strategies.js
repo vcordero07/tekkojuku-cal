@@ -76,7 +76,7 @@ const basicStrategy = new BasicStrategy((username, password, callback) => {
 // }
 const jwtStrategy = new JwtStrategy(opts, (payload, done) => {
   console.log('strategies.js:68 - payload:', payload);
-  Instructor.findOne({ Username: payload.sub }, (err, user) => {
+  Instructor.findById(payload.user._id, (err, user) => {
     console.log('strategies.js:80 - err:', err);
     console.log('strategies.js:81 - user:', user);
     if (err) {
