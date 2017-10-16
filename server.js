@@ -76,6 +76,11 @@ app.get('/login', (req, res) => {
   res.render('./login');
 });
 
+app.get('/logout', (req, res) => {
+  process.env.JWT_TOKEN = ""
+  res.render('./logout');
+});
+
 app.get('/signup', (req, res) => {
   res.render('./signup');
 });
