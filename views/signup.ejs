@@ -11,15 +11,15 @@
   <title>Tekkojuku-Calendar</title>
 </head>
 
-<body>
+<body class="signup">
 
-  <main class="container">
+  <main class="container-signup">
     <header class="logo">
-      <img class="logo-1" src="./img/tekkojuku-logo.png" alt="Aikido Tekkojuku logo">
+      <img class="logo-2" src="./img/tekkojuku-logo-inv.png" alt="Aikido Tekkojuku logo">
     </header>
-    <div class="content">
-      <h1 class="form-title">Login</h1>
-      <form class="tekkojuku_form_login" action="/signup/" method="post">
+    <div class="content-signup">
+      <h1 class="form-title">Sing Up</h1>
+      <form class="tekkojuku_form_signup" action="/signup/" method="post">
         <label for="username">Username</label>
         <input type="text" name="username" id="username" placeholder="instructorFoo">
         <label for="email">Email</label>
@@ -29,15 +29,17 @@
         <input type="password" name="password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="password" placeholder="1234Pswd" required>
 
         <!-- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" -->
-        <button type="submit" name="button" class="btn-login">Log in</button>
+        <button type="submit" name="button" class="btn-signup">Sign Up</button>
         <!-- <a class="link-forgotpwd" href="/forgot-password/new">Forgot Password?</a> -->
+        <br>
+        <div class="link-login">
+          Already have an account? <a href="/login">Log in</a>
+        </div>
         <br>
       </form>
     </div>
 
-    <div class="link-signup">
-      New? Create an account <a href="/signup">Sign Up</a>
-    </div>
+
 
     <div class="login-error"></div>
   </main>

@@ -58,7 +58,7 @@ describe('Instructor CRUD Methods', function() {
 
       let res;
       return chai.request(app)
-        .get('/instructor/all')
+        .get('/instructors/')
         .then(_res => {
           res = _res;
           res.should.have.status(200);
@@ -77,7 +77,7 @@ describe('Instructor CRUD Methods', function() {
 
     let resInstructor;
     return chai.request(app)
-      .get('/instructor/all')
+      .get('/instructors/')
       .then(res => {
         res.should.have.status(200);
         res.should.be.json;
@@ -109,7 +109,7 @@ describe('Instructor CRUD Methods', function() {
         .findOne()
         .then(_post => {
           post = _post;
-          return chai.request(app).delete(`/instructor/${post._id}`);
+          return chai.request(app).delete(`/instructors/${post._id}`);
         })
         .then(res => {
           res.should.have.status(204);

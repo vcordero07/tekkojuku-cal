@@ -14,41 +14,29 @@
 </head>
 
 <body>
-  <header class="navbar">
-    <div class="navbar-logo">
-      <img src="./img/tekkojuku-logo.png" alt="Aikido Tekkojuku logo">
-    </div>
-    <nav>
-      <ul class="navbar-item">
-        <li><a alt="Calendar" onclick="window.location.href='calendar?auth_token=' + localStorage.getItem('token')">Calendar</a></li>
-        <li><a alt="Instructors" onclick="window.location.href='instructors?auth_token=' + localStorage.getItem('token')">Instructors</a></li>
-        <li><a alt="Login" href="/login">Login</a></li>
-        <li><a alt="Info" href="#">Info</a></li>
-      </ul>
-    </nav>
-  </header>
-  <div class="main-content">
-    <video id="bgvid" playsinline autoplay muted loop>
+  <%- include navbar.ejs %>
+    <div class="main-content">
+      <video id="bgvid" playsinline autoplay muted loop>
 
   <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
   <source src="./videos/ATJB3.webm" type="video/webm">
 <source src="./videos/ATJB3.mp4" type="video/mp4">
 </video>
-    <div id="ATJB">
-      <h1>Aikido Tekkojuku Boston Calendar</h1>
-      <p>Aikido Tekkojuku Boston (ATJB) was founded to promote the practice and teaching of the Japanese martial art of Aikido, as created by O Sensei Morihei Ueshiba, in an atmosphere of mutual respect conducive to training for all, irrespective of race,
-        ethnicity, gender, ability or age. All seven founding instructors of ATJB were long-time students of the late Mitsunari Kanai Shihan, himself an "uchi deshi" (disciple) of Aikido's founder, O'Sensei Morihei Ueshiba. Kanai Shihan, a world-renowned
-        Aikido practitioner and instructor, passed away in March of 2004. The founding instructors decided to honor his memory and love of Aikido by opening ATJB.</p>
+      <div id="ATJB">
+        <h1>Aikido Tekkojuku Boston Calendar</h1>
+        <p>Aikido Tekkojuku Boston (ATJB) was founded to promote the practice and teaching of the Japanese martial art of Aikido, as created by O Sensei Morihei Ueshiba, in an atmosphere of mutual respect conducive to training for all, irrespective of race,
+          ethnicity, gender, ability or age. All seven founding instructors of ATJB were long-time students of the late Mitsunari Kanai Shihan, himself an "uchi deshi" (disciple) of Aikido's founder, O'Sensei Morihei Ueshiba. Kanai Shihan, a world-renowned
+          Aikido practitioner and instructor, passed away in March of 2004. The founding instructors decided to honor his memory and love of Aikido by opening ATJB.</p>
 
-      <!-- <button class="pause-btn">Pause</button> -->
+        <!-- <button class="pause-btn">Pause</button> -->
 
-      <button class="pause-btn" type="button" name="login"><a href="/login">login</a></button>
+        <button class="pause-btn" type="button" name="login"><a href="/login">login</a></button>
+      </div>
     </div>
-  </div>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 
-  <script src="./js/bgVid.js"></script>
+    <script src="./js/bgVid.js"></script>
 </body>
 
 </html>

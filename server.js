@@ -76,9 +76,13 @@ app.get('/login', (req, res) => {
   res.render('./login');
 });
 
+app.get('/signup', (req, res) => {
+  res.render('./signup');
+});
+
 app.use('/auth', authRoute);
 
-app.use('/instructor', instructorRoute)
+app.use('/instructors', instructorRoute)
 
 app.use('*', (req, res) => {
   return res.status(404).json({

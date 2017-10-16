@@ -50,14 +50,14 @@ exports.getAllInstructors = (req, res) => {
 // };
 
 exports.getInstructorId = (req, res) => {
-  // res.render('../views/instructor', {
+  // res.render('../views/instructors', {
   //   "instructor": req.params.id
   // })
   console.log('instructor.controller.js:56 - req, res:', req, res);
   Instructor
     .findById(req.params.id)
     .then((data) => {
-      res.status(200).render('../views/instructor', {
+      res.status(200).render('../views/instructors', {
         "instructorData": data
       });
     })

@@ -9,7 +9,7 @@ let hideShow = (toHide = [], toShow = []) => {
 
 let createEventListers = () => {
   console.log('app.js:11 - abcasdfasd');
-  $('.tekkojuku_form').submit(function(event) {
+  $('.tekkojuku_form_login').submit(function(event) {
     event.preventDefault();
     let auth = btoa($('#username').val() + ':' + $('#password').val());
     //console.log('app.js:15 - info:', info);
@@ -61,6 +61,7 @@ let createEventListers = () => {
         //     localStorage.setItem("uid", responseData.instructorID);
         //     console.log('app.js:62 - responseData:', responseData);
         console.log('test: this is working', data);
+        $(location).attr('href', '/calendar');
       });
   });
 
@@ -74,20 +75,20 @@ let createEventListers = () => {
     $(location).attr('href', BASE_URL);
   }
 
-  $('.link-login').on('click', (event) => {
-    hideShow(['.link-login', '.btn-signup'], ['.link-signup', '.btn-login'])
-    $('.form-title').html('Login')
-  });
-
-  $('.link-signup').on('click', (event) => {
-    hideShow(['.link-signup', '.btn-login'], ['.link-login', '.btn-signup'])
-    $('.form-title').html('Sign Up')
-  });
+  // $('.link-login').on('click', (event) => {
+  //   // hideShow(['.link-login', '.btn-signup'], ['.link-signup', '.btn-login'])
+  //   // $('.form-title').html('Login')
+  // });
+  //
+  // $('.link-signup').on('click', (event) => {
+  //   hideShow(['.link-signup', '.btn-login'], ['.link-login', '.btn-signup'])
+  //   $('.form-title').html('Sign Up')
+  // });
 }
 
 
 const renderApp = () => {
-  hideShow(['.link-login', '.logo-2', '.btn-signup'], ['.link-signup'])
+  // hideShow(['.link-login', '.logo-2', '.btn-signup'], ['.link-signup'])
   createEventListers();
 };
 
