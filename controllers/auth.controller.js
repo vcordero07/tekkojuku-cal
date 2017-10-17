@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { Instructor } = require('../models/instructor.model');
 const passport = require('passport');
+const cookie = require('cookie');
 let tkn;
 let instructorID;
 

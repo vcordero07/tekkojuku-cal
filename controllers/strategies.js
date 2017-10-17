@@ -57,23 +57,6 @@ const basicStrategy = new BasicStrategy((username, password, callback) => {
     });
 });
 
-// const jwtStrategy = new JwtStrategy({
-//     secretOrKey: JWT_SECRET,
-//     // Look for the JWT as a Bearer auth header
-//     // jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
-//     jwtFromRequest: ExtractJwt.fromUrlQueryParameter('jwttoken'),
-//     // jwtFromRequest: Instructor.getToken(),
-//     // Only allow HS256 tokens - the same as the ones we issue
-//     algorithms: ['HS256']
-//   },
-//   (payload, done) => {
-//     console.log('strategies.js:68 - payload:', payload);
-//     done(null, payload.user);
-//   }
-// );
-// const jwtStrategy = () => {
-//   console.log('strategies.js:73', ExtractJwt.fromAuthHeaderWithScheme('Bearer'));
-// }
 const jwtStrategy = new JwtStrategy(opts, (payload, done) => {
   console.log('strategies.js:68 - payload:', payload);
   Instructor.findById(payload.user._id, (err, user) => {

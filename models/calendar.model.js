@@ -10,7 +10,7 @@ const calendarSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Instructor'
   },
-  "dateOccurence": {
+  "dateOccurrence": {
     type: 'Date',
     required: true
   },
@@ -20,5 +20,15 @@ const calendarSchema = new Schema({
     default: Date.now
   }
 });
+
+calendarSchema.methods.apiRepr = function() {
+  return {
+    id: this._id,
+    content: this.content,
+    _instructor: this._instructor,
+    dateOccurrence: this.dateOccurrence,
+    created: this.created
+  };
+}
 
 module.exports = mongoose.model('Calendar', calendarSchema);

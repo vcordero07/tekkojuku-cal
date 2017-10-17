@@ -6,6 +6,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const passport = require('passport');
+const cookie = require('cookie');
+const cookieParser = require('cookie-parser');
 
 const { DATABASE_URL } = require('./config');
 const { TEST_DATABASE_URL } = require('./config');
@@ -27,6 +29,8 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
+
+app.use(cookieParser());
 
 app.use(function(req, res, next) {
 
