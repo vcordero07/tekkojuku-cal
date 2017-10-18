@@ -14,10 +14,11 @@
 <body>
 
   <main class="container">
-    <header class="logo">
-      <img class="logo-1" src="./img/tekkojuku-logo.png" alt="Aikido Tekkojuku logo">
-    </header>
+
     <div class="content">
+      <header class="logo">
+        <img class="logo-1" src="./img/tekkojuku-logo.png" alt="Aikido Tekkojuku logo">
+      </header>
       <h1 class="form-title">Login</h1>
       <form class="tekkojuku_form_login" action="/signup/" method="post">
         <label for="username">Username</label>
@@ -32,12 +33,14 @@
         <button type="submit" name="button" class="btn-login">Log in</button>
         <!-- <a class="link-forgotpwd" href="/forgot-password/new">Forgot Password?</a> -->
         <br>
+        <div class="link-signup">
+          New? Create an account <a href="/signup">Sign Up</a>
+        </div>
+        <br>
       </form>
     </div>
 
-    <div class="link-signup">
-      New? Create an account <a href="/signup">Sign Up</a>
-    </div>
+
 
     <div class="login-error"></div>
   </main>
