@@ -1,0 +1,81 @@
+body {
+  background-image: url('../img/zen-circle-aikido-3.png');
+}
+
+.calendar {
+  min-width: 350px;
+  max-width: 50%;
+  margin: 1em auto;
+  padding: 1em;
+  background: #eee;
+  font-family: arial, helvetica, san-serif;
+  box-shadow: 0 0 0.1em rgba(0, 0, 0, 0.5);
+  border-radius: 0.2em;
+}
+
+.calendar:last-child {
+  border-top: 6px solid #2c3e50;
+}
+
+h1 {
+  margin: 0 0 0.4em;
+  font-weight: bold;
+}
+
+.event {
+  color: #333;
+  display: block;
+  padding: 0.1em;
+  transition: all 0.25s ease;
+  margin-bottom: 0.5em;
+}
+
+.event:hover {
+  background: darken(#eee, 10%);
+  text-decoration: none;
+  color: black;
+}
+
+.event_icon {
+  width: 4em;
+  float: left;
+  margin-right: 0.75em;
+}
+
+.event_month,
+.event_day {
+  text-align: center;
+}
+
+.event_month {
+  padding: 0.1em;
+  margin-bottom: 0.15em;
+  background: #2c3e50;
+  font-size: 0.75em;
+  color: white;
+  border-top-left-radius: 0.3em;
+  border-top-right-radius: 0.3em;
+}
+
+.event_day {
+  border: 1px solid #999;
+  background: white;
+  color: black;
+  font-size: 1em;
+  font-weight: bold;
+  border-bottom-left-radius: 0.1em;
+  border-bottom-right-radius: 0.1em;
+}
+
+.event_title {
+  font-size: 1.1em;
+  height: 3em;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.btn {
+  margin-top: 0.5em;
+  width: 100%;
+  font-size: 1.5em;
+}

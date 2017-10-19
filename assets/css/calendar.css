@@ -1,5 +1,6 @@
 body {
   background-image: url('../img/zen-circle-aikido-3.png');
+  color: black;
 }
 
 .calendar-body {
@@ -8,8 +9,16 @@ body {
 }
 
 #calendar {
+  color: #000;
   border: 1px solid;
-  width: 100%;
+  width: 90%;
+  border-radius: 3px;
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  display: block;
   /*background-color: #445252;*/
 }
 
@@ -26,25 +35,28 @@ body {
 }
 
 #calendar-event-modal {
-  background-color: red;
+  background-color: #6B8E23;
   border-radius: 5px;
   display: none;
-  height: 60%;
+  height: 20%;
   left: 0;
   margin-left: 20%;
   margin-top: 20%;
   position: fixed;
   top: 0;
   z-index: 10;
-  width: 60%;
+  width: 30%;
 }
 
 #calendar-event-modal button {
   float: left;
+  font-size: 1.5em;
 }
 
 #calendar-modal-cancel {
   float: right;
+  color: white;
+  font-size: 1.5em;
 }
 
 
