@@ -1,0 +1,184 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url('../img/zen-circle-aikido-3.png');
+}
+
+div {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  display: block;
+}
+
+.wrapper1 {
+  display: grid;
+  align-items: end;
+  grid-template-columns: 1fr;
+  grid-column-gap: 1em;
+  grid-row-gap: 2em;
+}
+
+@media screen and (min-width: 500px) {
+  .wrapper1 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 780px) {
+  .wrapper1 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .wrapper1 {
+    margin-top: 1.4em;
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  .wrapper1 {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .wrapper1 {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 1900px) {
+  .wrapper1 {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+}
+
+div.dan-team {
+  border-bottom: 10px solid #666666;
+  background-color: #666666;
+}
+
+div.kyu-team {
+  border-bottom: 10px solid #fff;
+  background-color: #fff;
+}
+
+.degree-card {
+  line-height: 1.25;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  border-radius: 0.25em;
+}
+
+.degree-card figure {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.degree-card figure img {
+  display: block;
+  position: relative;
+  z-index: 10;
+}
+
+.degree-card figure figcaption {
+  display: block;
+  position: absolute;
+}
+
+.degree-card figure figcaption {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.degree-card figure img {
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.degree-card div,
+.degree-card figcaption {
+  padding: 1em 0.75em;
+}
+
+.degree-card figcaption {
+  padding: 0 0.75em;
+}
+
+.degree-card figcaption a {
+  display: block;
+  text-decoration: none;
+}
+
+.dan-team h2 {
+  font-size: 1.5em;
+  color: #fff;
+  text-align: left;
+}
+
+.dan-team p {
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  text-align: left;
+  line-height: 2em;
+}
+
+.dan-team h2 {
+  font-size: 1.5em;
+  color: #fff;
+  text-align: left;
+}
+
+.dan-team p {
+  color: #fff;
+}
+
+.kyu-team h2 {
+  font-size: 1.5em;
+  color: #000;
+  text-align: left;
+}
+
+.kyu-team p {
+  color: #000;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  text-align: left;
+  line-height: 2em;
+}
+
+.kyu-team h2 {
+  font-size: 1.5em;
+  color: #000;
+  text-align: left;
+}
+
+.kyu-team p {
+  color: #000;
+}
+
+.degree-card figure {
+  max-height: 350px;
+}
+
+@media screen and (min-width: 500px) {
+  .degree-card figure {
+    max-height: 550px;
+  }
+}

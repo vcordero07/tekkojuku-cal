@@ -30,10 +30,12 @@ exports.newInstructor = (req, res) => {
 };
 
 exports.getAllInstructors = (req, res) => {
+  let instInfo = {};
   Instructor.find().exec().then(data => {
     console.log('instructor.controller.js:34 -data', data);
+    instInfo = data;
     res.status(200).render('../views/instructors', {
-      "instructorData": data
+      "instructorData": instInfo
     })
   });
 };
