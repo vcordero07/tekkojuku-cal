@@ -30,7 +30,7 @@ const instructorSchema = new Schema({
   },
   "img": {
     type: "String",
-    default: 'img/instructor.jpg'
+    default: 'img/user.jpg'
   },
   "degree": {
     type: "String",

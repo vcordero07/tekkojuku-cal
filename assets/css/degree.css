@@ -61,12 +61,12 @@ body {
   }
 }
 
-div.dan-team {
+div.DAN-team {
   border-bottom: 10px solid #666;
   background-color: #666;
 }
 
-div.kyu-team {
+div.KYU-team {
   border-bottom: 10px solid #ecf0f1;
   background-color: #ecf0f1;
 }
@@ -107,49 +107,49 @@ div.kyu-team {
   padding-left: 10px
 }
 
-.dan-team h2 {
+.DAN-team h2 {
   font-size: 1.5em;
   color: #fff;
   text-align: left;
 }
 
-.dan-team p {
+.DAN-team p {
   color: #fff;
   font-family: 'Open Sans', sans-serif;
   font-size: 11px;
   text-align: left;
 }
 
-.dan-team h2 {
+.DAN-team h2 {
   font-size: 1.5em;
   color: #fff;
   text-align: left;
 }
 
-.dan-team p {
+.DAN-team p {
   color: #fff;
 }
 
-.kyu-team h2 {
+.KYU-team h2 {
   font-size: 1.5em;
   color: #000;
   text-align: left;
 }
 
-.kyu-team p {
+.KYU-team p {
   color: #000;
   font-family: 'Open Sans', sans-serif;
   font-size: 11px;
   text-align: left;
 }
 
-.kyu-team h2 {
+.KYU-team h2 {
   font-size: 1.5em;
   color: #000;
   text-align: left;
 }
 
-.kyu-team p {
+.KYU-team p {
   color: #000;
 }
 

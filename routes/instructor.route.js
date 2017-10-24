@@ -9,10 +9,10 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 mongoose.Promise = global.Promise;
 
-router.get('/', passport.authenticate('jwt', { session: false, failWithError: true }), instructorController.getAllInstructors);
+router.get('/', instructorController.getAllInstructors);
 router.get('/data', passport.authenticate('jwt', { session: false, failWithError: true }), instructorController.getAllInstructorsData);
 router.get('/:id', passport.authenticate('jwt', { session: false, failWithError: true }), instructorController.getInstructorId);
-router.post('/creator/', passport.authenticate('jwt', { session: false, failWithError: true }), jsonParser, instructorController.newInstructor);
+router.post('/creator/', jsonParser, instructorController.newInstructor);
 router.put('/:id', jsonParser, instructorController.updateInstructor);
 router.delete('/:id', passport.authenticate('jwt', { session: false, failWithError: true }), instructorController.deleteInstructor);
 

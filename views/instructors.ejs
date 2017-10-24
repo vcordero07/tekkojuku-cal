@@ -19,14 +19,15 @@
   <%- include navbar.ejs %>
 
     <div class="main-content ">
-      <p>
+      <!-- <p>
         <%= instructorData %>
-      </p>
-
+      </p> -->
+      <div class="btn btn-primary add-instructor-btn">Add Instructor</div>
       <div class="wrapper1">
 
         <% for(var i=0; i<instructorData.length; i++) {%>
-          <div data-userid="<%= instructorData[i]._id%>" class="degree-card dan-team" id="<%= instructorData[i]._id%>">
+
+          <div data-userid="<%= instructorData[i]._id%>" class="degree-card <%= instructorData[i].degree%>-team" id="<%= instructorData[i]._id%>">
             <div class="degree-card-title">
               <h2><%= instructorData[i].username%></h2>
               <p>
@@ -37,66 +38,8 @@
               <img src="<%= instructorData[i].img%>" alt="Instructor <%= instructorData[i].username%>">
             </figure>
           </div>
+
           <% } %>
-
-
-
-            <div data-userid="" class="degree-card dan-team" id="">
-              <div class="degree-card-title">
-                <h2>Goku </h2>
-                <p>DAN 10th Degree</p>
-              </div>
-              <figure>
-                <img src="/img/goku.jpg" alt="Instructor Goku">
-              </figure>
-            </div>
-            <div data-userid="" class="degree-card kyu-team" id="">
-              <div class="degree-card-title">
-                <h2>Mr. Satan </h2>
-                <p>KYU 5st Degree</p>
-              </div>
-              <figure>
-                <img src="/img/satan.jpg" alt="Instructor Satan">
-              </figure>
-            </div>
-            <div data-userid="" class="degree-card dan-team" id="">
-              <div class="degree-card-title">
-                <h2>Vegeta </h2>
-                <p>DAN 9th Degree</p>
-              </div>
-              <figure>
-                <img src="/img/vegeta.jpg" alt="Instructor Vegeta">
-              </figure>
-            </div>
-
-
-            <div data-userid="" class="degree-card kyu-team" id="">
-              <div class="degree-card-title">
-                <h2>Master Roshi </h2>
-                <p>Kyu 1st Degree</p>
-              </div>
-              <figure>
-                <img src="/img/roshi.jpg" alt="Instructor Roshi">
-              </figure>
-            </div>
-            <div data-userid="" class="degree-card dan-team" id="">
-              <div class="degree-card-title">
-                <h2>Beerus </h2>
-                <p>DAN 13th Degree</p>
-              </div>
-              <figure>
-                <img src="/img/beerus.jpg" alt="Instructor Beerus">
-              </figure>
-            </div>
-            <div data-userid="" class="degree-card kyu-team" id="">
-              <div class="degree-card-title">
-                <h2>Picolo </h2>
-                <p>Kyu 1th Degree</p>
-              </div>
-              <figure>
-                <img src="/img/picolo.jpg" alt="Instructor Picolo">
-              </figure>
-            </div>
 
       </div>
 

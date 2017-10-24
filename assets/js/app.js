@@ -118,6 +118,41 @@ let createEventListers = () => {
       }]
     });
   });
+  $('.add-instructor-btn').on('click', (event) => {
+    BootstrapDialog.show({
+      title: `Add Instructor`,
+      message: `
+    <br>
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username" placeholder="instructorFoo">
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" placeholder="foo@bar.com" required>
+    <label for="password">Password</label>
+    <input type="password" name="password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="password" placeholder="1234Pswd" required>
+    <button type="submit" name="button" class="btn-signup">Sign Up</button>
+    `,
+      type: BootstrapDialog.TYPE_PRIMARY,
+      buttons: [{
+        label: 'Submit',
+        cssClass: 'btn-success',
+        autospin: true,
+        action: function(dialogRef) {
+          dialogRef.enableButtons(false);
+          dialogRef.setClosable(false);
+          dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
+          setTimeout(function() {
+            dialogRef.close();
+          }, 5000);
+        }
+      }, {
+        label: 'Close',
+        action: function(dialogRef) {
+          dialogRef.close();
+        }
+      }]
+    });
+  });
+
   $('.add-event-btn').on('click', (event) => {
 
     $.ajax({
@@ -134,8 +169,6 @@ let createEventListers = () => {
         setTimeout(function() {
           $('select[name="instructors"]').html(instructorOpts)
         }, 500)
-
-
       });
 
 
@@ -171,6 +204,7 @@ let createEventListers = () => {
       }]
     });
   });
+
 
 
 }
