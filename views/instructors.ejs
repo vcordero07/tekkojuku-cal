@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css"> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/css/bootstrap-dialog.css" type="text/css" />
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel=" stylesheet " href="font-awesome-4.7.0/css/font-awesome.css " type="text/css " />
   <link rel="stylesheet " href="font-awesome-4.7.0/css/font-awesome.min.css " type="text/css " />
@@ -24,62 +24,79 @@
       </p>
 
       <div class="wrapper1">
-        <div data-userid="" class="degree-card dan-team" id="">
-          <div class="degree-card-title">
-            <h2>Goku </h2>
-            <p>DAN 10th Degree</p>
+
+        <% for(var i=0; i<instructorData.length; i++) {%>
+          <div data-userid="<%= instructorData[i]._id%>" class="degree-card dan-team" id="<%= instructorData[i]._id%>">
+            <div class="degree-card-title">
+              <h2><%= instructorData[i].username%></h2>
+              <p>
+                <%= instructorData[i].degree%>
+              </p>
+            </div>
+            <figure>
+              <img src="<%= instructorData[i].img%>" alt="Instructor <%= instructorData[i].username%>">
+            </figure>
           </div>
-          <figure>
-            <img src="/img/goku.jpg" alt="Instructor Goku">
-          </figure>
-        </div>
-        <div data-userid="" class="degree-card kyu-team" id="">
-          <div class="degree-card-title">
-            <h2>Mr. Satan </h2>
-            <p>KYU 5st Degree</p>
-          </div>
-          <figure>
-            <img src="/img/satan.jpg" alt="Instructor Satan">
-          </figure>
-        </div>
-        <div data-userid="" class="degree-card dan-team" id="">
-          <div class="degree-card-title">
-            <h2>Vegeta </h2>
-            <p>DAN 9th Degree</p>
-          </div>
-          <figure>
-            <img src="/img/vegeta.jpg" alt="Instructor Vegeta">
-          </figure>
-        </div>
+          <% } %>
 
 
-        <div data-userid="" class="degree-card kyu-team" id="">
-          <div class="degree-card-title">
-            <h2>Master Roshi </h2>
-            <p>Kyu 1st Degree</p>
-          </div>
-          <figure>
-            <img src="/img/roshi.jpg" alt="Instructor Roshi">
-          </figure>
-        </div>
-        <div data-userid="" class="degree-card dan-team" id="">
-          <div class="degree-card-title">
-            <h2>Beerus </h2>
-            <p>DAN 13th Degree</p>
-          </div>
-          <figure>
-            <img src="/img/beerus.jpg" alt="Instructor Beerus">
-          </figure>
-        </div>
-        <div data-userid="" class="degree-card kyu-team" id="">
-          <div class="degree-card-title">
-            <h2>Picolo </h2>
-            <p>Kyu 1th Degree</p>
-          </div>
-          <figure>
-            <img src="/img/picolo.jpg" alt="Instructor Picolo">
-          </figure>
-        </div>
+
+            <div data-userid="" class="degree-card dan-team" id="">
+              <div class="degree-card-title">
+                <h2>Goku </h2>
+                <p>DAN 10th Degree</p>
+              </div>
+              <figure>
+                <img src="/img/goku.jpg" alt="Instructor Goku">
+              </figure>
+            </div>
+            <div data-userid="" class="degree-card kyu-team" id="">
+              <div class="degree-card-title">
+                <h2>Mr. Satan </h2>
+                <p>KYU 5st Degree</p>
+              </div>
+              <figure>
+                <img src="/img/satan.jpg" alt="Instructor Satan">
+              </figure>
+            </div>
+            <div data-userid="" class="degree-card dan-team" id="">
+              <div class="degree-card-title">
+                <h2>Vegeta </h2>
+                <p>DAN 9th Degree</p>
+              </div>
+              <figure>
+                <img src="/img/vegeta.jpg" alt="Instructor Vegeta">
+              </figure>
+            </div>
+
+
+            <div data-userid="" class="degree-card kyu-team" id="">
+              <div class="degree-card-title">
+                <h2>Master Roshi </h2>
+                <p>Kyu 1st Degree</p>
+              </div>
+              <figure>
+                <img src="/img/roshi.jpg" alt="Instructor Roshi">
+              </figure>
+            </div>
+            <div data-userid="" class="degree-card dan-team" id="">
+              <div class="degree-card-title">
+                <h2>Beerus </h2>
+                <p>DAN 13th Degree</p>
+              </div>
+              <figure>
+                <img src="/img/beerus.jpg" alt="Instructor Beerus">
+              </figure>
+            </div>
+            <div data-userid="" class="degree-card kyu-team" id="">
+              <div class="degree-card-title">
+                <h2>Picolo </h2>
+                <p>Kyu 1th Degree</p>
+              </div>
+              <figure>
+                <img src="/img/picolo.jpg" alt="Instructor Picolo">
+              </figure>
+            </div>
 
       </div>
 
@@ -89,8 +106,10 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js " integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=" anonymous "></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/js/bootstrap-dialog.js"></script>
     <script src="/js/global.js "></script>
-    <script src="./js/app.js "></script>
+    <script src="/js/app.js "></script>
 </body>
 
 

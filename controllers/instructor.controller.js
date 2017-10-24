@@ -40,6 +40,15 @@ exports.getAllInstructors = (req, res) => {
   });
 };
 
+exports.getAllInstructorsData = (req, res) => {
+  let instInfo = {};
+  Instructor.find().exec().then(data => {
+    console.log('instructor.controller.js:34 -data', data);
+    instInfo = data;
+    res.status(200).json(instInfo);
+  });
+};
+
 exports.getInstructorId = (req, res) => {
   console.log('instructor.controller.js:56 - req, res:', req, res);
   Instructor

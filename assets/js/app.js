@@ -76,6 +76,15 @@ let doSignup = (auth) => {
       $(location).attr('href', '/instructors');
     });
 }
+let incorrectLogin = () => {
+  $('.login-error').remove();
+  $('.login').prepend('<span class="login-error">The username or password is incorrect. Please try again.');
+}
+
+let logoutUser = () => {
+  localStorage.removeItem('authToken');
+  $(location).attr('href', "/");
+}
 
 let createEventListers = () => {
   console.log('app.js:11 - abcasdfasd');
@@ -92,15 +101,78 @@ let createEventListers = () => {
     doSignup(auth);
   });
 
-  function incorrectLogin() {
-    $('.login-error').remove();
-    $('.login').prepend('<span class="login-error">The username or password is incorrect. Please try again.');
-  }
+  // incorrectLogin()
+  // logoutUser()
 
-  function logoutUser() {
-    localStorage.removeItem('authToken');
-    $(location).attr('href', BASE_URL);
-  }
+  $('.info-btn').on('click', (event) => {
+    BootstrapDialog.show({
+      title: `<img src="/img/tekkojuku-logo.png" alt="Aikido Tekkojuku Logo" width="64" height="64"> <div><span >Aikido Tekkojuku Class Calendar</span></div>`,
+      message: `BLAH BLAH BLAH BLAH
+    <br> `,
+      type: BootstrapDialog.TYPE_PRIMARY,
+      buttons: [{
+        label: 'Close',
+        action: function(dialogRef) {
+          dialogRef.close();
+        }
+      }]
+    });
+  });
+  $('.add-event-btn').on('click', (event) => {
+
+    $.ajax({
+        type: "get",
+        url: "/instructors/data",
+        datatype: "json",
+      })
+      .done((data) => {
+        console.log('data: Successful', data);
+        let instructorOpts = "";
+        data.forEach(item => {
+          instructorOpts += ` <option value="${item._id}">${item.username}</option>`
+        })
+        setTimeout(function() {
+          $('select[name="instructors"]').html(instructorOpts)
+        }, 500)
+
+
+      });
+
+
+    BootstrapDialog.show({
+      title: `Add a new Class`,
+      message: `loading...
+    <br>
+    Select an Instructor
+    <select name="instructors">
+</select>
+    <input type=date>
+<input type=time min=9:00 max=17:00 step=900> `,
+      type: BootstrapDialog.TYPE_DANGER,
+      buttons: [{
+        label: 'Close',
+        action: function(dialogRef) {
+          dialogRef.close();
+        }
+      }]
+    });
+  });
+  $('.degree-card').on('click', (event) => {
+    BootstrapDialog.show({
+      title: `Instructor Edit`,
+      message: `BLAH BLAH BLAH BLAH
+    <br> `,
+      type: BootstrapDialog.TYPE_PRIMARY,
+      buttons: [{
+        label: 'Close',
+        action: function(dialogRef) {
+          dialogRef.close();
+        }
+      }]
+    });
+  });
+
+
 }
 
 

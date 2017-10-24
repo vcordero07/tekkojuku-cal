@@ -3,7 +3,7 @@ const { Calendar } = require('../models/calendar.model');
 exports.getCalendar = (req, res) => {
   console.log('calendar.controller.js:4 - getCalendar:');
   Calendar.find().exec().then(data => {
-    res.status(200).json(data);
+    res.status(200)..render('../views/calendar', data);
   });
 };
 exports.getClass = (req, res) => {

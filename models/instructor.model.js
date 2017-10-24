@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcryptjs');
+const SUPERUSER = 1;
+const INSTRUCTOR = 2;
+const USER = 3;
 
 const instructorSchema = new Schema({
   "username": {
@@ -19,6 +22,20 @@ const instructorSchema = new Schema({
   },
   "token": {
     type: "String"
+  },
+  "role": {
+    type: "Number",
+    required: true,
+    default: USER
+  },
+  "img": {
+    type: "String",
+    default: 'img/instructor.jpg'
+  },
+  "degree": {
+    type: "String",
+    required: true,
+    default: "kyu"
   }
 })
 
