@@ -35,7 +35,7 @@ const instructorSchema = new Schema({
   "degree": {
     type: "String",
     required: true,
-    default: "kyu"
+    default: "KYU"
   }
 })
 

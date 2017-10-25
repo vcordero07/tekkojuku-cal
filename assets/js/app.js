@@ -106,9 +106,12 @@ let createEventListers = () => {
 
   $('.info-btn').on('click', (event) => {
     BootstrapDialog.show({
-      title: `<img src="/img/tekkojuku-logo.png" alt="Aikido Tekkojuku Logo" width="64" height="64"> <div><span >Aikido Tekkojuku Class Calendar</span></div>`,
-      message: `BLAH BLAH BLAH BLAH
-    <br> `,
+      title: `<img src="/img/tekkojuku-logo-inv.png" alt="Aikido Tekkojuku Logo" width="64" height="64"> Aikido Tekkojuku`,
+      message: `Class Calendar
+    <br> The purpose of this site is to allow the head instructor to automate the process of the monthly calendar class assignment.
+    <br> Aikido Tekkojuku Boston (ATJB) was founded to promote the practice and teaching of the Japanese martial art of Aikido, as created by O Sensei Morihei Ueshiba, in an atmosphere of mutual respect conducive to training for all, irrespective of race,
+      ethnicity, gender, ability or age. All seven founding instructors of ATJB were long-time students of the late Mitsunari Kanai Shihan, himself an "uchi deshi" (disciple) of Aikido's founder, O'Sensei Morihei Ueshiba. Kanai Shihan, a world-renowned
+      Aikido practitioner and instructor, passed away in March of 2004. The founding instructors decided to honor his memory and love of Aikido by opening ATJB.`,
       type: BootstrapDialog.TYPE_PRIMARY,
       buttons: [{
         label: 'Close',
@@ -129,7 +132,6 @@ let createEventListers = () => {
     <input type="email" name="email" id="email" placeholder="foo@bar.com" required>
     <label for="password">Password</label>
     <input type="password" name="password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="password" placeholder="1234Pswd" required>
-    <button type="submit" name="button" class="btn-signup">Sign Up</button>
     `,
       type: BootstrapDialog.TYPE_PRIMARY,
       buttons: [{
@@ -137,6 +139,9 @@ let createEventListers = () => {
         cssClass: 'btn-success',
         autospin: true,
         action: function(dialogRef) {
+          event.preventDefault();
+          let auth = btoa($('#username').val() + ':' + $('#password').val());
+          doSignup(auth);
           dialogRef.enableButtons(false);
           dialogRef.setClosable(false);
           dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
@@ -199,7 +204,9 @@ let createEventListers = () => {
     BootstrapDialog.show({
       title: `<img src="${$(event.currentTarget).find('img').attr('src')}" width="65" height="90"> Instructor ${$(event.currentTarget).find('.inst-name')[0].innerHTML}`,
       message: `Degree: ${$.trim($(event.currentTarget).find('.inst-degree')[0].innerHTML)}
-    <br> Short Bio: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam consequat ornare mauris quis mollis. Nam quam magna, fermentum eget lacinia a, vehicula ut erat. Curabitur cursus ligula justo, nec feugiat leo rutrum eget. Morbi molestie lorem at sapien iaculis maximus. Morbi accumsan lacus et augue dignissim eleifend. Praesent erat arcu, blandit a enim sit amet, auctor hendrerit erat. Sed id lorem consequat, dapibus sem non, bibendum nunc. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum tristique vel ante a venenatis.`,
+    <br> Short Bio: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam consequat ornare mauris quis mollis. Nam quam magna, fermentum eget lacinia a, vehicula ut erat. Curabitur cursus ligula justo, nec feugiat leo rutrum eget. Morbi molestie lorem at sapien iaculis maximus. Morbi accumsan lacus et augue dignissim eleifend. Praesent erat arcu, blandit a enim sit amet, auctor hendrerit erat. Sed id lorem consequat, dapibus sem non, bibendum nunc. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum tristique vel ante a venenatis.
+    <br> Class:
+    <br>`,
       type: BootstrapDialog.TYPE_PRIMARY,
       buttons: [{
         label: 'Close',
