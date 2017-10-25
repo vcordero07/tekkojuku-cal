@@ -29,13 +29,13 @@
 
           <div data-userid="<%= instructorData[i]._id%>" class="degree-card <%= instructorData[i].degree%>-team" id="<%= instructorData[i]._id%>">
             <div class="degree-card-title">
-              <h2><%= instructorData[i].username%></h2>
-              <p>
+              <h2 class="inst-name"><%= instructorData[i].username%></h2>
+              <p class="inst-degree">
                 <%= instructorData[i].degree%>
               </p>
             </div>
             <figure>
-              <img src="<%= instructorData[i].img%>" alt="Instructor <%= instructorData[i].username%>">
+              <img class="inst-profile-pic" src="<%= instructorData[i].img%>" alt="Instructor <%= instructorData[i].username%>">
             </figure>
           </div>
 

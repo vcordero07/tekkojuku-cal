@@ -191,10 +191,15 @@ let createEventListers = () => {
     });
   });
   $('.degree-card').on('click', (event) => {
+    // console.log('app.js:194 - event:', event);
+    // console.log('app.js:194 - data-userid:', event.currentTarget.attributes[0].value);
+    // console.log('user img', $(event.currentTarget).find('img').attr('src'));
+    // console.log('Name', $(event.currentTarget).find('.inst-name')[0].innerHTML);
+    // console.log('Degree', $.trim($(event.currentTarget).find('.inst-degree')[0].innerHTML));
     BootstrapDialog.show({
-      title: `Instructor Edit`,
-      message: `BLAH BLAH BLAH BLAH
-    <br> `,
+      title: `<img src="${$(event.currentTarget).find('img').attr('src')}" width="65" height="90"> Instructor ${$(event.currentTarget).find('.inst-name')[0].innerHTML}`,
+      message: `Degree: ${$.trim($(event.currentTarget).find('.inst-degree')[0].innerHTML)}
+    <br> Short Bio: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam consequat ornare mauris quis mollis. Nam quam magna, fermentum eget lacinia a, vehicula ut erat. Curabitur cursus ligula justo, nec feugiat leo rutrum eget. Morbi molestie lorem at sapien iaculis maximus. Morbi accumsan lacus et augue dignissim eleifend. Praesent erat arcu, blandit a enim sit amet, auctor hendrerit erat. Sed id lorem consequat, dapibus sem non, bibendum nunc. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum tristique vel ante a venenatis.`,
       type: BootstrapDialog.TYPE_PRIMARY,
       buttons: [{
         label: 'Close',
