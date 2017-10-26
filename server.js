@@ -16,6 +16,7 @@ const app = express();
 const methodOverride = require('method-override');
 const authRoute = require('./routes/auth.route');
 const instructorRoute = require('./routes/instructor.route');
+const calendarRoute = require('./routes/calendar.route');
 
 const { basicStrategy, jwtStrategy } = require('./controllers/strategies');
 
@@ -72,9 +73,8 @@ app.get('/', (req, res) => {
   res.render('./index');
 });
 
-app.get('/calendar', (req, res) => {
-  res.render('./calendar');
-});
+app.use('/calendar', calendarRoute);
+
 
 app.get('/login', (req, res) => {
   res.render('./login');

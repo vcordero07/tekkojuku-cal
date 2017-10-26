@@ -77,6 +77,41 @@ let doSignup = (auth, role = 3) => {
       $(location).attr('href', '/instructors');
     });
 }
+
+let deleteUser = (userID) => {
+  $.ajax({
+      type: "delete",
+      url: `/instructors/${userID}`,
+      headers: {
+        "Accept": "application/json",
+      },
+    })
+    .done((data) => {
+      console.log('msg: User deleted', data);
+      // alert('msg: User deleted', data);
+      $(location).attr('href', '/instructors');
+    });
+}
+
+let addClassEvent = () => {
+  $.ajax({
+      type: "post",
+      url: `/calendar/class`,
+      headers: {
+        "Accept": "application/json",
+      },
+      data: {
+        instructorID: "59f002a373e700306d593e9f",
+        dateOccurence: new Date(),
+        content: "test",
+      }
+    })
+    .done((data) => {
+      console.log('msg: class added', data);
+      // alert('msg: User deleted', data);
+      //$(location).attr('href', '/instructors');
+    });
+}
 let incorrectLogin = () => {
   $('.login-error').remove();
   $('.login').prepend('<span class="login-error">The username or password is incorrect. Please try again.');
@@ -182,23 +217,36 @@ let createEventListers = () => {
     BootstrapDialog.show({
       title: `Add a new Class`,
       message: `loading...
-    <br>
-    Select an Instructor
-    <select name="instructors">
-</select>
-<label class="checkbox-inline">
-  <input type="checkbox" value="">Aikido
-</label>
-<label class="checkbox-inline">
-  <input type="checkbox" value="">Iaido
-</label>
-<label class="checkbox-inline">
-  <input type="checkbox" value="">Weapons
-</label>
-    <input type=date>
-<input type=time min=9:00 max=17:00 step=900> `,
-      type: BootstrapDialog.TYPE_DANGER,
+      <br>
+      Select an Instructor
+      <select name="instructors">
+      </select>
+      <label class="checkbox-inline, class-content">
+      <input type="checkbox" value="">Aikido
+      </label>
+      <label class="checkbox-inline, class-content">
+      <input type="checkbox" value="">Iaido
+      </label>
+      <label class="checkbox-inline, class-content">
+      <input type="checkbox" value="">Weapons
+      </label>
+      <input type=date class="new-class-date">
+      <input type=time min=9:00 max=17:00 step=900> `,
+      type: BootstrapDialog.TYPE_PRIMARY,
       buttons: [{
+        label: 'Submit',
+        cssClass: 'btn-success',
+        autospin: true,
+        action: function(dialogRef) {
+          addClassEvent();
+          dialogRef.enableButtons(false);
+          dialogRef.setClosable(false);
+          dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
+          setTimeout(function() {
+            dialogRef.close();
+          }, 5000);
+        }
+      }, {
         label: 'Close',
         action: function(dialogRef) {
           dialogRef.close();
@@ -212,6 +260,9 @@ let createEventListers = () => {
     // console.log('user img', $(event.currentTarget).find('img').attr('src'));
     // console.log('Name', $(event.currentTarget).find('.inst-name')[0].innerHTML);
     // console.log('Degree', $.trim($(event.currentTarget).find('.inst-degree')[0].innerHTML));
+    console.log('id: ', $(event.currentTarget));
+    console.log('id: ', $(event.currentTarget).find('id'));
+    console.log('id: ', $(event.currentTarget).attr('id'));
     BootstrapDialog.show({
       title: `<img src="${$(event.currentTarget).find('img').attr('src')}" width="65" height="90"> Instructor ${$(event.currentTarget).find('.inst-name')[0].innerHTML}`,
       message: `Degree: ${$.trim($(event.currentTarget).find('.inst-degree')[0].innerHTML)}
@@ -223,6 +274,19 @@ let createEventListers = () => {
         label: 'Close',
         action: function(dialogRef) {
           dialogRef.close();
+        }
+      }, {
+        label: 'Delete',
+        title: 'Delete Instructor',
+        cssClass: 'btn-danger',
+        action: function(dialogRef) {
+          deleteUser($(event.currentTarget).attr('id'))
+          dialogRef.enableButtons(false);
+          dialogRef.setClosable(false);
+          dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
+          setTimeout(function() {
+            dialogRef.close();
+          }, 5000);
         }
       }]
     });
@@ -240,6 +304,10 @@ let createEventListers = () => {
         action: function(dialogRef) {
           dialogRef.close();
         }
+      }, {
+        label: 'Delete',
+        title: 'Delete Class',
+        cssClass: 'btn-danger'
       }]
     });
 

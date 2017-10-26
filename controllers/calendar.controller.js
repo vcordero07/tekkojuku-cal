@@ -1,10 +1,11 @@
 const { Calendar } = require('../models/calendar.model');
+const { Instructor } = require('../models/instructor.model');
 
 exports.getCalendar = (req, res) => {
   console.log('calendar.controller.js:4 - getCalendar:');
-  Calendar.find().exec().then(data => {
-    res.status(200)..render('../views/calendar', data);
-  });
+  // Calendar.find().exec().then(data => {
+  res.status(200).render('../views/calendar');
+  // });
 };
 exports.getClass = (req, res) => {
   console.log('calendar.controller.js:7 - getClass:');
@@ -24,7 +25,7 @@ exports.getClass = (req, res) => {
 };
 exports.newClass = (req, res) => {
   console.log('calendar.controller.js:10 - newClass:');
-  const requiredFields = ['content', 'dateOccurence', '_instructor'];
+  const requiredFields = ['content', 'dateOccurence', 'instructorID'];
   for (let i = 0; i < requiredFields.length; i++) {
     let field = requiredFields[i];
     if (!(field in req.body)) {
@@ -33,13 +34,18 @@ exports.newClass = (req, res) => {
       return res.status(400).send(err);
     }
   }
+  //fix here
   return Calendar.create({
       content: req.body.content,
-      _instructor: req.body._instructor,
+      _instructor: req.body.instructorID,
       dateOccurence: req.body.dateOccurence
     })
     .then(data => {
-      res.status(201).json(data);
+      Instructor.findByIdAndUpdate(req.body.instructorID, { $push: { calendarRef: data._id } }, { upsert: true })
+        .then(() => {
+          res.status(201).json(data);
+        })
+
     })
     .catch(err => {
       console.error('calendar.controller.js:45 - new class create err', err);

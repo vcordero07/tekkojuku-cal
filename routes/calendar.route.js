@@ -9,10 +9,10 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 mongoose.Promise = global.Promise;
 
-router.get('/', passport.authenticate('jwt', { session: false, failWithError: true }), calendarController.getCalendar);
-router.get('/:id', passport.authenticate('jwt', { session: false, failWithError: true }), calendarController.getClass);
+router.get('/', calendarController.getCalendar);
+router.get('/:id', calendarController.getClass);
 router.post('/class/', jsonParser, calendarController.newClass);
 router.put('/:id', jsonParser, calendarController.updateClass);
-router.delete('/:id', passport.authenticate('jwt', { session: false, failWithError: true }), calendarController.deleteClass);
+router.delete('/:id', calendarController.deleteClass);
 
 module.exports = router;
