@@ -55,7 +55,7 @@ let doLogin = (auth) => {
         })
     });
 };
-let doSignup = (auth) => {
+let doSignup = (auth, role = 3) => {
   $.ajax({
       type: "POST",
       url: "/instructors/creator",
@@ -66,7 +66,8 @@ let doSignup = (auth) => {
       data: {
         "username": $('#username').val(),
         "password": $('#password').val(),
-        "email": $('#email').val()
+        "email": $('#email').val(),
+        "role": role
       },
       datatype: "json",
     })
@@ -140,8 +141,9 @@ let createEventListers = () => {
         autospin: true,
         action: function(dialogRef) {
           event.preventDefault();
+
           let auth = btoa($('#username').val() + ':' + $('#password').val());
-          doSignup(auth);
+          doSignup(auth, 2);
           dialogRef.enableButtons(false);
           dialogRef.setClosable(false);
           dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
@@ -184,6 +186,15 @@ let createEventListers = () => {
     Select an Instructor
     <select name="instructors">
 </select>
+<label class="checkbox-inline">
+  <input type="checkbox" value="">Aikido
+</label>
+<label class="checkbox-inline">
+  <input type="checkbox" value="">Iaido
+</label>
+<label class="checkbox-inline">
+  <input type="checkbox" value="">Weapons
+</label>
     <input type=date>
 <input type=time min=9:00 max=17:00 step=900> `,
       type: BootstrapDialog.TYPE_DANGER,
@@ -217,6 +228,22 @@ let createEventListers = () => {
     });
   });
 
+  $('.event').on('click', (event) => {
+
+    BootstrapDialog.show({
+      title: `Event Info`,
+      message: `blah blah blah blah
+  <br>`,
+      type: BootstrapDialog.TYPE_PRIMARY,
+      buttons: [{
+        label: 'Close',
+        action: function(dialogRef) {
+          dialogRef.close();
+        }
+      }]
+    });
+
+  });
 
 
 }
