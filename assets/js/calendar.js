@@ -24,7 +24,7 @@ function renderCalendarMonthYear(month, year) {
       {
         _id: '3newionanonoa',
         content: 'it is a calendar',
-        dateOccurence: new Date(2017, 1, 28).getTime()
+        dateOccurrence: new Date(2017, 1, 28).getTime()
       }
     ],
     pseudoObjPos = 0;
@@ -46,7 +46,7 @@ function renderCalendarMonthYear(month, year) {
       _id: '',
       content: ''
     };
-    if (pseudoObj[0] && pseudoObj[0].dateOccurence === epochDate) {
+    if (pseudoObj[0] && pseudoObj[0].dateOccurrence === epochDate) {
       curContent = pseudoObj.shift();
     }
     console.log('runnning');

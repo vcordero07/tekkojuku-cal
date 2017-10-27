@@ -102,7 +102,7 @@ let addClassEvent = () => {
       },
       data: {
         instructorID: "59f002a373e700306d593e9f",
-        dateOccurence: new Date(),
+        dateOccurrence: new Date(),
         content: "test",
       }
     })

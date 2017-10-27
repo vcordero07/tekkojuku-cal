@@ -24,8 +24,9 @@ exports.getClass = (req, res) => {
     });
 };
 exports.newClass = (req, res) => {
-  console.log('calendar.controller.js:10 - newClass:');
-  const requiredFields = ['content', 'dateOccurence', 'instructorID'];
+  console.log('calendar.controller.js:27 - newClass:');
+  const requiredFields = ['content', 'dateOccurrence', 'instructorID'];
+  console.log('calendar.controller.js:29 - requiredFields', requiredFields);
   for (let i = 0; i < requiredFields.length; i++) {
     let field = requiredFields[i];
     if (!(field in req.body)) {
@@ -35,17 +36,19 @@ exports.newClass = (req, res) => {
     }
   }
   //fix here
-  return Calendar.create({
+  Calendar.create({
       content: req.body.content,
       _instructor: req.body.instructorID,
-      dateOccurence: req.body.dateOccurence
+      dateOccurrence: req.body.dateOccurrence
     })
     .then(data => {
       Instructor.findByIdAndUpdate(req.body.instructorID, { $push: { calendarRef: data._id } }, { upsert: true })
         .then(() => {
           res.status(201).json(data);
         })
-
+        .catch(err => {
+          console.error('calendar.controller.js50: error', err);
+        })
     })
     .catch(err => {
       console.error('calendar.controller.js:45 - new class create err', err);
