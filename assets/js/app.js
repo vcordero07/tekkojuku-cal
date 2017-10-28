@@ -94,6 +94,12 @@ let deleteUser = (userID) => {
 }
 
 let addClassEvent = () => {
+  let instID = $('select')["0"].value;
+  console.log($('input[type=date]')["0"].value);
+  console.log(`T${$('input[type=time]')["0"].value}:00.000Z`);
+  console.log('instID:', instID);
+  let classDateTime = `${$('input[type=date]')["0"].value}T${$('input[type=time]')["0"].value}:00.000Z`;
+  $('')
   $.ajax({
       type: "post",
       url: `/calendar/class`,
@@ -101,9 +107,9 @@ let addClassEvent = () => {
         "Accept": "application/json",
       },
       data: {
-        instructorID: "59f002a373e700306d593e9f",
-        dateOccurrence: new Date(),
-        content: "test",
+        instructorID: instID,
+        dateOccurrence: new Date(classDateTime),
+        content: "Aikido",
       }
     })
     .done((data) => {
@@ -210,6 +216,7 @@ let createEventListers = () => {
         })
         setTimeout(function() {
           $('select[name="instructors"]').html(instructorOpts)
+          console.log('select: ', $('select'));
         }, 500)
       });
 
@@ -255,7 +262,7 @@ let createEventListers = () => {
     });
   });
   $('.degree-card').on('click', (event) => {
-    // console.log('app.js:194 - event:', event);
+    console.log('app.js:194 - event:', event);
     // console.log('app.js:194 - data-userid:', event.currentTarget.attributes[0].value);
     // console.log('user img', $(event.currentTarget).find('img').attr('src'));
     // console.log('Name', $(event.currentTarget).find('.inst-name')[0].innerHTML);
@@ -293,7 +300,7 @@ let createEventListers = () => {
   });
 
   $('.event').on('click', (event) => {
-
+    $.trim($(event.currentTarget).find('.event-type')[0].innerHTML);
     BootstrapDialog.show({
       title: `Event Info`,
       message: `blah blah blah blah

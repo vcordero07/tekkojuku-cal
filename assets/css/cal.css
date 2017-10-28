@@ -74,6 +74,10 @@ h1 {
   vertical-align: middle;
 }
 
+.event-type-title {
+  display: inline-flex;
+}
+
 .btn {
   margin-top: 0.5em;
   width: 100%;

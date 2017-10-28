@@ -30,5 +30,6 @@ calendarSchema.methods.apiRepr = function() {
     created: this.created
   };
 }
+const Calendar = mongoose.model('Calendar', calendarSchema);
 
-module.exports = mongoose.model('Calendar', calendarSchema);
+module.exports = { Calendar };
