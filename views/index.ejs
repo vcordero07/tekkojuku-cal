@@ -10,14 +10,14 @@
   <link rel=" stylesheet " href="font-awesome-4.7.0/css/font-awesome.css " type="text/css " />
   <link rel="stylesheet " href="font-awesome-4.7.0/css/font-awesome.min.css " type="text/css " />
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <link rel="stylesheet" href="./css/bgVid.css">
+  <link rel="stylesheet" href="./css/bg-video.css">
   <title>Tekkojuku-Calendar</title>
 </head>
 
 <body>
   <%- include navbar.ejs %>
     <div class="main-content">
-      <video id="bgvid" playsinline autoplay muted loop>
+      <video id="bg-video" playsinline autoplay muted loop>
 
   <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
   <source src="./videos/ATJB3.webm" type="video/webm">
@@ -29,18 +29,20 @@
           ethnicity, gender, ability or age. All seven founding instructors of ATJB were long-time students of the late Mitsunari Kanai Shihan, himself an "uchi deshi" (disciple) of Aikido's founder, O'Sensei Morihei Ueshiba. Kanai Shihan, a world-renowned
           Aikido practitioner and instructor, passed away in March of 2004. The founding instructors decided to honor his memory and love of Aikido by opening ATJB.</p>
 
-        <!-- <button class="pause-btn">Pause</button> -->
+        <button class="p-btn" id="pause-btn">Pause</button>
 
-        <button class="pause-btn" type="button" name="login"><a href="/login">login</a></button>
+        <button class="p-btn" type="button" name="login"><a href="/login">login</a></button>
       </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/js/bootstrap-dialog.js"></script>
+    <script src="./js/debug.js"></script>
     <script src="/js/global.js "></script>
     <script src="/js/app.js"></script>
-    <script src="/js/bgVid.js"></script>
+    <script src="/js/bg-video.js"></script>
+
 </body>
 
 </html>

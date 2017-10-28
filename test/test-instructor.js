@@ -14,7 +14,7 @@ const { TEST_DATABASE_URL } = require('../config');
 chai.use(chaiHttp);
 
 function seedTekkojukuCalData() {
-  console.log('test-instructor.js:29 - seeding Tekkojuku cal app data');
+  qonsole.debug('test-instructor.js:29 - seeding Tekkojuku cal app data');
   let seedData = [];
   for (let i = 1; i <= 10; i++) {
     seedData.push({
@@ -33,22 +33,22 @@ function tearDownDb() {
 
 describe('Instructor CRUD Methods', function() {
   before(function() {
-    console.log('test-instructor.js:48 - 1a');
+    qonsole.debug('test-instructor.js:48 - 1a');
     return runServer(TEST_DATABASE_URL);
   });
 
   beforeEach(function() {
-    console.log('test-instructor.js:53 - 1b');
+    qonsole.debug('test-instructor.js:53 - 1b');
     return seedTekkojukuCalData();
   });
 
   afterEach(function() {
-    console.log('test-instructor.js:58 - 1c');
+    qonsole.debug('test-instructor.js:58 - 1c');
     return tearDownDb();
   });
 
   after(function() {
-    console.log('test-instructor.js:63 - 1d');
+    qonsole.debug('test-instructor.js:63 - 1d');
     return closeServer();
   })
 

@@ -80,14 +80,7 @@ video {
   float: right;
   font-size: 1.2rem;
 }
-
-/*h1 {
-  font-size: 3rem;
-  text-transform: uppercase;
-  margin-top: 0;
-  letter-spacing: .3rem;
-}*/
-.pause-btn {
+.p-btn {
   display: block;
   width: 80%;
   padding: .4rem;
@@ -100,28 +93,15 @@ video {
   cursor: pointer;
   transition: .3s background;
 }
-.pause-btn:hover {
+.p-btn:hover {
   background: rgba(0, 0, 0, 0.5);
 }
-.pause-btn a {
+.p-btn a {
   text-decoration: none;
   text-transform: uppercase;
   cursor: pointer;
   color: #fff;
 }
-
-/*a {
-  display: inline-block;
-  color: #fff;
-  text-decoration: none;
-  background: rgba(0, 0, 0, 0.5);
-  padding: .5rem;
-  transition: .6s background;
-}
-
-a:hover {
-  background: rgba(0, 0, 0, 0.9);
-}*/
 @media screen and (max-width: 500px) {
   div {
     width: 70%;

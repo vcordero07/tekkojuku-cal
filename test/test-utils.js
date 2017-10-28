@@ -7,18 +7,18 @@
 // mongoose.Promise = global.Promise;
 //
 // before(function(done) {
-//   console.log("c");
+//   qonsole.debug("c");
 //   mockgoose.prepareStorage().then(function() {
-//     console.log('1');
+//     qonsole.debug('1');
 //     mongoose.connect('mongodb://localhost/aikido-calendar_test', function(err) {
-//       console.log("2");
+//       qonsole.debug("2");
 //       done(err);
 //     });
 //   });
 // });
 //
 // beforeEach((done) => {
-//   console.log("d");
+//   qonsole.debug("d");
 //   const {
 //     collections
 //   } = mongoose.connection;

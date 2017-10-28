@@ -23,17 +23,17 @@ let doLogin = (auth) => {
       //-----------------------------------------SUCCESS AND ERROR ARE NOT WORKING
 
       // success: function(data) {
-      //   console.log('app.js:35 - data:', data);
+      //   qonsole.debug('app.js:35 - data:', data);
       //   if (!data.tkn) {
-      //     console.log('app.js:37 - a');
+      //     qonsole.debug('app.js:37 - a');
       //     incorrectLogin();
       //   } else {
-      //     console.log('app.js:40 - b:');
+      //     qonsole.debug('app.js:40 - b:');
       //     $('.login-error').remove();
       //     localStorage.setItem('token', data.tkn);
       //     // $(location).attr('href', BASE_URL + '/calendar?auth_token=' + data.tkn);
       //     $(location).attr('href', BASE_URL + '/calendar');
-      //     console.log('app.js:45 - location:', $(location).attr('href', BASE_URL + '/calendar'));
+      //     qonsole.debug('app.js:45 - location:', $(location).attr('href', BASE_URL + '/calendar'));
       //   }
       //
       // },
@@ -49,8 +49,8 @@ let doLogin = (auth) => {
         function(responseData) {
           localStorage.setItem("token", responseData.tkn);
           localStorage.setItem("uid", responseData.instructorID);
-          // console.log('app.js:62 - responseData:', responseData);
-          console.log('Login: successful', responseData);
+          // qonsole.debug('app.js:62 - responseData:', responseData);
+          qonsole.debug('Login: successful', responseData);
           $(location).attr('href', '/calendar');
         })
     });
@@ -72,7 +72,7 @@ let doSignup = (auth, role = 3) => {
       datatype: "json",
     })
     .done((data) => {
-      console.log('Signup: Successful', data);
+      qonsole.debug('Signup: Successful', data);
 
       $(location).attr('href', '/instructors');
     });
@@ -87,7 +87,7 @@ let deleteUser = (userID) => {
       },
     })
     .done((data) => {
-      console.log('msg: User deleted', data);
+      qonsole.debug('msg: User deleted', data);
       // alert('msg: User deleted', data);
       $(location).attr('href', '/instructors');
     });
@@ -95,9 +95,9 @@ let deleteUser = (userID) => {
 
 let addClassEvent = () => {
   let instID = $('select')["0"].value;
-  console.log($('input[type=date]')["0"].value);
-  console.log(`T${$('input[type=time]')["0"].value}:00.000Z`);
-  console.log('instID:', instID);
+  qonsole.debug($('input[type=date]')["0"].value);
+  qonsole.debug(`T${$('input[type=time]')["0"].value}:00.000Z`);
+  qonsole.debug('instID:', instID);
   let classDateTime = `${$('input[type=date]')["0"].value}T${$('input[type=time]')["0"].value}:00.000Z`;
   $('')
   $.ajax({
@@ -113,7 +113,7 @@ let addClassEvent = () => {
       }
     })
     .done((data) => {
-      console.log('msg: class added', data);
+      qonsole.debug('msg: class added', data);
       // alert('msg: User deleted', data);
       //$(location).attr('href', '/instructors');
     });
@@ -129,17 +129,17 @@ let logoutUser = () => {
 }
 
 let createEventListers = () => {
-  console.log('app.js:11 - abcasdfasd');
+  qonsole.debug('app.js:11 - abcasdfasd');
   $('.tekkojuku_form_login').submit(function(event) {
     event.preventDefault();
     let auth = btoa($('#username').val() + ':' + $('#password').val());
-    //console.log('app.js:15 - info:', info);
+    //qonsole.debug('app.js:15 - info:', info);
     doLogin(auth);
   });
   $('.tekkojuku_form_signup').submit(function(event) {
     event.preventDefault();
     let auth = btoa($('#username').val() + ':' + $('#password').val());
-    //console.log('app.js:15 - info:', info);
+    //qonsole.debug('app.js:15 - info:', info);
     doSignup(auth);
   });
 
@@ -209,14 +209,14 @@ let createEventListers = () => {
         datatype: "json",
       })
       .done((data) => {
-        console.log('data: Successful', data);
+        qonsole.debug('data: Successful', data);
         let instructorOpts = "";
         data.forEach(item => {
           instructorOpts += ` <option value="${item._id}">${item.username}</option>`
         })
         setTimeout(function() {
           $('select[name="instructors"]').html(instructorOpts)
-          console.log('select: ', $('select'));
+          qonsole.debug('select: ', $('select'));
         }, 500)
       });
 
@@ -262,14 +262,14 @@ let createEventListers = () => {
     });
   });
   $('.degree-card').on('click', (event) => {
-    console.log('app.js:194 - event:', event);
-    // console.log('app.js:194 - data-userid:', event.currentTarget.attributes[0].value);
-    // console.log('user img', $(event.currentTarget).find('img').attr('src'));
-    // console.log('Name', $(event.currentTarget).find('.inst-name')[0].innerHTML);
-    // console.log('Degree', $.trim($(event.currentTarget).find('.inst-degree')[0].innerHTML));
-    console.log('id: ', $(event.currentTarget));
-    console.log('id: ', $(event.currentTarget).find('id'));
-    console.log('id: ', $(event.currentTarget).attr('id'));
+    qonsole.debug('app.js:194 - event:', event);
+    // qonsole.debug('app.js:194 - data-userid:', event.currentTarget.attributes[0].value);
+    // qonsole.debug('user img', $(event.currentTarget).find('img').attr('src'));
+    // qonsole.debug('Name', $(event.currentTarget).find('.inst-name')[0].innerHTML);
+    // qonsole.debug('Degree', $.trim($(event.currentTarget).find('.inst-degree')[0].innerHTML));
+    qonsole.debug('id: ', $(event.currentTarget));
+    qonsole.debug('id: ', $(event.currentTarget).find('id'));
+    qonsole.debug('id: ', $(event.currentTarget).attr('id'));
     BootstrapDialog.show({
       title: `<img src="${$(event.currentTarget).find('img').attr('src')}" width="65" height="90"> Instructor ${$(event.currentTarget).find('.inst-name')[0].innerHTML}`,
       message: `Degree: ${$.trim($(event.currentTarget).find('.inst-degree')[0].innerHTML)}
@@ -300,12 +300,23 @@ let createEventListers = () => {
   });
 
   $('.event').on('click', (event) => {
-    $.trim($(event.currentTarget).find('.event-type')[0].innerHTML);
+    qonsole.debug($.trim($(event.currentTarget).find('.event-type')));
     BootstrapDialog.show({
       title: `Event Info`,
       message: `blah blah blah blah
   <br>`,
       type: BootstrapDialog.TYPE_PRIMARY,
+      // buttons: [{
+      //   label: 'Close',
+      //   title: 'Close',
+      //   action: function(dialogRef) {
+      //     dialogRef.close();
+      //   }
+      // }, {
+      //   label: 'Delete',
+      //   title: 'Delete Class',
+      //   cssClass: 'btn-danger'
+      // }]
       buttons: [{
         label: 'Close',
         action: function(dialogRef) {
@@ -313,14 +324,22 @@ let createEventListers = () => {
         }
       }, {
         label: 'Delete',
-        title: 'Delete Class',
-        cssClass: 'btn-danger'
+        title: 'Delete Instructor',
+        cssClass: 'btn-danger',
+        action: function(dialogRef) {
+          deleteUser($(event.currentTarget).attr('id'))
+          dialogRef.enableButtons(false);
+          dialogRef.setClosable(false);
+          dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
+          setTimeout(function() {
+            dialogRef.close();
+          }, 5000);
+        }
       }]
     });
 
   });
-
-
+  qonsole.debug('test qonsole.debug')
 }
 
 
