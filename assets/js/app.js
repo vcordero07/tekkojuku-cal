@@ -128,6 +128,22 @@ let logoutUser = () => {
   $(location).attr('href', "/");
 }
 
+let generateClasses = (item, indexOf) => {
+  let currClass = `
+       <div class="event_icon">
+       <div class="event_month">${item.dateOccurrence}</div>
+       <div class="event_day">${item.dateOccurrence}</div>
+       </div>
+       `;
+  console.log('generateClasses currClass:', currClass);
+  return currClass;
+}
+
+function getClasses(list) {
+  console.log('getClasses list:', list);
+  list.map(generateClasses);
+}
+
 let createEventListers = () => {
   qonsole.debug('app.js:11 - abcasdfasd');
   $('.tekkojuku_form_login').submit(function(event) {
@@ -267,36 +283,52 @@ let createEventListers = () => {
     // qonsole.debug('user img', $(event.currentTarget).find('img').attr('src'));
     // qonsole.debug('Name', $(event.currentTarget).find('.inst-name')[0].innerHTML);
     // qonsole.debug('Degree', $.trim($(event.currentTarget).find('.inst-degree')[0].innerHTML));
-    qonsole.debug('id: ', $(event.currentTarget));
-    qonsole.debug('id: ', $(event.currentTarget).find('id'));
-    qonsole.debug('id: ', $(event.currentTarget).attr('id'));
-    BootstrapDialog.show({
-      title: `<img src="${$(event.currentTarget).find('img').attr('src')}" width="65" height="90"> Instructor ${$(event.currentTarget).find('.inst-name')[0].innerHTML}`,
-      message: `Degree: ${$.trim($(event.currentTarget).find('.inst-degree')[0].innerHTML)}
-    <br> Short Bio: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam consequat ornare mauris quis mollis. Nam quam magna, fermentum eget lacinia a, vehicula ut erat. Curabitur cursus ligula justo, nec feugiat leo rutrum eget. Morbi molestie lorem at sapien iaculis maximus. Morbi accumsan lacus et augue dignissim eleifend. Praesent erat arcu, blandit a enim sit amet, auctor hendrerit erat. Sed id lorem consequat, dapibus sem non, bibendum nunc. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum tristique vel ante a venenatis.
-    <br> Class:
-    <br>`,
-      type: BootstrapDialog.TYPE_PRIMARY,
-      buttons: [{
-        label: 'Close',
-        action: function(dialogRef) {
-          dialogRef.close();
-        }
-      }, {
-        label: 'Delete',
-        title: 'Delete Instructor',
-        cssClass: 'btn-danger',
-        action: function(dialogRef) {
-          deleteUser($(event.currentTarget).attr('id'))
-          dialogRef.enableButtons(false);
-          dialogRef.setClosable(false);
-          dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
-          setTimeout(function() {
+    let instClass, currClass;
+    // qonsole.debug('id: ', $(event.currentTarget));
+    // qonsole.debug('data-class: ', $(event.currentTarget).find('data-class').prevObject["0"].attributes[1].value);
+    // qonsole.debug('id: ', $(event.currentTarget).attr('id'));
+    console.log($.parseJSON($.trim($(event.currentTarget).find('inst-classes').prevObject["0"].children[1].innerHTML)));
+    instClass = $.parseJSON($.trim($(event.currentTarget).find('inst-classes').prevObject["0"].children[1].innerHTML));
+    // qonsole.debug(instClass);
+    console.log('instClass:', instClass);
+    // setTimeout(function() {
+    //     currClass = getClasses(instClass);
+    //     console.log(currClass);
+    //   }, 500)
+    currClass = getClasses(instClass);
+    console.log(currClass);
+    setTimeout(function() {
+      BootstrapDialog.show({
+        title: `<img src="${$(event.currentTarget).find('img').attr('src')}" width="65" height="90"> Instructor ${$(event.currentTarget).find('.inst-name')[0].innerHTML}`,
+        message: `Degree: ${$.trim($(event.currentTarget).find('.inst-degree')[0].innerHTML)}
+      <br> Short Bio: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam consequat ornare mauris quis mollis. Nam quam magna, fermentum eget lacinia a, vehicula ut erat. Curabitur cursus ligula justo, nec feugiat leo rutrum eget. Morbi molestie lorem at sapien iaculis maximus. Morbi accumsan lacus et augue dignissim eleifend. Praesent erat arcu, blandit a enim sit amet, auctor hendrerit erat. Sed id lorem consequat, dapibus sem non, bibendum nunc. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum tristique vel ante a venenatis.
+      <br> Class:
+      ${currClass}
+      <br>`,
+        type: BootstrapDialog.TYPE_PRIMARY,
+        buttons: [{
+          label: 'Close',
+          action: function(dialogRef) {
             dialogRef.close();
-          }, 5000);
-        }
-      }]
-    });
+          }
+        }, {
+          label: 'Delete',
+          title: 'Delete Instructor',
+          cssClass: 'btn-danger',
+          action: function(dialogRef) {
+            deleteUser($(event.currentTarget).attr('id'))
+            dialogRef.enableButtons(false);
+            dialogRef.setClosable(false);
+            dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
+            setTimeout(function() {
+              dialogRef.close();
+            }, 5000);
+          }
+        }]
+      });
+    }, 300)
+
+
   });
 
   $('.event').on('click', (event) => {

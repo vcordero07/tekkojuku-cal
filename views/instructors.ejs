@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="./img/favicon.ico" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/css/bootstrap-dialog.css" type="text/css" />
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -25,12 +26,15 @@
 
         <% for(var i=0; i<instructorData.length; i++) {%>
 
-          <div data-userid="<%= instructorData[i]._id%>" class="degree-card <%= instructorData[i].degree%>-team" id="<%= instructorData[i]._id%>">
+          <div data-userid="<%= instructorData[i]._id%>" data-class="<%= instructorData[i].calendarRef %>" class="degree-card <%= instructorData[i].degree%>-team" id="<%= instructorData[i]._id%>">
             <div class="degree-card-title">
               <h2 class="inst-name"><%= instructorData[i].username%></h2>
               <p class="inst-degree">
                 <%= instructorData[i].degree%>
               </p>
+            </div>
+            <div class="inst-classes">
+              <%= JSON.stringify(instructorData[i].calendarRef) %>
             </div>
             <figure>
               <img class="inst-profile-pic" src="<%= instructorData[i].img%>" alt="Instructor <%= instructorData[i].username%>">
