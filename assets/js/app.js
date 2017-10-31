@@ -20,26 +20,6 @@ let doLogin = (auth) => {
         "email": $('#email').val()
       },
       datatype: "jsonp",
-      //-----------------------------------------SUCCESS AND ERROR ARE NOT WORKING
-
-      // success: function(data) {
-      //   qonsole.debug('app.js:35 - data:', data);
-      //   if (!data.tkn) {
-      //     qonsole.debug('app.js:37 - a');
-      //     incorrectLogin();
-      //   } else {
-      //     qonsole.debug('app.js:40 - b:');
-      //     $('.login-error').remove();
-      //     localStorage.setItem('token', data.tkn);
-      //     // $(location).attr('href', BASE_URL + '/calendar?auth_token=' + data.tkn);
-      //     $(location).attr('href', BASE_URL + '/calendar');
-      //     qonsole.debug('app.js:45 - location:', $(location).attr('href', BASE_URL + '/calendar'));
-      //   }
-      //
-      // },
-      // error: function(data, errorThrown) {
-      //   alert("error");
-      // }
     })
     .done((data) => {
       $.ajax({
@@ -128,20 +108,31 @@ let logoutUser = () => {
   $(location).attr('href', "/");
 }
 
+let getCurrentTime = (myDate) => {
+  let time = new Date(myDate);
+  let hours = time.getUTCHours() > 12 ? time.getUTCHours() - 12 : time.getUTCHours();
+  let am_pm = time.getUTCHours() >= 12 ? "PM" : "AM";
+  hours = hours < 10 ? "0" + hours : hours;
+  let minutes = time.getUTCMinutes() < 10 ? "0" + time.getUTCMinutes() : time.getUTCMinutes();
+  //   let seconds = time.getUTCSeconds() < 10 ? "0" + time.getUTCSeconds() : time.getUTCSeconds();
+  time = hours + ":" + minutes + am_pm;
+  return time;
+};
+
 let generateClasses = (item, indexOf) => {
-  let currClass = `
-       <div class="event_icon">
-       <div class="event_month">${item.dateOccurrence}</div>
-       <div class="event_day">${item.dateOccurrence}</div>
-       </div>
-       `;
-  console.log('generateClasses currClass:', currClass);
+  let monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+  let d = new Date(item.dateOccurrence);
+  let dateM = monthNames[d.getMonth()];
+  let dateD = d.getUTCDay();
+  let dateT = getCurrentTime(item.dateOccurrence);
+  let currClass = `<div class="event_icon"><div class="event_month">${dateD} ${dateM}</div><div class="event_day">${dateT}</div></div>`;
+  qonsole.debug('generateClasses currClass:', currClass);
   return currClass;
 }
 
 function getClasses(list) {
-  console.log('getClasses list:', list);
-  list.map(generateClasses);
+  qonsole.debug('getClasses list:', list);
+  return list.map(generateClasses);
 }
 
 let createEventListers = () => {
@@ -233,26 +224,17 @@ let createEventListers = () => {
         setTimeout(function() {
           $('select[name="instructors"]').html(instructorOpts)
           qonsole.debug('select: ', $('select'));
-        }, 500)
+        }, 3000)
       });
 
 
     BootstrapDialog.show({
       title: `Add a new Class`,
       message: `loading...
-      <br>
       Select an Instructor
       <select name="instructors">
       </select>
-      <label class="checkbox-inline, class-content">
-      <input type="checkbox" value="">Aikido
-      </label>
-      <label class="checkbox-inline, class-content">
-      <input type="checkbox" value="">Iaido
-      </label>
-      <label class="checkbox-inline, class-content">
-      <input type="checkbox" value="">Weapons
-      </label>
+      <div class="btn-group class-content" role="group" aria-label="Class Content"><button type="button" class="btn btn-secondary">Aikido</button><button type="button" class="btn btn-secondary">Iaido</button><button type="button" class="btn btn-secondary">Weapons</button></div>
       <input type=date class="new-class-date">
       <input type=time min=9:00 max=17:00 step=900> `,
       type: BootstrapDialog.TYPE_PRIMARY,
@@ -287,8 +269,14 @@ let createEventListers = () => {
     // qonsole.debug('id: ', $(event.currentTarget));
     // qonsole.debug('data-class: ', $(event.currentTarget).find('data-class').prevObject["0"].attributes[1].value);
     // qonsole.debug('id: ', $(event.currentTarget).attr('id'));
-    console.log($.parseJSON($.trim($(event.currentTarget).find('inst-classes').prevObject["0"].children[1].innerHTML)));
-    instClass = $.parseJSON($.trim($(event.currentTarget).find('inst-classes').prevObject["0"].children[1].innerHTML));
+    setTimeout(function() {
+      qonsole.debug($(event.currentTarget).find('.inst-classes').html());
+    }, 500);
+
+
+
+    console.log('instClass:', $.parseJSON($.trim($(event.currentTarget).find('.inst-classes').html())));
+    instClass = $.parseJSON($.trim($(event.currentTarget).find('.inst-classes').html()));
     // qonsole.debug(instClass);
     console.log('instClass:', instClass);
     // setTimeout(function() {
@@ -296,37 +284,38 @@ let createEventListers = () => {
     //     console.log(currClass);
     //   }, 500)
     currClass = getClasses(instClass);
-    console.log(currClass);
-    setTimeout(function() {
-      BootstrapDialog.show({
-        title: `<img src="${$(event.currentTarget).find('img').attr('src')}" width="65" height="90"> Instructor ${$(event.currentTarget).find('.inst-name')[0].innerHTML}`,
-        message: `Degree: ${$.trim($(event.currentTarget).find('.inst-degree')[0].innerHTML)}
+    // currClass = currClass.replace(/,/g, "");
+    console.log("this is the current class", currClass);
+
+    BootstrapDialog.show({
+      title: `<img src="${$(event.currentTarget).find('img').attr('src')}" width="65" height="90"> Instructor ${$(event.currentTarget).find('.inst-name')[0].innerHTML}`,
+      message: `Degree: ${$.trim($(event.currentTarget).find('.inst-degree')[0].innerHTML)}
       <br> Short Bio: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam consequat ornare mauris quis mollis. Nam quam magna, fermentum eget lacinia a, vehicula ut erat. Curabitur cursus ligula justo, nec feugiat leo rutrum eget. Morbi molestie lorem at sapien iaculis maximus. Morbi accumsan lacus et augue dignissim eleifend. Praesent erat arcu, blandit a enim sit amet, auctor hendrerit erat. Sed id lorem consequat, dapibus sem non, bibendum nunc. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum tristique vel ante a venenatis.
       <br> Class:
       ${currClass}
       <br>`,
-        type: BootstrapDialog.TYPE_PRIMARY,
-        buttons: [{
-          label: 'Close',
-          action: function(dialogRef) {
+      type: BootstrapDialog.TYPE_PRIMARY,
+      buttons: [{
+        label: 'Close',
+        action: function(dialogRef) {
+          dialogRef.close();
+        }
+      }, {
+        label: 'Delete',
+        title: 'Delete Instructor',
+        cssClass: 'btn-danger',
+        action: function(dialogRef) {
+          deleteUser($(event.currentTarget).attr('id'))
+          dialogRef.enableButtons(false);
+          dialogRef.setClosable(false);
+          dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
+          setTimeout(function() {
             dialogRef.close();
-          }
-        }, {
-          label: 'Delete',
-          title: 'Delete Instructor',
-          cssClass: 'btn-danger',
-          action: function(dialogRef) {
-            deleteUser($(event.currentTarget).attr('id'))
-            dialogRef.enableButtons(false);
-            dialogRef.setClosable(false);
-            dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
-            setTimeout(function() {
-              dialogRef.close();
-            }, 5000);
-          }
-        }]
-      });
-    }, 300)
+          }, 5000);
+        }
+      }]
+    });
+
 
 
   });

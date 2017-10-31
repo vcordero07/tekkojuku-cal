@@ -1,6 +1,7 @@
 body {
   margin: 0;
   /*background: #445252;*/
+  /*padding: 10px;*/
 }
 
 .navbar {
@@ -44,13 +45,12 @@ li a {
   cursor: pointer;
 }
 
-
-}
 .main-content {
-  padding: 2%;
+  padding: 15px;
   /*flex: 1 1 90%;*/
   /*min-height: 100vh;*/
 }
+
 video {
   position: fixed;
   top: 50%;
@@ -62,13 +62,14 @@ video {
   z-index: -100;
   transform: translateX(-50%) translateY(-50%);
   /*background: url('./img/ATJB.jpg') no-repeat;*/
-
   background-size: cover;
   transition: 1s opacity;
 }
+
 .stopfade {
   opacity: .5;
 }
+
 #ATJB {
   font-family: Agenda-Light, Agenda Light, Agenda, Arial Narrow, sans-serif;
   font-weight: 100;
@@ -80,6 +81,7 @@ video {
   float: right;
   font-size: 1.2rem;
 }
+
 .p-btn {
   display: block;
   width: 80%;
@@ -93,25 +95,61 @@ video {
   cursor: pointer;
   transition: .3s background;
 }
+
 .p-btn:hover {
   background: rgba(0, 0, 0, 0.5);
 }
+
 .p-btn a {
   text-decoration: none;
   text-transform: uppercase;
   cursor: pointer;
   color: #fff;
 }
+
+.btn-group-vertical>.btn-group:after,
+.btn-group-vertical>.btn-group:before,
+.btn-toolbar:after,
+.btn-toolbar:before,
+.clearfix:after,
+.clearfix:before,
+.container-fluid:after,
+.container-fluid:before,
+.container:after,
+.container:before,
+.dl-horizontal dd:after,
+.dl-horizontal dd:before,
+.form-horizontal .form-group:after,
+.form-horizontal .form-group:before,
+.modal-footer:after,
+.modal-footer:before,
+.nav:after,
+.nav:before,
+.navbar-collapse:after,
+.navbar-collapse:before,
+.navbar-header:after,
+.navbar-header:before,
+.navbar:after,
+.navbar:before,
+.pager:after,
+.pager:before,
+.panel-body:after,
+.panel-body:before,
+.row:after,
+.row:before {
+  content: none;
+}
+
 @media screen and (max-width: 500px) {
   div {
     width: 70%;
   }
 }
+
 @media screen and (max-device-width: 800px) {
   html {
     background: url(./img/ATJB.jpg) #000 no-repeat center center fixed;
   }
-
   #bgvid {
     display: none;
   }
