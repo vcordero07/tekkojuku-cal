@@ -73,6 +73,22 @@ let deleteUser = (userID) => {
     });
 }
 
+let deleteClasses = (list) => {
+  list.forEach(item => {
+    $.ajax({
+        type: "delete",
+        url: `/calendar/${item.clsVal}`,
+        headers: {
+          "Accept": "application/json",
+        },
+      })
+      .done((data) => {
+        qonsole.debug('msg: Classes deleted', data);
+      });
+  })
+
+}
+
 let addClassEvent = () => {
   let instID = $('select')["0"].value;
   qonsole.debug($('input[type=date]')["0"].value);
@@ -123,16 +139,28 @@ let generateClasses = (item, indexOf) => {
   let monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
   let d = new Date(item.dateOccurrence);
   let dateM = monthNames[d.getMonth()];
-  let dateD = d.getUTCDay();
+  let dateD = d.getDate();
   let dateT = getCurrentTime(item.dateOccurrence);
   let currClass = `<div class="event_icon"><div class="event_month">${dateD} ${dateM}</div><div class="event_day">${dateT}</div></div>`;
-  qonsole.debug('generateClasses currClass:', currClass);
+  // qonsole.debug('generateClasses currClass:', currClass);
   return currClass;
 }
 
 function getClasses(list) {
-  qonsole.debug('getClasses list:', list);
+  // qonsole.debug('getClasses list:', list);
   return list.map(generateClasses);
+}
+
+function getClassesID(list) {
+  let classID = [];
+  qonsole.debug('getClassesID: ', list);
+  // list.map((item, indexof) => {
+  //   classID += `${item._id},`;
+  // })
+  list.forEach((val, key) => {
+    classID.push({ clsKey: key, clsVal: val._id });
+  })
+  return classID;
 }
 
 let createEventListers = () => {
@@ -265,7 +293,7 @@ let createEventListers = () => {
     // qonsole.debug('user img', $(event.currentTarget).find('img').attr('src'));
     // qonsole.debug('Name', $(event.currentTarget).find('.inst-name')[0].innerHTML);
     // qonsole.debug('Degree', $.trim($(event.currentTarget).find('.inst-degree')[0].innerHTML));
-    let instClass, currClass;
+    let instClass, currClass, classesID;
     // qonsole.debug('id: ', $(event.currentTarget));
     // qonsole.debug('data-class: ', $(event.currentTarget).find('data-class').prevObject["0"].attributes[1].value);
     // qonsole.debug('id: ', $(event.currentTarget).attr('id'));
@@ -284,8 +312,10 @@ let createEventListers = () => {
     //     console.log(currClass);
     //   }, 500)
     currClass = getClasses(instClass);
+    classesID = getClassesID(instClass);
     // currClass = currClass.replace(/,/g, "");
     console.log("this is the current class", currClass);
+    console.log("this is the current id", classesID);
 
     BootstrapDialog.show({
       title: `<img src="${$(event.currentTarget).find('img').attr('src')}" width="65" height="90"> Instructor ${$(event.currentTarget).find('.inst-name')[0].innerHTML}`,
@@ -302,10 +332,12 @@ let createEventListers = () => {
         }
       }, {
         label: 'Delete',
-        title: 'Delete Instructor',
+        title: 'Delete Instructor & Classes',
         cssClass: 'btn-danger',
         action: function(dialogRef) {
-          deleteUser($(event.currentTarget).attr('id'))
+          let instID = $(event.currentTarget).attr('id');
+          deleteClasses(classesID)
+          deleteUser(instID)
           dialogRef.enableButtons(false);
           dialogRef.setClosable(false);
           dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
