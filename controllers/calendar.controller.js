@@ -4,7 +4,32 @@ const { Instructor } = require('../models/instructor.model');
 exports.getCalendar = (req, res) => {
   console.log('calendar.controller.js:4 - getCalendar:');
   Calendar.find().exec().then(data => {
-    res.status(200).render('../views/calendar', { "calendarData": data });
+
+    let getCurrentTime = (myDate) => {
+      let time = new Date(myDate);
+      let hours = time.getUTCHours() > 12 ? time.getUTCHours() - 12 : time.getUTCHours();
+      let am_pm = time.getUTCHours() >= 12 ? "PM" : "AM";
+      hours = hours < 10 ? "0" + hours : hours;
+      let minutes = time.getUTCMinutes() < 10 ? "0" + time.getUTCMinutes() : time.getUTCMinutes();
+      //   let seconds = time.getUTCSeconds() < 10 ? "0" + time.getUTCSeconds() : time.getUTCSeconds();
+      time = hours + ":" + minutes + am_pm;
+      return time;
+    };
+
+    let generateClasses = (item, indexOf) => {
+      let monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+      let d = new Date(item.dateOccurrence);
+      let dateM = monthNames[d.getMonth()];
+      let dateD = d.getDate();
+      let dateT = getCurrentTime(item.dateOccurrence);
+      let currClass = `<div class="event_icon"><div class="event_month">${dateD} ${dateM}</div>|<div class="event_day">${dateT}</div></div>`;
+      // qonsole.debug('generateClasses currClass:', currClass);
+      return currClass;
+    }
+
+    let allClasses = data.map(generateClasses);
+    console.log('data:', allClasses);
+    res.status(200).render('../views/calendar', { "calendarData": data, allClasses });
   });
 };
 

@@ -34,7 +34,7 @@ exports.newInstructor = (req, res) => {
 
 exports.getAllInstructors = (req, res) => {
   let instInfo = {};
-  Instructor.find({ "role": { $lt: 3 } }).populate("calendarRef").exec().then(data => {
+  Instructor.find({ "role": { $lt: 3 } }).populate({ path: "calendarRef", options: { sort: { dateOccurrence: 1 } } }).exec().then(data => {
     console.log('instructor.controller.js:34 -data', data);
     instInfo = data;
     res.status(200).render('../views/instructors', {

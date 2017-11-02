@@ -25,20 +25,21 @@
     <div class="calendar">
       <h1>Class Calendar</h1>
       <% for(var i=0; i<calendarData.length; i++) {%>
-        <a href="#" data-userid="" id="<%= calendarData[i]._id%>" class="event clearfix">
-          <div class="event_icon">
-            <div class="event_month">
-              <%= calendarData[i].dateOccurrence %>
-            </div>
-            <div class="event_day">
-              <%= calendarData[i].dateOccurrence %>
-            </div>
-          </div>
-          <div class="event-type-title"><span class="event_type"><%= calendarData[i].content %></span>&nbsp;-&nbsp;<span class="event_title"><%= calendarData[i]._instructor %></span></div>
-        </a>
+        <% var calArray=allClasses[i].split("|") %>
+          <a href="#" data-userid="" id="<%= calendarData[i]._id%>" class="event clearfix">
+            <!-- <div class="event_icon">
+              <div class="event_month"> -->
+            <%- calArray[0] %>
+              <!-- </div> -->
+              <!-- <div class="event_day"> -->
+              <%- calArray[1] %>
+                <!-- </div> -->
+                <!-- </div> -->
+                <div class="event-type-title"><span class="event_type"><%= calendarData[i].content %></span>&nbsp;-&nbsp;<span class="event_title"><%= calendarData[i]._instructor %></span></div>
+          </a>
 
-        <% } %>
-          <!-- <a href="#" data-userid="" id="" class="event clearfix">
+          <% } %>
+            <!-- <a href="#" data-userid="" id="" class="event clearfix">
             <div class="event_icon">
               <div class="event_month">18 OCT</div>
               <div class="event_day">7:00AM</div>
@@ -88,7 +89,7 @@
             <div class="event-type-title"><span class="event_type">Aikido</span>&nbsp;-&nbsp;<span class="event_title">Picolo</span></div>
           </a> -->
 
-          <div class="btn btn-primary add-event-btn">Add Event</div>
+            <div class="btn btn-primary add-event-btn">Add Event</div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js " integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=" anonymous "></script>
