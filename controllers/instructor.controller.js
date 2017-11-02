@@ -1,4 +1,5 @@
 const { Instructor } = require('../models/instructor.model');
+const { Calendar } = require('../models/calendar.model');
 
 exports.newInstructor = (req, res) => {
   console.log("instructor.controller.js:6", req.body);
@@ -83,6 +84,11 @@ exports.updateInstructor = (req, res) => {
 exports.deleteInstructor = (req, res) => {
   Instructor.findByIdAndRemove(req.params.id).then(() => {
     console.log(`instructor.controller.js:114 - Deleted instructor from the list \`${req.params.id}\``);
-    res.status(204).end();
+    // res.status(204).end();
+
+  }).then(() => {
+    Calendar.remove({ _instructor: req.params.id }).then(() => {
+      res.status(204).end();
+    })
   });
 };

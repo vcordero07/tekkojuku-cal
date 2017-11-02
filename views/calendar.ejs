@@ -21,59 +21,74 @@
 
   <%- include navbar.ejs %>
 
+
     <div class="calendar">
       <h1>Class Calendar</h1>
-      <a href="#" data-userid="" id="" class="event clearfix">
-        <div class="event_icon">
-          <div class="event_month">18 OCT</div>
-          <div class="event_day">7:00AM</div>
-        </div>
-        <div class="event-type-title"><span class="event_type">Aikido</span>&nbsp;-&nbsp;<span class="event_title">Goku</span></div>
-      </a>
-      <a href="#" data-userid="" id="" class="event clearfix">
-        <div class="event_icon">
-          <div class="event_month">18 OCT</div>
-          <div class="event_day">7:00PM</div>
-        </div>
-        <div class="event-type-title"><span class="event_type">Aikido</span>&nbsp;-&nbsp;<span class="event_title">Vegeta</span></div>
-      </a>
-      <a href="#" data-userid="" id="" class="event clearfix">
-        <div class="event_icon">
-          <div class="event_month">19 OCT</div>
-          <div class="event_day">5:30PM</div>
-        </div>
-        <div class="event-type-title"><span class="event_type">Aikido</span>&nbsp;-&nbsp;<span class="event_title">Beerus</span></div>
-      </a>
-      <a href="#" data-userid="" id="" class="event clearfix">
-        <div class="event_icon">
-          <div class="event_month">19 OCT</div>
-          <div class="event_day">6:45PM</div>
-        </div>
-        <div class="event-type-title"><span class="event_type">Aikido</span>&nbsp;-&nbsp;<span class="event_title">Picolo</span></div>
-      </a>
-      <a href="#" data-userid="" id="" class="event clearfix">
-        <div class="event_icon">
-          <div class="event_month">20 OCT</div>
-          <div class="event_day">7:00AM</div>
-        </div>
-        <div class="event-type-title"><span class="event_type">Aikido</span>&nbsp;-&nbsp;<span class="event_title">Master Roshi</span></div>
-      </a>
-      <a href="#" data-userid="" id="" class="event clearfix">
-        <div class="event_icon">
-          <div class="event_month">20 OCT</div>
-          <div class="event_day">5:30PM</div>
-        </div>
-        <div class="event-type-title"><span class="event_type">Aikido</span>&nbsp;-&nbsp;<span class="event_title">Mr. Satan</span></div>
-      </a>
-      <a href="#" data-userid="" id="" class="event clearfix">
-        <div class="event_icon">
-          <div class="event_month">30 OCT</div>
-          <div class="event_day">11:30PM</div>
-        </div>
-        <div class="event-type-title"><span class="event_type">Aikido</span>&nbsp;-&nbsp;<span class="event_title">Picolo</span></div>
-      </a>
+      <% for(var i=0; i<calendarData.length; i++) {%>
+        <a href="#" data-userid="" id="<%= calendarData[i]._id%>" class="event clearfix">
+          <div class="event_icon">
+            <div class="event_month">
+              <%= calendarData[i].dateOccurrence %>
+            </div>
+            <div class="event_day">
+              <%= calendarData[i].dateOccurrence %>
+            </div>
+          </div>
+          <div class="event-type-title"><span class="event_type"><%= calendarData[i].content %></span>&nbsp;-&nbsp;<span class="event_title"><%= calendarData[i]._instructor %></span></div>
+        </a>
 
-      <div class="btn btn-primary add-event-btn">Add Event</div>
+        <% } %>
+          <!-- <a href="#" data-userid="" id="" class="event clearfix">
+            <div class="event_icon">
+              <div class="event_month">18 OCT</div>
+              <div class="event_day">7:00AM</div>
+            </div>
+            <div class="event-type-title"><span class="event_type">Aikido</span>&nbsp;-&nbsp;<span class="event_title">Goku</span></div>
+          </a>
+          <a href="#" data-userid="" id="" class="event clearfix">
+            <div class="event_icon">
+              <div class="event_month">18 OCT</div>
+              <div class="event_day">7:00PM</div>
+            </div>
+            <div class="event-type-title"><span class="event_type">Aikido</span>&nbsp;-&nbsp;<span class="event_title">Vegeta</span></div>
+          </a>
+          <a href="#" data-userid="" id="" class="event clearfix">
+            <div class="event_icon">
+              <div class="event_month">19 OCT</div>
+              <div class="event_day">5:30PM</div>
+            </div>
+            <div class="event-type-title"><span class="event_type">Aikido</span>&nbsp;-&nbsp;<span class="event_title">Beerus</span></div>
+          </a>
+          <a href="#" data-userid="" id="" class="event clearfix">
+            <div class="event_icon">
+              <div class="event_month">19 OCT</div>
+              <div class="event_day">6:45PM</div>
+            </div>
+            <div class="event-type-title"><span class="event_type">Aikido</span>&nbsp;-&nbsp;<span class="event_title">Picolo</span></div>
+          </a>
+          <a href="#" data-userid="" id="" class="event clearfix">
+            <div class="event_icon">
+              <div class="event_month">20 OCT</div>
+              <div class="event_day">7:00AM</div>
+            </div>
+            <div class="event-type-title"><span class="event_type">Aikido</span>&nbsp;-&nbsp;<span class="event_title">Master Roshi</span></div>
+          </a>
+          <a href="#" data-userid="" id="" class="event clearfix">
+            <div class="event_icon">
+              <div class="event_month">20 OCT</div>
+              <div class="event_day">5:30PM</div>
+            </div>
+            <div class="event-type-title"><span class="event_type">Aikido</span>&nbsp;-&nbsp;<span class="event_title">Mr. Satan</span></div>
+          </a>
+          <a href="#" data-userid="" id="" class="event clearfix">
+            <div class="event_icon">
+              <div class="event_month">30 OCT</div>
+              <div class="event_day">11:30PM</div>
+            </div>
+            <div class="event-type-title"><span class="event_type">Aikido</span>&nbsp;-&nbsp;<span class="event_title">Picolo</span></div>
+          </a> -->
+
+          <div class="btn btn-primary add-event-btn">Add Event</div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js " integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=" anonymous "></script>

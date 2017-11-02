@@ -336,7 +336,7 @@ let createEventListers = () => {
         cssClass: 'btn-danger',
         action: function(dialogRef) {
           let instID = $(event.currentTarget).attr('id');
-          deleteClasses(classesID)
+          // deleteClasses(classesID)
           deleteUser(instID)
           dialogRef.enableButtons(false);
           dialogRef.setClosable(false);
