@@ -79,6 +79,10 @@ h1 {
   display: inline-flex;
 }
 
+.inst-info {
+  display: none;
+}
+
 
 /*.btn {
   margin-top: 0.5em;

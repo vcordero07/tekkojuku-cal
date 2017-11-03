@@ -3,7 +3,7 @@ const { Instructor } = require('../models/instructor.model');
 
 exports.getCalendar = (req, res) => {
   console.log('calendar.controller.js:4 - getCalendar:');
-  Calendar.find().exec().then(data => {
+  Calendar.find().sort({ dateOccurrence: 1 }).populate({ path: "_instructor" }).exec().then(data => {
 
     let getCurrentTime = (myDate) => {
       let time = new Date(myDate);
@@ -28,7 +28,9 @@ exports.getCalendar = (req, res) => {
     }
 
     let allClasses = data.map(generateClasses);
-    console.log('data:', allClasses);
+    let instructorsInfo = JSON.stringify(data);
+
+    // console.log('instructorsInfo:', instructorsInfo);
     res.status(200).render('../views/calendar', { "calendarData": data, allClasses });
   });
 };

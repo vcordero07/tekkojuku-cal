@@ -7,7 +7,7 @@ const calendarSchema = new Schema({
     required: true
   },
   "_instructor": {
-    type: Schema.ObjectId,
+    type: mongoose.Schema.ObjectId,
     ref: 'Instructor'
   },
   "dateOccurrence": {

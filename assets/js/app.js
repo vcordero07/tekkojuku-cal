@@ -89,6 +89,20 @@ let deleteClasses = (list) => {
 
 }
 
+let deleteClassByID = (classID) => {
+  $.ajax({
+      type: "delete",
+      url: `/calendar/${classID}`,
+      headers: {
+        "Accept": "application/json",
+      },
+    })
+    .done((data) => {
+      qonsole.debug('msg: Class deleted', data);
+      $(location).attr('href', '/calendar');
+    });
+}
+
 let addClassEvent = () => {
   let instID = $('select')["0"].value;
   qonsole.debug($('input[type=date]')["0"].value);
@@ -111,7 +125,7 @@ let addClassEvent = () => {
     .done((data) => {
       qonsole.debug('msg: class added', data);
       // alert('msg: User deleted', data);
-      //$(location).attr('href', '/instructors');
+      $(location).attr('href', '/calendar');
     });
 }
 let incorrectLogin = () => {
@@ -277,7 +291,7 @@ let createEventListers = () => {
           dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
           setTimeout(function() {
             dialogRef.close();
-          }, 5000);
+          }, 1000);
         }
       }, {
         label: 'Close',
@@ -331,6 +345,12 @@ let createEventListers = () => {
           dialogRef.close();
         }
       }, {
+        label: 'Update',
+        cssClass: 'btn-primary',
+        action: function(dialogRef) {
+          dialogRef.close();
+        }
+      }, {
         label: 'Delete',
         title: 'Delete Instructor & Classes',
         cssClass: 'btn-danger',
@@ -354,42 +374,81 @@ let createEventListers = () => {
 
   $('.event').on('click', (event) => {
     qonsole.debug($.trim($(event.currentTarget).find('.event-type')));
-    BootstrapDialog.show({
-      title: `Event Info`,
-      message: `blah blah blah blah
-  <br>`,
-      type: BootstrapDialog.TYPE_PRIMARY,
-      // buttons: [{
-      //   label: 'Close',
-      //   title: 'Close',
-      //   action: function(dialogRef) {
-      //     dialogRef.close();
-      //   }
-      // }, {
-      //   label: 'Delete',
-      //   title: 'Delete Class',
-      //   cssClass: 'btn-danger'
-      // }]
-      buttons: [{
-        label: 'Close',
-        action: function(dialogRef) {
-          dialogRef.close();
-        }
-      }, {
-        label: 'Delete',
-        title: 'Delete Instructor',
-        cssClass: 'btn-danger',
-        action: function(dialogRef) {
-          deleteUser($(event.currentTarget).attr('id'))
-          dialogRef.enableButtons(false);
-          dialogRef.setClosable(false);
-          dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
-          setTimeout(function() {
+
+    console.log('parseJSON:', JSON.parse($(event.currentTarget).find('.inst-info').html()));
+    let instInfo = JSON.parse($(event.currentTarget).find('.inst-info').html());
+    console.log('instInfo:', instInfo);
+
+    if (instInfo === null) {
+      BootstrapDialog.show({
+        title: `Event Info: ${$(event.currentTarget).find('.event_month').html()} @ ${$(event.currentTarget).find('.event_day').html()}`,
+        message: `There was an error trying to load this instructor. Please try again.
+    <br>`,
+        type: BootstrapDialog.TYPE_PRIMARY,
+        buttons: [{
+          label: 'Close',
+          action: function(dialogRef) {
             dialogRef.close();
-          }, 5000);
-        }
-      }]
-    });
+          }
+        }, {
+          label: 'Update',
+          cssClass: 'btn-primary',
+          action: function(dialogRef) {
+            dialogRef.close();
+          }
+        }, {
+          label: 'Delete',
+          title: 'Delete Instructor',
+          cssClass: 'btn-danger',
+          action: function(dialogRef) {
+            deleteClassByID($(event.currentTarget).attr('id'))
+            dialogRef.enableButtons(false);
+            dialogRef.setClosable(false);
+            dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
+            setTimeout(function() {
+              dialogRef.close();
+            }, 5000);
+          }
+        }]
+      });
+    } else {
+      BootstrapDialog.show({
+        title: `Event Info: ${$(event.currentTarget).find('.event_month').html()} @ ${$(event.currentTarget).find('.event_day').html()}`,
+        message: `Instructor:
+        <img src="${instInfo.img}" width="65" height="90">
+        ${instInfo.username}
+        Degree: ${instInfo.degree}
+    <br>`,
+        type: BootstrapDialog.TYPE_PRIMARY,
+        buttons: [{
+          label: 'Close',
+          action: function(dialogRef) {
+            dialogRef.close();
+          }
+        }, {
+          label: 'Update',
+          cssClass: 'btn-primary',
+          action: function(dialogRef) {
+            dialogRef.close();
+          }
+        }, {
+          label: 'Delete',
+          title: 'Delete Instructor',
+          cssClass: 'btn-danger',
+          action: function(dialogRef) {
+            deleteClassByID($(event.currentTarget).attr('id'))
+            dialogRef.enableButtons(false);
+            dialogRef.setClosable(false);
+            dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
+            setTimeout(function() {
+              dialogRef.close();
+            }, 5000);
+          }
+        }]
+      });
+    }
+
+
 
   });
   qonsole.debug('test qonsole.debug')

@@ -37,7 +37,10 @@ const instructorSchema = new Schema({
     required: true,
     default: "KYU"
   },
-  "calendarRef": [{ type: mongoose.Schema.ObjectId, ref: "Calendar" }]
+  "calendarRef": [{
+    type: mongoose.Schema.ObjectId,
+    ref: "Calendar"
+  }]
 })
 
 instructorSchema.methods.apiRepr = function() {
