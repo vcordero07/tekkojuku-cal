@@ -226,6 +226,11 @@ let createEventListers = () => {
     `,
       type: BootstrapDialog.TYPE_PRIMARY,
       buttons: [{
+        label: 'Close',
+        action: function(dialogRef) {
+          dialogRef.close();
+        }
+      }, {
         label: 'Submit',
         cssClass: 'btn-success',
         autospin: true,
@@ -240,11 +245,6 @@ let createEventListers = () => {
           setTimeout(function() {
             dialogRef.close();
           }, 5000);
-        }
-      }, {
-        label: 'Close',
-        action: function(dialogRef) {
-          dialogRef.close();
         }
       }]
     });
@@ -266,21 +266,29 @@ let createEventListers = () => {
         setTimeout(function() {
           $('select[name="instructors"]').html(instructorOpts)
           qonsole.debug('select: ', $('select'));
-        }, 3000)
+        }, 500)
       });
 
 
     BootstrapDialog.show({
       title: `Add a new Class`,
-      message: `loading...
-      Select an Instructor
+      message: `
+      Select an Instructor:
       <select name="instructors">
       </select>
-      <div class="btn-group class-content" role="group" aria-label="Class Content"><button type="button" class="btn btn-secondary">Aikido</button><button type="button" class="btn btn-secondary">Iaido</button><button type="button" class="btn btn-secondary">Weapons</button></div>
-      <input type=date class="new-class-date">
-      <input type=time min=9:00 max=17:00 step=900> `,
+
+      Class Type:
+      <div class="btn-group class-content" data-toggle="buttons"><label type="button" class="btn btn-secondary active"><input type="radio" name="options" id="option1" autocomplete="off" checked>Aikido</label><label type="button" class="btn btn-secondary"><input type="radio" name="options" id="option2" autocomplete="off">Iaido</label><label type="button" class="btn btn-secondary"><input type="radio" name="options" id="option3" autocomplete="off">Weapons</label></div>
+
+      Date: <input type=date class="new-class-date">
+      Time: <input type=time min=9:00 max=17:00 step=900> `,
       type: BootstrapDialog.TYPE_PRIMARY,
       buttons: [{
+        label: 'Close',
+        action: function(dialogRef) {
+          dialogRef.close();
+        }
+      }, {
         label: 'Submit',
         cssClass: 'btn-success',
         autospin: true,
@@ -292,11 +300,6 @@ let createEventListers = () => {
           setTimeout(function() {
             dialogRef.close();
           }, 1000);
-        }
-      }, {
-        label: 'Close',
-        action: function(dialogRef) {
-          dialogRef.close();
         }
       }]
     });
@@ -391,8 +394,8 @@ let createEventListers = () => {
             dialogRef.close();
           }
         }, {
-          label: 'Update',
-          cssClass: 'btn-primary',
+          label: 'Edit',
+          cssClass: 'btn-warning',
           action: function(dialogRef) {
             dialogRef.close();
           }
@@ -414,7 +417,11 @@ let createEventListers = () => {
     } else {
       BootstrapDialog.show({
         title: `Event Info: ${$(event.currentTarget).find('.event_month').html()} @ ${$(event.currentTarget).find('.event_day').html()}`,
-        message: `Instructor:
+        message: `Class:
+        <div class="event_icon"><div class="event_month">${$(event.currentTarget).find('.event_month').html()}</div><div class="event_day">${$(event.currentTarget).find('.event_day').html()}</div></div>
+
+
+        Instructor:
         <img src="${instInfo.img}" width="65" height="90">
         ${instInfo.username}
         Degree: ${instInfo.degree}
@@ -426,8 +433,8 @@ let createEventListers = () => {
             dialogRef.close();
           }
         }, {
-          label: 'Update',
-          cssClass: 'btn-primary',
+          label: 'Edit',
+          cssClass: 'btn-warning',
           action: function(dialogRef) {
             dialogRef.close();
           }
