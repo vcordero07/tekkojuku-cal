@@ -109,6 +109,8 @@ let addClassEvent = () => {
   qonsole.debug(`T${$('input[type=time]')["0"].value}:00.000Z`);
   qonsole.debug('instID:', instID);
   let classDateTime = `${$('input[type=date]')["0"].value}T${$('input[type=time]')["0"].value}:00.000Z`;
+  let classType = $('.active input').prop('id');
+  console.log('classType:', classType);
   $('')
   $.ajax({
       type: "post",
@@ -119,7 +121,7 @@ let addClassEvent = () => {
       data: {
         instructorID: instID,
         dateOccurrence: new Date(classDateTime),
-        content: "Aikido",
+        content: `${classType}`,
       }
     })
     .done((data) => {
@@ -278,7 +280,8 @@ let createEventListers = () => {
       </select>
 
       Class Type:
-      <div class="btn-group class-content" data-toggle="buttons"><label type="button" class="btn btn-secondary active"><input type="radio" name="options" id="option1" autocomplete="off" checked>Aikido</label><label type="button" class="btn btn-secondary"><input type="radio" name="options" id="option2" autocomplete="off">Iaido</label><label type="button" class="btn btn-secondary"><input type="radio" name="options" id="option3" autocomplete="off">Weapons</label></div>
+      <div class="btn-group" data-toggle="buttons">
+      <label type="button" class="btn btn-secondary active class-content"><input type="radio" name="options" id="Aikido" autocomplete="off" checked>Aikido</label><label type="button" class="btn btn-secondary class-content"><input type="radio" name="options" id="Iaido" autocomplete="off">Iaido</label><label type="button" class="btn btn-secondary class-content"><input type="radio" name="options" id="Weapons" autocomplete="off">Weapons</label></div>
 
       Date: <input type=date class="new-class-date">
       Time: <input type=time min=9:00 max=17:00 step=900> `,
@@ -417,7 +420,7 @@ let createEventListers = () => {
     } else {
       BootstrapDialog.show({
         title: `Event Info: ${$(event.currentTarget).find('.event_month').html()} @ ${$(event.currentTarget).find('.event_day').html()}`,
-        message: `Class:
+        message: `${$(event.currentTarget).find('.event_type').html()} Class:
         <div class="event_icon"><div class="event_month">${$(event.currentTarget).find('.event_month').html()}</div><div class="event_day">${$(event.currentTarget).find('.event_day').html()}</div></div>
 
 
@@ -437,6 +440,57 @@ let createEventListers = () => {
           cssClass: 'btn-warning',
           action: function(dialogRef) {
             dialogRef.close();
+            $.ajax({
+                type: "get",
+                url: "/instructors/data",
+                datatype: "json",
+              })
+              .done((data) => {
+                qonsole.debug('data: Successful', data);
+                let instructorOpts = "";
+                data.forEach(item => {
+                  instructorOpts += ` <option value="${item._id}">${item.username}</option>`
+                })
+                setTimeout(function() {
+                  $('select[name="instructors"]').html(instructorOpts)
+                  qonsole.debug('select: ', $('select'));
+                }, 500)
+              });
+
+
+            BootstrapDialog.show({
+              title: `Edit Class:`,
+              message: `
+              Select an Instructor:
+              <select name="instructors">
+              </select>
+
+              Class Type:
+              <div class="btn-group" data-toggle="buttons"><label type="button" class="btn btn-secondary active class-content"><input type="radio" name="options" id="option1" autocomplete="off" checked>Aikido</label><label type="button" class="btn btn-secondary class-content"><input type="radio" name="options" id="option2" autocomplete="off">Iaido</label><label type="button" class="btn btn-secondary class-content"><input type="radio" name="options" id="option3" autocomplete="off">Weapons</label></div>
+
+              Date: <input type=date class="new-class-date">
+              Time: <input type=time min=9:00 max=17:00 step=900> `,
+              type: BootstrapDialog.TYPE_PRIMARY,
+              buttons: [{
+                label: 'Close',
+                action: function(dialogRef) {
+                  dialogRef.close();
+                }
+              }, {
+                label: 'Submit',
+                cssClass: 'btn-success',
+                autospin: true,
+                action: function(dialogRef) {
+                  updateClassEventByID(instInfo._id);
+                  dialogRef.enableButtons(false);
+                  dialogRef.setClosable(false);
+                  dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
+                  setTimeout(function() {
+                    dialogRef.close();
+                  }, 1000);
+                }
+              }]
+            });
           }
         }, {
           label: 'Delete',
