@@ -103,6 +103,33 @@ let deleteClassByID = (classID) => {
     });
 }
 
+let updateClassEventByID = (classID) => {
+  // let instID = $('select')["0"].value;
+  qonsole.debug($('input[type=date]')["0"].value);
+  qonsole.debug(`T${$('input[type=time]')["0"].value}:00.000Z`);
+  // qonsole.debug('instID:', instID);
+  let classDateTime = `${$('input[type=date]')["0"].value}T${$('input[type=time]')["0"].value}:00.000Z`;
+  let classType = $('.active input').prop('id');
+  console.log('classType:', classType);
+  $.ajax({
+      type: "PUT",
+      url: `/calendar/${classID}`,
+      headers: {
+        "Accept": "application/json",
+      },
+      data: {
+        instructorID: classID,
+        dateOccurrence: new Date(classDateTime),
+        content: `${classType}`,
+      }
+    })
+    .done((data) => {
+      qonsole.debug('msg: class updated by id', data);
+      // alert('msg: User deleted', data);
+      // $(location).attr('href', '/calendar');
+    });
+}
+
 let addClassEvent = () => {
   let instID = $('select')["0"].value;
   qonsole.debug($('input[type=date]')["0"].value);
@@ -130,6 +157,7 @@ let addClassEvent = () => {
       $(location).attr('href', '/calendar');
     });
 }
+
 let incorrectLogin = () => {
   $('.login-error').remove();
   $('.login').prepend('<span class="login-error">The username or password is incorrect. Please try again.');
@@ -139,6 +167,29 @@ let logoutUser = () => {
   localStorage.removeItem('authToken');
   $(location).attr('href', "/");
 }
+
+let getConvertTimeTo24 = (myDate) => {
+  console.log('mydate:', myDate);
+  let time = new Date(myDate);
+  let hours = time.getUTCHours() > 12 ? time.getUTCHours() - 12 : time.getUTCHours();
+  let am_pm = time.getUTCHours() >= 12 ? "PM" : "AM";
+  hours = hours < 10 ? "0" + hours : hours;
+  let minutes = time.getUTCMinutes() < 10 ? "0" + time.getUTCMinutes() : time.getUTCMinutes();
+  time = hours + ":" + minutes + " " + am_pm;
+  console.log('time:', time);
+  const [ntime, nmodifier] = time.split(' ');
+  let [nhours, nminutes] = ntime.split(':');
+
+  if (nhours === '12') {
+    nhours = '00';
+  }
+
+  if (nmodifier === 'PM') {
+    nhours = parseInt(nhours, 10) + 12;
+  }
+  console.log("24time:", nhours + ':' + nminutes);
+  return nhours + ':' + nminutes;
+};
 
 let getCurrentTime = (myDate) => {
   let time = new Date(myDate);
@@ -157,7 +208,7 @@ let generateClasses = (item, indexOf) => {
   let dateM = monthNames[d.getMonth()];
   let dateD = d.getDate();
   let dateT = getCurrentTime(item.dateOccurrence);
-  let currClass = `<div class="event_icon"><div class="event_month">${dateD} ${dateM}</div><div class="event_day">${dateT}</div></div>`;
+  let currClass = `<div class="event_icon"><div class="event_month ${item.content}">${dateD} ${dateM}</div><div class="event_day">${dateT}</div></div>`;
   // qonsole.debug('generateClasses currClass:', currClass);
   return currClass;
 }
@@ -234,7 +285,7 @@ let createEventListers = () => {
         }
       }, {
         label: 'Submit',
-        cssClass: 'btn-success',
+        cssClass: 'btn-primary',
         autospin: true,
         action: function(dialogRef) {
           event.preventDefault();
@@ -293,7 +344,7 @@ let createEventListers = () => {
         }
       }, {
         label: 'Submit',
-        cssClass: 'btn-success',
+        cssClass: 'btn-primary',
         autospin: true,
         action: function(dialogRef) {
           addClassEvent();
@@ -359,7 +410,7 @@ let createEventListers = () => {
       }, {
         label: 'Delete',
         title: 'Delete Instructor & Classes',
-        cssClass: 'btn-danger',
+        cssClass: 'btn-primary',
         action: function(dialogRef) {
           let instID = $(event.currentTarget).attr('id');
           // deleteClasses(classesID)
@@ -379,11 +430,11 @@ let createEventListers = () => {
   });
 
   $('.event').on('click', (event) => {
-    qonsole.debug($.trim($(event.currentTarget).find('.event-type')));
-
-    console.log('parseJSON:', JSON.parse($(event.currentTarget).find('.inst-info').html()));
+    // console.log("data-evdt", $(event.currentTarget)["0"].attributes[2].value);
+    //qonsole.debug($.trim($(event.currentTarget).find('.event-type')));
+    //console.log('parseJSON:', JSON.parse($(event.currentTarget).find('.inst-info').html()));
     let instInfo = JSON.parse($(event.currentTarget).find('.inst-info').html());
-    console.log('instInfo:', instInfo);
+    //console.log('instInfo:', instInfo);
 
     if (instInfo === null) {
       BootstrapDialog.show({
@@ -398,14 +449,14 @@ let createEventListers = () => {
           }
         }, {
           label: 'Edit',
-          cssClass: 'btn-warning',
+          cssClass: 'btn-primary',
           action: function(dialogRef) {
             dialogRef.close();
           }
         }, {
           label: 'Delete',
           title: 'Delete Instructor',
-          cssClass: 'btn-danger',
+          cssClass: 'btn-primary',
           action: function(dialogRef) {
             deleteClassByID($(event.currentTarget).attr('id'))
             dialogRef.enableButtons(false);
@@ -421,7 +472,7 @@ let createEventListers = () => {
       BootstrapDialog.show({
         title: `Event Info: ${$(event.currentTarget).find('.event_month').html()} @ ${$(event.currentTarget).find('.event_day').html()}`,
         message: `${$(event.currentTarget).find('.event_type').html()} Class:
-        <div class="event_icon"><div class="event_month">${$(event.currentTarget).find('.event_month').html()}</div><div class="event_day">${$(event.currentTarget).find('.event_day').html()}</div></div>
+        <div class="event_icon"><div class="event_month ${$(event.currentTarget).find('.event_type').html()}">${$(event.currentTarget).find('.event_month').html()}</div><div class="event_day">${$(event.currentTarget).find('.event_day').html()}</div></div>
 
 
         Instructor:
@@ -437,9 +488,16 @@ let createEventListers = () => {
           }
         }, {
           label: 'Edit',
-          cssClass: 'btn-warning',
+          cssClass: 'btn-primary',
           action: function(dialogRef) {
             dialogRef.close();
+
+            var date = new Date($(event.currentTarget)["0"].attributes[2].value);
+            date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+            var dateStr = date.toISOString().substring(0, 10);
+            var timeStr = getConvertTimeTo24($(event.currentTarget)["0"].attributes[2].value);
+            console.log('dateStr:', dateStr);
+            console.log('timeStr:', timeStr);
             $.ajax({
                 type: "get",
                 url: "/instructors/data",
@@ -468,8 +526,8 @@ let createEventListers = () => {
               Class Type:
               <div class="btn-group" data-toggle="buttons"><label type="button" class="btn btn-secondary active class-content"><input type="radio" name="options" id="option1" autocomplete="off" checked>Aikido</label><label type="button" class="btn btn-secondary class-content"><input type="radio" name="options" id="option2" autocomplete="off">Iaido</label><label type="button" class="btn btn-secondary class-content"><input type="radio" name="options" id="option3" autocomplete="off">Weapons</label></div>
 
-              Date: <input type=date class="new-class-date">
-              Time: <input type=time min=9:00 max=17:00 step=900> `,
+              Date: <input type=date class="new-class-date" value="${dateStr}">
+              Time: <input type=time min=9:00 max=17:00 step=900 value="${timeStr}"> `,
               type: BootstrapDialog.TYPE_PRIMARY,
               buttons: [{
                 label: 'Close',
@@ -478,7 +536,7 @@ let createEventListers = () => {
                 }
               }, {
                 label: 'Submit',
-                cssClass: 'btn-success',
+                cssClass: 'btn-primary',
                 autospin: true,
                 action: function(dialogRef) {
                   updateClassEventByID(instInfo._id);
@@ -495,7 +553,7 @@ let createEventListers = () => {
         }, {
           label: 'Delete',
           title: 'Delete Instructor',
-          cssClass: 'btn-danger',
+          cssClass: 'btn-primary',
           action: function(dialogRef) {
             deleteClassByID($(event.currentTarget).attr('id'))
             dialogRef.enableButtons(false);

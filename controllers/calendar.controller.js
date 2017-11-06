@@ -22,7 +22,7 @@ exports.getCalendar = (req, res) => {
       let dateM = monthNames[d.getMonth()];
       let dateD = d.getDate();
       let dateT = getCurrentTime(item.dateOccurrence);
-      let currClass = `<div class="event_icon"><div class="event_month">${dateD} ${dateM}</div>|<div class="event_day">${dateT}</div></div>`;
+      let currClass = `<div class="event_icon"><div class="event_month ${item.content}">${dateD} ${dateM}</div>|<div class="event_day">${dateT}</div></div>`;
       // qonsole.debug('generateClasses currClass:', currClass);
       return currClass;
     }
@@ -87,7 +87,7 @@ exports.updateClass = (req, res) => {
   console.log('calendar.controller.js:13 - updateClass:');
   Calendar.findByIdAndUpdate(req.params.id, {
     content: req.body.content,
-    _instructor: req.body._instructor,
+    _instructor: req.body.instructorID,
     dateOccurrence: req.body.dateOccurrence
   }).then(data => {
     res.status(202).json(data);

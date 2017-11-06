@@ -25,7 +25,7 @@
       <h1>Class Calendar</h1>
       <% for(var i=0; i<calendarData.length; i++) {%>
         <% var calArray=allClasses[i].split("|") %>
-          <a href="#" data-userid="<%= calendarData[i]._id%>" id="<%= calendarData[i]._id%>" class="event clearfix">
+          <a href="#" data-userid="<%= calendarData[i]._id%>" data-evdt="<%= calendarData[i].dateOccurrence %>" id="<%= calendarData[i]._id%>" class="event clearfix">
 
             <%- calArray[0] %>
 
