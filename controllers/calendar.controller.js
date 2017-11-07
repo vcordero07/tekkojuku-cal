@@ -86,14 +86,21 @@ exports.newClass = (req, res) => {
 exports.updateClass = (req, res) => {
   console.log('calendar.controller.js:13 - updateClass:');
   Calendar.findByIdAndUpdate(req.params.id, {
-    content: req.body.content,
-    _instructor: req.body.instructorID,
-    dateOccurrence: req.body.dateOccurrence
-  }).then(data => {
-    res.status(202).json(data);
-  }).catch(err => {
-    console.error('calendar.controller.js:38 - error update class', err);
-  });
+      content: req.body.content,
+      _instructor: req.body.instructorID,
+      dateOccurrence: req.body.dateOccurrence
+    }).then(data => {
+      Instructor.findByIdAndUpdate(req.body.instructorID, { $push: { calendarRef: data._id } }, { upsert: true })
+        .then(() => {
+          res.status(201).json(data);
+        })
+        .catch(err => {
+          console.error('calendar.controller.js50: error', err);
+        })
+    })
+    .catch(err => {
+      console.error('calendar.controller.js:38 - error update class', err);
+    });
 };
 exports.deleteClass = (req, res) => {
   console.log('calendar.controller.js:16 - deleteClass:');

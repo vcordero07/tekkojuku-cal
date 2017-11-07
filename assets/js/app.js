@@ -104,13 +104,14 @@ let deleteClassByID = (classID) => {
 }
 
 let updateClassEventByID = (classID) => {
-  // let instID = $('select')["0"].value;
-  qonsole.debug($('input[type=date]')["0"].value);
-  qonsole.debug(`T${$('input[type=time]')["0"].value}:00.000Z`);
-  // qonsole.debug('instID:', instID);
+  console.log('classID:', classID);
+  let instID = $('select')["0"].value;
+  console.log($('input[type=date]')["0"].value);
+  console.log(`T${$('input[type=time]')["0"].value}:00.000Z`);
+  // console.log('instID:', instID);
   let classDateTime = `${$('input[type=date]')["0"].value}T${$('input[type=time]')["0"].value}:00.000Z`;
   let classType = $('.active input').prop('id');
-  console.log('classType:', classType);
+  console.log('classType:', classType, classDateTime, instID);
   $.ajax({
       type: "PUT",
       url: `/calendar/${classID}`,
@@ -118,15 +119,15 @@ let updateClassEventByID = (classID) => {
         "Accept": "application/json",
       },
       data: {
-        instructorID: classID,
+        instructorID: instID,
         dateOccurrence: new Date(classDateTime),
         content: `${classType}`,
       }
     })
     .done((data) => {
-      qonsole.debug('msg: class updated by id', data);
+      console.log('msg: class updated by id', data);
       // alert('msg: User deleted', data);
-      // $(location).attr('href', '/calendar');
+      $(location).attr('href', '/calendar');
     });
 }
 
@@ -138,7 +139,7 @@ let addClassEvent = () => {
   let classDateTime = `${$('input[type=date]')["0"].value}T${$('input[type=time]')["0"].value}:00.000Z`;
   let classType = $('.active input').prop('id');
   console.log('classType:', classType);
-  $('')
+  // $('')
   $.ajax({
       type: "post",
       url: `/calendar/class`,
@@ -435,7 +436,7 @@ let createEventListers = () => {
     //console.log('parseJSON:', JSON.parse($(event.currentTarget).find('.inst-info').html()));
     let instInfo = JSON.parse($(event.currentTarget).find('.inst-info').html());
     //console.log('instInfo:', instInfo);
-
+    let eventID = $(event.currentTarget).attr('id');
     if (instInfo === null) {
       BootstrapDialog.show({
         title: `Event Info: ${$(event.currentTarget).find('.event_month').html()} @ ${$(event.currentTarget).find('.event_day').html()}`,
@@ -524,7 +525,8 @@ let createEventListers = () => {
               </select>
 
               Class Type:
-              <div class="btn-group" data-toggle="buttons"><label type="button" class="btn btn-secondary active class-content"><input type="radio" name="options" id="option1" autocomplete="off" checked>Aikido</label><label type="button" class="btn btn-secondary class-content"><input type="radio" name="options" id="option2" autocomplete="off">Iaido</label><label type="button" class="btn btn-secondary class-content"><input type="radio" name="options" id="option3" autocomplete="off">Weapons</label></div>
+              <div class="btn-group" data-toggle="buttons">
+              <label type="button" class="btn btn-secondary active class-content"><input type="radio" name="options" id="Aikido" autocomplete="off" checked>Aikido</label><label type="button" class="btn btn-secondary class-content"><input type="radio" name="options" id="Iaido" autocomplete="off">Iaido</label><label type="button" class="btn btn-secondary class-content"><input type="radio" name="options" id="Weapons" autocomplete="off">Weapons</label></div>
 
               Date: <input type=date class="new-class-date" value="${dateStr}">
               Time: <input type=time min=9:00 max=17:00 step=900 value="${timeStr}"> `,
@@ -539,7 +541,7 @@ let createEventListers = () => {
                 cssClass: 'btn-primary',
                 autospin: true,
                 action: function(dialogRef) {
-                  updateClassEventByID(instInfo._id);
+                  updateClassEventByID(eventID);
                   dialogRef.enableButtons(false);
                   dialogRef.setClosable(false);
                   dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
