@@ -105,7 +105,7 @@ app.use('*', (req, res) => {
 
 let server;
 
-function runServer(databaseUrl = DATABASE_URL, port = 3000) {
+function runServer(databaseUrl = DATABASE_URL, port = process.env.PORT || 3000) {
   return new Promise((resolve, reject) => {
     console.log('server.js:92 - DATABASE_URL:', DATABASE_URL);
     console.log('server.js:93 - mongoUrl', mongoUrl);
