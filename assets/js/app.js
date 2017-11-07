@@ -30,7 +30,7 @@ let doLogin = (auth) => {
           localStorage.setItem("token", responseData.tkn);
           localStorage.setItem("uid", responseData.instructorID);
           // qonsole.debug('app.js:62 - responseData:', responseData);
-          qonsole.debug('Login: successful', responseData);
+          // qonsole.debug('Login: successful', responseData);
           $(location).attr('href', '/calendar');
         })
     });
@@ -53,7 +53,6 @@ let doSignup = (auth, role = 3) => {
     })
     .done((data) => {
       qonsole.debug('Signup: Successful', data);
-
       $(location).attr('href', '/instructors');
     });
 }
@@ -133,9 +132,9 @@ let updateClassEventByID = (classID) => {
 
 let addClassEvent = () => {
   let instID = $('select')["0"].value;
-  qonsole.debug($('input[type=date]')["0"].value);
-  qonsole.debug(`T${$('input[type=time]')["0"].value}:00.000Z`);
-  qonsole.debug('instID:', instID);
+  // qonsole.debug($('input[type=date]')["0"].value);
+  // qonsole.debug(`T${$('input[type=time]')["0"].value}:00.000Z`);
+  // qonsole.debug('instID:', instID);
   let classDateTime = `${$('input[type=date]')["0"].value}T${$('input[type=time]')["0"].value}:00.000Z`;
   let classType = $('.active input').prop('id');
   console.log('classType:', classType);
@@ -221,10 +220,8 @@ function getClasses(list) {
 
 function getClassesID(list) {
   let classID = [];
-  qonsole.debug('getClassesID: ', list);
-  // list.map((item, indexof) => {
-  //   classID += `${item._id},`;
-  // })
+  // qonsole.debug('getClassesID: ', list);
+
   list.forEach((val, key) => {
     classID.push({ clsKey: key, clsVal: val._id });
   })
@@ -232,7 +229,7 @@ function getClassesID(list) {
 }
 
 let createEventListers = () => {
-  qonsole.debug('app.js:11 - abcasdfasd');
+  // qonsole.debug('app.js:11 - abcasdfasd');
   $('.tekkojuku_form_login').submit(function(event) {
     event.preventDefault();
     let auth = btoa($('#username').val() + ':' + $('#password').val());
@@ -246,8 +243,6 @@ let createEventListers = () => {
     doSignup(auth);
   });
 
-  // incorrectLogin()
-  // logoutUser()
 
   $('.info-btn').on('click', (event) => {
     BootstrapDialog.show({
@@ -360,34 +355,11 @@ let createEventListers = () => {
     });
   });
   $('.degree-card').on('click', (event) => {
-    qonsole.debug('app.js:194 - event:', event);
-    // qonsole.debug('app.js:194 - data-userid:', event.currentTarget.attributes[0].value);
-    // qonsole.debug('user img', $(event.currentTarget).find('img').attr('src'));
-    // qonsole.debug('Name', $(event.currentTarget).find('.inst-name')[0].innerHTML);
-    // qonsole.debug('Degree', $.trim($(event.currentTarget).find('.inst-degree')[0].innerHTML));
+    // qonsole.debug('app.js:194 - event:', event);
     let instClass, currClass, classesID;
-    // qonsole.debug('id: ', $(event.currentTarget));
-    // qonsole.debug('data-class: ', $(event.currentTarget).find('data-class').prevObject["0"].attributes[1].value);
-    // qonsole.debug('id: ', $(event.currentTarget).attr('id'));
-    setTimeout(function() {
-      qonsole.debug($(event.currentTarget).find('.inst-classes').html());
-    }, 500);
-
-
-
-    console.log('instClass:', $.parseJSON($.trim($(event.currentTarget).find('.inst-classes').html())));
     instClass = $.parseJSON($.trim($(event.currentTarget).find('.inst-classes').html()));
-    // qonsole.debug(instClass);
-    console.log('instClass:', instClass);
-    // setTimeout(function() {
-    //     currClass = getClasses(instClass);
-    //     console.log(currClass);
-    //   }, 500)
     currClass = getClasses(instClass);
     classesID = getClassesID(instClass);
-    // currClass = currClass.replace(/,/g, "");
-    console.log("this is the current class", currClass);
-    console.log("this is the current id", classesID);
 
     BootstrapDialog.show({
       title: `<img src="${$(event.currentTarget).find('img').attr('src')}" width="65" height="90"> Instructor ${$(event.currentTarget).find('.inst-name')[0].innerHTML}`,
@@ -403,7 +375,7 @@ let createEventListers = () => {
           dialogRef.close();
         }
       }, {
-        label: 'Update',
+        label: 'Edit',
         cssClass: 'btn-primary',
         action: function(dialogRef) {
           dialogRef.close();
@@ -431,11 +403,7 @@ let createEventListers = () => {
   });
 
   $('.event').on('click', (event) => {
-    // console.log("data-evdt", $(event.currentTarget)["0"].attributes[2].value);
-    //qonsole.debug($.trim($(event.currentTarget).find('.event-type')));
-    //console.log('parseJSON:', JSON.parse($(event.currentTarget).find('.inst-info').html()));
     let instInfo = JSON.parse($(event.currentTarget).find('.inst-info').html());
-    //console.log('instInfo:', instInfo);
     let eventID = $(event.currentTarget).attr('id');
     if (instInfo === null) {
       BootstrapDialog.show({
@@ -568,7 +536,6 @@ let createEventListers = () => {
         }]
       });
     }
-
 
 
   });

@@ -34,7 +34,7 @@
                 <div class="inst-info">
                   <%= JSON.stringify(calendarData[i]._instructor) %>
                 </div>
-                <div class="event-type-title"><span class="event_type"><%= calendarData[i].content %></span>&nbsp;-&nbsp;<span class="event_title">-</span></div>
+                <div class="event-type-title"><span class="event_type"><%= calendarData[i].content %></span>&nbsp;-&nbsp;<span class="event_title">-<%= JSON.stringify(calendarData[i]._instructor).replace(/(.*username\":\")(\w.*)(",\"em.*)/g,"$2")%></span></div>
           </a>
 
           <% } %>
