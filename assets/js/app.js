@@ -7,6 +7,7 @@ let hideShow = (toHide = [], toShow = []) => {
   });
 };
 let doLogin = (auth) => {
+  console.log('app.js auth:', auth);
   $.ajax({
       type: "POST",
       url: "/auth/login",
@@ -27,6 +28,7 @@ let doLogin = (auth) => {
         url: "/auth/getAuthToken",
       }).done(
         function(responseData) {
+          console.log('app.js responseData:', responseData);
           localStorage.setItem("token", responseData.tkn);
           localStorage.setItem("uid", responseData.instructorID);
           // qonsole.debug('app.js:62 - responseData:', responseData);
