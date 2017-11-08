@@ -47,6 +47,19 @@ body {
   border-radius: 3px;
 }
 
+.content-demo {
+  width: 280px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  background-color: #7f8c8d;
+  display: block;
+  border-radius: 3px;
+  color: #fff;
+}
+
 h1 {
   display: block;
   text-align: center;
@@ -59,6 +72,13 @@ label {
   display: block;
   padding-bottom: 15px;
   padding-top: 15px;
+}
+
+.lb-demo {
+  display: block;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  font-size: 13px;
 }
 
 input[type="text"] {
@@ -179,7 +199,6 @@ input[type="password"] {
 .txt-bolder {
   font-weight: bold;
 }
-
 
 /*.main-content3 {
 

@@ -4,6 +4,37 @@ body {
   /*padding: 10px;*/
 }
 
+.btn-primary {
+  color: #fff;
+  background-color: #34495e;
+  border-color: #2c3e50;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #286090;
+  border-color: #204d74;
+}
+
+.btn-primary.focus,
+.btn-primary:focus {
+  color: #fff;
+  background-color: #34495e;
+  border-color: #2c3e50;
+}
+
+.btn-primary.active,
+.btn-primary:active,
+.open>.dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #34495e;
+  border-color: #2c3e50;
+}
+
+.bootstrap-dialog.type-primary .modal-header {
+  background-color: #34495e;
+}
+
 .navbar {
   display: flex;
   flex: 1 1 10%;
@@ -94,6 +125,7 @@ video {
   border-radius: 3px;
   cursor: pointer;
   transition: .3s background;
+  text-transform: uppercase;
 }
 
 .p-btn:hover {

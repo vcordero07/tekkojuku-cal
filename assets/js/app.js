@@ -374,32 +374,35 @@ let createEventListers = () => {
       <br>`,
       type: BootstrapDialog.TYPE_PRIMARY,
       buttons: [{
-        label: 'Close',
-        action: function(dialogRef) {
-          dialogRef.close();
-        }
-      }, {
-        label: 'Edit',
-        cssClass: 'btn-primary',
-        action: function(dialogRef) {
-          dialogRef.close();
-        }
-      }, {
-        label: 'Delete',
-        title: 'Delete Instructor & Classes',
-        cssClass: 'btn-primary',
-        action: function(dialogRef) {
-          let instID = $(event.currentTarget).attr('id');
-          // deleteClasses(classesID)
-          deleteUser(instID)
-          dialogRef.enableButtons(false);
-          dialogRef.setClosable(false);
-          dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
-          setTimeout(function() {
+          label: 'Close',
+          action: function(dialogRef) {
             dialogRef.close();
-          }, 5000);
+          }
         }
-      }]
+        // , {
+        //   label: 'Edit',
+        //   cssClass: 'btn-primary',
+        //   action: function(dialogRef) {
+        //     dialogRef.close();
+        //   }
+        // }
+        , {
+          label: 'Delete',
+          title: 'Delete Instructor & Classes',
+          cssClass: 'btn-primary',
+          action: function(dialogRef) {
+            let instID = $(event.currentTarget).attr('id');
+            // deleteClasses(classesID)
+            deleteUser(instID)
+            dialogRef.enableButtons(false);
+            dialogRef.setClosable(false);
+            dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
+            setTimeout(function() {
+              dialogRef.close();
+            }, 5000);
+          }
+        }
+      ]
     });
 
 
