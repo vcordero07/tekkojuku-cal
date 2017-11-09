@@ -7,7 +7,7 @@ let hideShow = (toHide = [], toShow = []) => {
   });
 };
 let doLogin = (auth) => {
-  console.log('app.js auth:', auth);
+  console.log('app.js doLogin auth:', auth);
   $.ajax({
       type: "POST",
       url: "/auth/login",
@@ -38,6 +38,7 @@ let doLogin = (auth) => {
     });
 };
 let doSignup = (auth, role = 3) => {
+  console.log('app.js doSignup:', auth, role);
   $.ajax({
       type: "POST",
       url: "/instructors/creator",
@@ -60,6 +61,7 @@ let doSignup = (auth, role = 3) => {
 }
 
 let deleteUser = (userID) => {
+  console.log('app.js deleteUser:', userID);
   $.ajax({
       type: "delete",
       url: `/instructors/${userID}`,

@@ -48,7 +48,7 @@ app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
   if (process.env.JWT_TOKEN !== "") {
-    console.log('server.js:42 - test log:', process.env.JWT_TOKEN);
+    console.log('server.js:51 - test log:', process.env.JWT_TOKEN);
     res.header('Authorization', 'Bearer ' + process.env.JWT_TOKEN);
   }
   if (req.method === 'OPTIONS') {
