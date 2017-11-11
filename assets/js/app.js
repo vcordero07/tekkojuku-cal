@@ -34,7 +34,7 @@ let doLogin = (auth) => {
           localStorage.setItem("uid", responseData.instructorID);
           // qonsole.debug('app.js:62 - responseData:', responseData);
           // qonsole.debug('Login: successful', responseData);
-          // $(location).attr('href', '/calendar');
+          $(location).attr('href', '/calendar');
         })
     });
 };
