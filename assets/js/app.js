@@ -8,19 +8,20 @@ let hideShow = (toHide = [], toShow = []) => {
 };
 let doLogin = (auth) => {
   console.log('app.js doLogin auth:', auth);
+  let jsonData = {
+    "username": $('#username').val(),
+    "password": $('#password').val(),
+    "email": $('#email').val()
+  }
   $.ajax({
       type: "POST",
       url: "/auth/login",
       headers: {
         "Authorization": "Basic " + auth,
-        "Accept": "application/json",
+        "Content-Type": "application/json"
       },
-      data: {
-        "username": $('#username').val(),
-        "password": $('#password').val(),
-        "email": $('#email').val()
-      },
-      datatype: "jsonp",
+      data: JSON.stringify(jsonData),
+      // datatype: "jsonp",
     })
     .done((data) => {
       $.ajax({
@@ -33,7 +34,7 @@ let doLogin = (auth) => {
           localStorage.setItem("uid", responseData.instructorID);
           // qonsole.debug('app.js:62 - responseData:', responseData);
           // qonsole.debug('Login: successful', responseData);
-          $(location).attr('href', '/calendar');
+          // $(location).attr('href', '/calendar');
         })
     });
 };
