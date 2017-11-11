@@ -132,12 +132,21 @@ video {
   background: rgba(0, 0, 0, 0.5);
 }
 
-.p-btn a {
+a.p-btn,
+a.p-btn:hover,
+a.p-btn:focus {
   text-decoration: none;
   text-transform: uppercase;
+  text-align: center;
   cursor: pointer;
   color: #fff;
 }
+
+/*a:focus,
+a:hover {
+  color: #fff;
+  text-decoration: none;
+}*/
 
 .btn-group-vertical>.btn-group:after,
 .btn-group-vertical>.btn-group:before,

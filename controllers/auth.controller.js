@@ -12,15 +12,21 @@ const createAuthToken = user => {
       expiresIn: process.env.JWT_EXPIRY,
       algorithm: 'HS256'
     }, (err, token) => {
-      console.log('auth.controller.js:16 - Auth.controller token:', token);
-      // console.log('auth.controller.js:17 - user:', user.setToken());
-      user.setToken(token);
-      process.env.JWT_TOKEN = token;
-      // console.log('auth.controller.js:20 - user.setToken():', user.setToken());
-      user.token = token;
-      tkn = token;
-      instructorID = user._id;
-      console.log('auth.controller.js:23 -user:', user);
+
+      if (err) {
+        console.log('auth.controller.js:17 err:', err);
+      } else {
+        console.log('auth.controller.js:16 - Auth.controller token:', token);
+        // console.log('auth.controller.js:17 - user:', user.setToken());
+        user.setToken(token);
+        process.env.JWT_TOKEN = token;
+        // console.log('auth.controller.js:20 - user.setToken():', user.setToken());
+        user.token = token;
+        tkn = token;
+        instructorID = user._id;
+        console.log('auth.controller.js:23 -user:', user);
+      }
+
     });
 };
 

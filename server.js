@@ -38,7 +38,7 @@ app.use(function(req, res, next) {
   // console.log('server.js:32 - setting req.header', req.headers.authorization);
   if (process.env.JWT_TOKEN !== "") {
     // req.headers.authorization = process.env.JWT_TOKEN;
-    req.headers.authorization = 'Bearer ' + process.env.JWT_TOKEN;
+    // req.headers.authorization = 'Bearer ' + process.env.JWT_TOKEN;
     // console.log('req.headers:', process.env);
     // req.query = process.env.JWT_TOKE;
     // req.header('Authorization', 'Bearer ' + process.env.JWT_TOKEN);
@@ -48,8 +48,8 @@ app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
   if (process.env.JWT_TOKEN !== "") {
-    console.log('server.js:51 - test log:', process.env.JWT_TOKEN);
-    res.header('Authorization', 'Bearer ' + process.env.JWT_TOKEN);
+    // console.log('server.js:51 - test log:', process.env.JWT_TOKEN);
+    // res.header('Authorization', 'Bearer ' + process.env.JWT_TOKEN);
   }
   if (req.method === 'OPTIONS') {
     return res.sendStatus(204);

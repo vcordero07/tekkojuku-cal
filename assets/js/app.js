@@ -24,6 +24,7 @@ let doLogin = (auth) => {
       // datatype: "jsonp",
     })
     .done((data) => {
+      console.log('data:', data);
       $.ajax({
         type: "GET",
         url: "/auth/getAuthToken",
@@ -40,6 +41,11 @@ let doLogin = (auth) => {
 };
 let doSignup = (auth, role = 3) => {
   console.log('app.js doSignup:', auth, role);
+  let jsonData = {
+    "username": $('#username').val(),
+    "password": $('#password').val(),
+    "email": $('#email').val()
+  }
   $.ajax({
       type: "POST",
       url: "/instructors/creator",
@@ -47,13 +53,8 @@ let doSignup = (auth, role = 3) => {
         "Authorization": "Basic " + auth,
         "Accept": "application/json",
       },
-      data: {
-        "username": $('#username').val(),
-        "password": $('#password').val(),
-        "email": $('#email').val(),
-        "role": role
-      },
-      datatype: "json",
+      data: JSON.stringify(jsonData),
+      // datatype: "jsonp",
     })
     .done((data) => {
       qonsole.debug('Signup: Successful', data);
