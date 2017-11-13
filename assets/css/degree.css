@@ -1,11 +1,11 @@
 * {
   box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
   background-image: url('../img/zen-circle-aikido-3.png');
 }
-
 
 /*div {
   margin: 0;
@@ -115,7 +115,7 @@ div.KYU-team {
 
 .DAN-team p {
   color: #fff;
-  font-family: 'Open Sans', sans-serif;
+  /*font-family: 'Open Sans', sans-serif;*/
   font-size: 11px;
   text-align: left;
 }
@@ -138,7 +138,7 @@ div.KYU-team {
 
 .KYU-team p {
   color: #000;
-  font-family: 'Open Sans', sans-serif;
+  /*font-family: 'Open Sans', sans-serif;*/
   font-size: 11px;
   text-align: left;
 }
@@ -159,7 +159,7 @@ div.KYU-team {
 
 .degree-card-title h2,
 .degree-card-title p,
-{
+  {
   margin-top: 5px;
   margin-bottom: 5px;
 }

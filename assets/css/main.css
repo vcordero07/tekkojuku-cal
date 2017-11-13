@@ -1,7 +1,10 @@
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
 body {
   /*background-color: #fff;*/
   background-image: url('../img/zen-circle-aikido-3.png');
-  font-family: 'Roboto', sans-serif;
 }
 
 .logo {
