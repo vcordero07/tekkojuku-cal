@@ -8,10 +8,10 @@ let hideShow = (toHide = [], toShow = []) => {
 };
 let doLogin = (auth) => {
   console.log('app.js doLogin auth:', auth);
-  let jsonData = {
+  let doLoginJSONData = {
     "username": $('#username').val(),
     "password": $('#password').val(),
-    "email": $('#email').val()
+    // "email": $('#email').val()
   }
   $.ajax({
       type: "POST",
@@ -20,7 +20,7 @@ let doLogin = (auth) => {
         "Authorization": "Basic " + auth,
         "Content-Type": "application/json"
       },
-      data: JSON.stringify(jsonData),
+      data: JSON.stringify(doLoginJSONData),
       // datatype: "jsonp",
     })
     .done((data) => {
@@ -41,19 +41,20 @@ let doLogin = (auth) => {
 };
 let doSignup = (auth, role = 3) => {
   console.log('app.js doSignup:', auth, role);
-  let jsonData = {
+  let doSignupJSONData = {
     "username": $('#username').val(),
     "password": $('#password').val(),
-    "email": $('#email').val()
+    "email": $('#email').val(),
+    "role": role
   }
   $.ajax({
       type: "POST",
       url: "/instructors/creator",
       headers: {
         "Authorization": "Basic " + auth,
-        "Accept": "application/json",
+        "Content-Type": "application/json",
       },
-      data: JSON.stringify(jsonData),
+      data: JSON.stringify(doSignupJSONData),
       // datatype: "jsonp",
     })
     .done((data) => {
