@@ -11,6 +11,8 @@
   <link rel=" stylesheet " href="font-awesome-4.7.0/css/font-awesome.css " type="text/css " />
   <link rel="stylesheet " href="font-awesome-4.7.0/css/font-awesome.min.css " type="text/css " />
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+  <link rel="stylesheet " href="/css/nav-bar.css ">
   <link rel="stylesheet" href="./css/bg-video.css">
   <title>Tekkojuku-Calendar</title>
 </head>
@@ -19,11 +21,11 @@
   <%- include navbar.ejs %>
     <div class="main-content2">
       <video id="bg-video" playsinline autoplay muted loop>
-
+        <!-- remove loop to play video only once -->
   <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
-  <source src="./videos/ATJB3.webm" type="video/webm">
-<source src="./videos/ATJB3.mp4" type="video/mp4">
-</video>
+        <source src="./videos/ATJB3.webm" type="video/webm">
+        <source src="./videos/ATJB3.mp4" type="video/mp4">
+      </video>
       <div id="ATJB">
         <h1>Aikido Tekkojuku Boston Class Calendar</h1>
         <p>Aikido Tekkojuku Boston (ATJB) was founded to promote the practice and teaching of the Japanese martial art of Aikido, as created by O Sensei Morihei Ueshiba, in an atmosphere of mutual respect conducive to training for all, irrespective of race,

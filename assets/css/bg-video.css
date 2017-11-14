@@ -9,84 +9,6 @@ body {
   /*padding: 10px;*/
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #34495e;
-  border-color: #2c3e50;
-}
-
-.btn-primary:hover {
-  color: #fff;
-  background-color: #286090;
-  border-color: #204d74;
-}
-
-.btn-primary.focus,
-.btn-primary:focus {
-  color: #fff;
-  background-color: #34495e;
-  border-color: #2c3e50;
-}
-
-.btn-primary.active,
-.btn-primary:active,
-.open>.dropdown-toggle.btn-primary {
-  color: #fff;
-  background-color: #34495e;
-  border-color: #2c3e50;
-}
-
-.bootstrap-dialog.type-primary .modal-header {
-  background-color: #34495e;
-}
-
-.navbar {
-  display: flex;
-  flex: 1 1 10%;
-  justify-content: space-between;
-  background-color: white;
-  padding: 8px 20px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.22);
-  align-items: center;
-  max-height: 75px;
-}
-
-.navbar-logo img {
-  height: 75px;
-  display: inline-block;
-  margin: auto;
-}
-
-ul {
-  display: flex;
-  padding: 0;
-  list-style-type: none;
-  justify-content: space-between;
-}
-
-ul li:nth-child(2) {
-  border-left: 2px solid #555;
-}
-
-ul li:nth-child(3) {
-  border-right: 2px solid #555;
-  border-left: 2px solid #555;
-}
-
-li a {
-  color: #445252;
-  text-decoration: none;
-  text-transform: uppercase;
-  padding: 0 15px;
-  cursor: pointer;
-}
-
-.main-content {
-  padding: 15px;
-  /*flex: 1 1 90%;*/
-  /*min-height: 100vh;*/
-}
-
 video {
   position: fixed;
   top: 50%;
@@ -107,7 +29,6 @@ video {
 }
 
 #ATJB {
-  /*font-family: Agenda-Light, Agenda Light, Agenda, Arial Narrow, sans-serif;*/
   font-weight: 100;
   background: rgba(0, 0, 0, 0.3);
   color: white;
@@ -153,7 +74,7 @@ a:hover {
   text-decoration: none;
 }*/
 
-.btn-group-vertical>.btn-group:after,
+/*.btn-group-vertical>.btn-group:after,
 .btn-group-vertical>.btn-group:before,
 .btn-toolbar:after,
 .btn-toolbar:before,
@@ -184,7 +105,7 @@ a:hover {
 .row:after,
 .row:before {
   content: none;
-}
+}*/
 
 @media screen and (max-width: 500px) {
   div {

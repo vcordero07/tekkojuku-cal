@@ -11,7 +11,8 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel=" stylesheet " href="/font-awesome-4.7.0/css/font-awesome.css " type="text/css " />
   <link rel="stylesheet " href="/font-awesome-4.7.0/css/font-awesome.min.css " type="text/css " />
-  <!-- <link rel="stylesheet " href="/css/calendar.css "> -->
+
+  <link rel="stylesheet " href="/css/nav-bar.css ">
   <link rel="stylesheet " href="/css/bg-video.css ">
   <link rel="stylesheet " href="/css/cal.css ">
   <title>Tekkojuku-Calendar</title>
@@ -22,24 +23,31 @@
   <%- include navbar.ejs %>
 
     <div class="calendar">
-      <h1>Class Calendar</h1>
-      <% for(var i=0; i<calendarData.length; i++) {%>
-        <% var calArray=allClasses[i].split("|") %>
-          <a href="#" data-userid="<%= calendarData[i]._id%>" data-evdt="<%= calendarData[i].dateOccurrence %>" id="<%= calendarData[i]._id%>" class="event clearfix">
+      <div class="sub-calendar">
 
-            <%- calArray[0] %>
 
-              <%- calArray[1] %>
+        <div class="row">
+          <h2>Class Calendar</h2>
+          <div class="btn btn-primary  add-event-btn ">Add Event</div>
+        </div>
+        <br><br>
+        <% for(var i=0; i<calendarData.length; i++) {%>
+          <% var calArray=allClasses[i].split("|") %>
+            <a href="#" data-userid="<%= calendarData[i]._id%>" data-evdt="<%= calendarData[i].dateOccurrence %>" id="<%= calendarData[i]._id%>" class="event clearfix">
 
-                <div class="inst-info">
-                  <%= JSON.stringify(calendarData[i]._instructor) %>
-                </div>
-                <div class="event-type-title"><span class="event_type"><%= calendarData[i].content %></span>&nbsp;-&nbsp;<span class="event_title">-<%= JSON.stringify(calendarData[i]._instructor).replace(/(.*username\":\")(\w.*)(",\"em.*)/g,"$2")%></span></div>
-          </a>
+              <%- calArray[0] %>
 
-          <% } %>
+                <%- calArray[1] %>
 
-            <div class="btn btn-primary btn-block add-event-btn ">Add Event</div>
+                  <div class="inst-info">
+                    <%= JSON.stringify(calendarData[i]._instructor) %>
+                  </div>
+                  <div class="event-type-title"><span class="event_type"><%= calendarData[i].content %></span>&nbsp;-&nbsp;<span class="event_title">-<%= JSON.stringify(calendarData[i]._instructor).replace(/(.*username\":\")(\w.*)(",\"em.*)/g,"$2")%></span></div>
+            </a>
+
+            <% } %>
+      </div>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js " integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=" anonymous "></script>

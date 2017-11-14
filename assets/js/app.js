@@ -1,3 +1,7 @@
+const suRole = 1;
+const inRole = 2;
+const usRole = 3;
+
 let hideShow = (toHide = [], toShow = []) => {
   toHide.forEach(function(item, indx) {
     $(item).hide()
@@ -39,7 +43,8 @@ let doLogin = (auth) => {
         })
     });
 };
-let doSignup = (auth, role = 3) => {
+
+let doSignup = (auth, role = usRole) => {
   console.log('app.js doSignup:', auth, role);
   let doSignupJSONData = {
     "username": $('#username').val(),
@@ -59,6 +64,9 @@ let doSignup = (auth, role = 3) => {
     })
     .done((data) => {
       qonsole.debug('Signup: Successful', data);
+      if (role === usRole) {
+        doLogin(auth)
+      }
       $(location).attr('href', '/instructors');
     });
 }
@@ -294,7 +302,7 @@ let createEventListers = () => {
           event.preventDefault();
 
           let auth = btoa($('#username').val() + ':' + $('#password').val());
-          doSignup(auth, 2);
+          doSignup(auth, inRole);
           dialogRef.enableButtons(false);
           dialogRef.setClosable(false);
           dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
