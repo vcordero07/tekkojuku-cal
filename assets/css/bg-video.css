@@ -9,6 +9,24 @@ body {
   /*padding: 10px;*/
 }
 
+@media screen and (max-width: 400px) {
+  #ATJB {
+    display: none;
+  }
+  .nav-bar-item {
+    display: none;
+  }
+}
+
+/*@media screen and (min-width: 405px) {
+  #ATJB {
+    display: none;
+  }
+  .small-nav-bar {
+    display: none;
+  }
+}*/
+
 video {
   position: fixed;
   top: 50%;
@@ -62,7 +80,7 @@ a.p-btn,
 a.p-btn:hover,
 a.p-btn:focus {
   text-decoration: none;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
   text-align: center;
   cursor: pointer;
   color: #fff;
@@ -74,40 +92,7 @@ a:hover {
   text-decoration: none;
 }*/
 
-/*.btn-group-vertical>.btn-group:after,
-.btn-group-vertical>.btn-group:before,
-.btn-toolbar:after,
-.btn-toolbar:before,
-.clearfix:after,
-.clearfix:before,
-.container-fluid:after,
-.container-fluid:before,
-.container:after,
-.container:before,
-.dl-horizontal dd:after,
-.dl-horizontal dd:before,
-.form-horizontal .form-group:after,
-.form-horizontal .form-group:before,
-.modal-footer:after,
-.modal-footer:before,
-.nav:after,
-.nav:before,
-.navbar-collapse:after,
-.navbar-collapse:before,
-.navbar-header:after,
-.navbar-header:before,
-.navbar:after,
-.navbar:before,
-.pager:after,
-.pager:before,
-.panel-body:after,
-.panel-body:before,
-.row:after,
-.row:before {
-  content: none;
-}*/
-
-@media screen and (max-width: 500px) {
+/*@media screen and (max-width: 500px) {
   div {
     width: 70%;
   }
@@ -120,4 +105,4 @@ a:hover {
   #bgvid {
     display: none;
   }
-}
+}*/

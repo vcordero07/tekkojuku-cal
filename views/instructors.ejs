@@ -12,46 +12,50 @@
   <link rel=" stylesheet " href="font-awesome-4.7.0/css/font-awesome.css " type="text/css " />
   <link rel="stylesheet " href="font-awesome-4.7.0/css/font-awesome.min.css " type="text/css " />
 
+  <link rel="stylesheet " href="/css/main.css ">
   <link rel="stylesheet " href="/css/nav-bar.css ">
-  <!-- <link rel="stylesheet " href="/css/bg-video.css "> -->
   <link rel="stylesheet " href="/css/ins.css ">
-  <!-- <link rel="stylesheet " href="/css/cal.css "> -->
+  <link rel="stylesheet " href="/css/cal.css ">
   <title>Tekkojuku-Calendar</title>
 </head>
 
 <body>
-  <%- include navbar.ejs %>
+  <div class="main-content">
+    <%- include navbar.ejs %>
 
-    <div class="main-content">
-      <div class="sub-content">
-        <div class="btn btn-primary add-instructor-btn">Add Instructor</div>
-        <div class="wrapper1">
+      <div class="inst-content">
+        <div class="sub-inst-content">
+          <div class="btn btn-primary add-instructor-btn">Add Instructor</div>
+          <div class="wrapper1">
 
-          <% for(var i=0; i<instructorData.length; i++) {%>
+            <% for(var i=0; i<instructorData.length; i++) {%>
 
-            <div data-userid="<%= instructorData[i]._id%>" data-class="<%= instructorData[i].calendarRef %>" class="degree-card <%= instructorData[i].degree%>-team" id="<%= instructorData[i]._id%>">
-              <div class="degree-card-title">
-                <h2 class="inst-name"><%= instructorData[i].username%></h2>
-                <p class="inst-degree">
-                  <%= instructorData[i].degree%>
-                </p>
+              <div data-userid="<%= instructorData[i]._id%>" data-class="<%= instructorData[i].calendarRef %>" class="degree-card <%= instructorData[i].degree%>-team" id="<%= instructorData[i]._id%>">
+                <div class="degree-card-title">
+                  <h2 class="inst-name"><%= instructorData[i].username%></h2>
+                  <p class="inst-degree">
+                    <%= instructorData[i].degree%>
+                  </p>
+                </div>
+                <div class="inst-classes">
+                  <%= JSON.stringify(instructorData[i].calendarRef) %>
+                </div>
+                <figure>
+                  <img class="inst-profile-pic" src="<%= instructorData[i].img%>" alt="Instructor <%= instructorData[i].username%>">
+                </figure>
               </div>
-              <div class="inst-classes">
-                <%= JSON.stringify(instructorData[i].calendarRef) %>
-              </div>
-              <figure>
-                <img class="inst-profile-pic" src="<%= instructorData[i].img%>" alt="Instructor <%= instructorData[i].username%>">
-              </figure>
-            </div>
 
-            <% } %>
+              <% } %>
 
+          </div>
+          <br>
+          <p>ATJB instructors have trained in Aikido for twenty to fourty years, and hold ranks from 1st to 13th degree black belt. They are some of the highest ranking Aikido practitioners in the region, forming a diverse group of experienced and dedicated
+            men and women of all ethnicities, ages, and backgrounds. They aspire to offer an exciting and martial expression of Aikido in an atmosphere of friendship and camaraderie. </p>
         </div>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-          irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </div>
-    </div>
+  </div>
+  <%- include footer.ejs %>
+
     <script src="https://code.jquery.com/jquery-3.2.1.min.js " integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=" anonymous "></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/js/bootstrap-dialog.js"></script>

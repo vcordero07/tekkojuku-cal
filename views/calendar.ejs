@@ -11,44 +11,44 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel=" stylesheet " href="/font-awesome-4.7.0/css/font-awesome.css " type="text/css " />
   <link rel="stylesheet " href="/font-awesome-4.7.0/css/font-awesome.min.css " type="text/css " />
-
+  <link rel="stylesheet " href="/css/main.css ">
   <link rel="stylesheet " href="/css/nav-bar.css ">
-  <link rel="stylesheet " href="/css/bg-video.css ">
+  <!-- <link rel="stylesheet " href="/css/bg-video.css "> -->
   <link rel="stylesheet " href="/css/cal.css ">
   <title>Tekkojuku-Calendar</title>
 </head>
 
 <body class="calendar-body">
+  <div class="main-content">
+    <%- include navbar.ejs %>
 
-  <%- include navbar.ejs %>
+      <div class="calendar">
+        <div class="sub-calendar">
 
-    <div class="calendar">
-      <div class="sub-calendar">
+          <div class="row">
+            <h2>Class Calendar</h2>
+            <div class="btn btn-primary  add-event-btn ">Add Event</div>
+          </div>
+          <br><br>
+          <% for(var i=0; i<calendarData.length; i++) {%>
+            <% var calArray=allClasses[i].split("|") %>
+              <a href="#" data-userid="<%= calendarData[i]._id%>" data-evdt="<%= calendarData[i].dateOccurrence %>" id="<%= calendarData[i]._id%>" class="event clearfix">
 
+                <%- calArray[0] %>
 
-        <div class="row">
-          <h2>Class Calendar</h2>
-          <div class="btn btn-primary  add-event-btn ">Add Event</div>
+                  <%- calArray[1] %>
+
+                    <div class="inst-info">
+                      <%= JSON.stringify(calendarData[i]._instructor) %>
+                    </div>
+                    <div class="event-type-title"><span class="event_type"><%= calendarData[i].content %></span>&nbsp;-&nbsp;<span class="event_title"><%= JSON.stringify(calendarData[i]._instructor).replace(/(.*username\":\")(\w.*)(",\"em.*)/g,"$2")%></span></div>
+              </a>
+
+              <% } %>
         </div>
-        <br><br>
-        <% for(var i=0; i<calendarData.length; i++) {%>
-          <% var calArray=allClasses[i].split("|") %>
-            <a href="#" data-userid="<%= calendarData[i]._id%>" data-evdt="<%= calendarData[i].dateOccurrence %>" id="<%= calendarData[i]._id%>" class="event clearfix">
-
-              <%- calArray[0] %>
-
-                <%- calArray[1] %>
-
-                  <div class="inst-info">
-                    <%= JSON.stringify(calendarData[i]._instructor) %>
-                  </div>
-                  <div class="event-type-title"><span class="event_type"><%= calendarData[i].content %></span>&nbsp;-&nbsp;<span class="event_title">-<%= JSON.stringify(calendarData[i]._instructor).replace(/(.*username\":\")(\w.*)(",\"em.*)/g,"$2")%></span></div>
-            </a>
-
-            <% } %>
       </div>
-
-    </div>
+  </div>
+  <%- include footer.ejs %>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js " integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=" anonymous "></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.js"></script>

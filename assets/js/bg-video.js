@@ -17,7 +17,7 @@ let createVideoListers = () => {
       // qonsole.debug('test true:', ($('#bg-video')["0"].paused));
       $('#bg-video').trigger('play');
       $('#bg-video').attr({ 'autoplay': 'true' });
-      $('#pause-btn').html('Pause');
+      $('#pause-btn').html('Pause Video');
     } else {
       // qonsole.debug("false:", $('#bg-video').paused);
       $('#bg-video').trigger('pause');

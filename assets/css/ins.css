@@ -17,7 +17,7 @@ body {
   display: block;
 }*/
 
-.main-content {
+.inst-content {
   min-width: 350px;
   max-width: 95%;
   margin: 1em auto;
@@ -29,10 +29,11 @@ body {
   border-top: 33px solid;
 }
 
-.sub-content {
+.sub-inst-content {
   background-color: #eee;
   border-left: 10px solid;
   border-right: 10px solid;
+  border-bottom: 1px solid;
   padding: 2em;
 }
 

@@ -22,11 +22,12 @@ body {
   background-color: #eee;
   border-left: 10px solid;
   border-right: 10px solid;
+  border-bottom: 1px solid;
   padding: 2em;
 }
 
 .calendar:last-child {
-  border-top: 6px solid #2c3e50;
+  /*border-top: 6px solid #2c3e50;*/
 }
 
 h1 {
@@ -106,24 +107,6 @@ h1 {
 .inst-info {
   display: none;
 }
-
-/*.btn {
-  margin-top: 0.5em;
-  width: 100%;
-  font-size: 1.5em;
-}*/
-
-/*.checkbox-inline,
-.radio-inline,
-.class-content {
-  position: relative;
-  display: inline-block;
-  padding-left: 20px;
-  margin-bottom: 0;
-  font-weight: 400;
-  vertical-align: middle;
-  cursor: pointer;
-}*/
 
 .class-content {
   background-color: #fff;

@@ -11,7 +11,7 @@
   <link rel=" stylesheet " href="font-awesome-4.7.0/css/font-awesome.css " type="text/css " />
   <link rel="stylesheet " href="font-awesome-4.7.0/css/font-awesome.min.css " type="text/css " />
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-
+  <link rel="stylesheet " href="/css/main.css ">
   <link rel="stylesheet " href="/css/nav-bar.css ">
   <link rel="stylesheet" href="./css/bg-video.css">
   <title>Tekkojuku-Calendar</title>
@@ -19,7 +19,7 @@
 
 <body>
   <%- include navbar.ejs %>
-    <div class="main-content2">
+    <div class="main-content">
       <video id="bg-video" playsinline autoplay muted loop>
         <!-- remove loop to play video only once -->
   <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
@@ -28,13 +28,14 @@
       </video>
       <div id="ATJB">
         <h1>Aikido Tekkojuku Boston Class Calendar</h1>
+        <p>The purpose of this site is to allow the head instructor to automate the process of the monthly calendar class assignment. You can view, add, edit, and delete classes by going to the Calendar page. To add classes, simply click on "Add Event" and
+          fill the requirements. You can add an Instructor by clicking on the "add Instructor" button, and view his information by clicking on his picture. </p>
         <p>Aikido Tekkojuku Boston (ATJB) was founded to promote the practice and teaching of the Japanese martial art of Aikido, as created by O Sensei Morihei Ueshiba, in an atmosphere of mutual respect conducive to training for all, irrespective of race,
-          ethnicity, gender, ability or age. All seven founding instructors of ATJB were long-time students of the late Mitsunari Kanai Shihan, himself an "uchi deshi" (disciple) of Aikido's founder, O'Sensei Morihei Ueshiba. Kanai Shihan, a world-renowned
-          Aikido practitioner and instructor, passed away in March of 2004. The founding instructors decided to honor his memory and love of Aikido by opening ATJB.</p>
+          ethnicity, gender, ability or age.</p>
 
         <button class="p-btn" id="pause-btn">Pause Video</button>
 
-        <a class="p-btn" type="button" name="login" href="/login">login</a>
+        <a class="p-btn" type="button" name="login" href="/login">Get Started</a>
       </div>
     </div>
 
