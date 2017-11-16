@@ -9,24 +9,6 @@ body {
   /*padding: 10px;*/
 }
 
-@media screen and (max-width: 400px) {
-  #ATJB {
-    display: none;
-  }
-  .nav-bar-item {
-    display: none;
-  }
-}
-
-/*@media screen and (min-width: 405px) {
-  #ATJB {
-    display: none;
-  }
-  .small-nav-bar {
-    display: none;
-  }
-}*/
-
 video {
   position: fixed;
   top: 50%;

@@ -7,15 +7,9 @@ body {
   background-image: url('../img/zen-circle-aikido-3.png');
 }
 
-/*div {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-  display: block;
-}*/
+/*/#3c4145 color hakama*/
+
+/*#27282d hakama border color*/
 
 .inst-content {
   min-width: 350px;
@@ -26,14 +20,14 @@ body {
   padding-right: 20px;
   /*box-shadow: 0 0 0.1em rgba(0, 0, 0, 0.5);*/
   /*border-radius: 0.2em;*/
-  border-top: 33px solid;
+  border-top: 33px solid #3c4145;
 }
 
 .sub-inst-content {
   background-color: #eee;
-  border-left: 10px solid;
-  border-right: 10px solid;
-  border-bottom: 1px solid;
+  border-left: 10px solid #3c4145;
+  border-right: 10px solid #3c4145;
+  border-bottom: 1px solid #3c4145;
   padding: 2em;
 }
 
@@ -186,7 +180,8 @@ div.KYU-team {
   margin-bottom: 5px;
 }
 
-.inst-classes {
+.inst-classes,
+.inst-bio {
   display: none;
 }
 

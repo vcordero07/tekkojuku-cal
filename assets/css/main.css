@@ -117,33 +117,41 @@ body {
   background: white;
 }*/
 
-/*.btn-primary {
+.btn-primary {
   color: #fff;
-  background-color: #34495e;
-  border-color: #2c3e50;
+  background-color: #3c4145;
+  border-color: #27282d;
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #286090;
-  border-color: #204d74;
+  background-color: #605d66;
+  border-color: #27282d;
 }
 
 .btn-primary.focus,
 .btn-primary:focus {
   color: #fff;
-  background-color: #34495e;
-  border-color: #2c3e50;
+  background-color: #3c4145;
+  border-color: #27282d;
 }
 
 .btn-primary.active,
 .btn-primary:active,
 .open>.dropdown-toggle.btn-primary {
   color: #fff;
-  background-color: #34495e;
-  border-color: #2c3e50;
+  background-color: #3c4145;
+  border-color: #27282d;
 }
 
 .bootstrap-dialog.type-primary .modal-header {
-  background-color: #34495e;
-}*/
+  background-color: #3c4145;
+}
+
+.login-dialog .modal-dialog {
+  width: auto;
+  height: auto;
+  max-height: 100%;
+}
+
+/*width:'auto',height:'auto', 'max-height':'100%'*/

@@ -15,6 +15,11 @@
   margin: auto;
 }
 
+.nav-bar-item,
+.small-nav-bar {
+  display: block;
+}
+
 ul.nav-bar-item {
   display: flex;
   padding: 0;
@@ -37,4 +42,22 @@ ul.nav-bar-item li:nth-child(3) {
   text-transform: uppercase;
   padding: 0 15px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 400px) {
+  #ATJB {
+    display: none;
+  }
+  .nav-bar-item {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 405px) {
+  /*#ATJB {
+    display: none;
+  }*/
+  .small-nav-bar {
+    display: none;
+  }
 }

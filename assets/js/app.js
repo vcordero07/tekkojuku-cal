@@ -266,8 +266,10 @@ let createEventListers = () => {
     <br> The purpose of this site is to allow the head instructor to automate the process of the monthly calendar class assignment. You can view, add, edit, and delete classes by going to the Calendar page. To add classes, simply click on "Add Event" and fill the requirements. You can add an Instructor by clicking on the "add Instructor" button, and view his information by clicking on his picture.
     <br> Aikido Tekkojuku Boston (ATJB) was founded to promote the practice and teaching of the Japanese martial art of Aikido, as created by O Sensei Morihei Ueshiba, in an atmosphere of mutual respect conducive to training for all, irrespective of race, ethnicity, gender, ability or age. For more on information, go to <a href="http://aikidotjboston.org/">aikidotjboston.org</a>
 
+    &copy Tekkojuku-Cal by Virgilio Cordero |
       `,
       type: BootstrapDialog.TYPE_PRIMARY,
+      cssClass: 'bs-dialog',
       buttons: [{
         label: 'Close',
         action: function(dialogRef) {
@@ -276,6 +278,7 @@ let createEventListers = () => {
       }]
     });
   });
+
   $('.add-instructor-btn').on('click', (event) => {
     BootstrapDialog.show({
       title: `Add Instructor`,
@@ -289,6 +292,7 @@ let createEventListers = () => {
     <input type="password" name="password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="password" placeholder="1234Pswd" required>
     `,
       type: BootstrapDialog.TYPE_PRIMARY,
+      cssClass: 'bs-dialog',
       buttons: [{
         label: 'Close',
         action: function(dialogRef) {
@@ -348,6 +352,7 @@ let createEventListers = () => {
       Date: <input type=date class="new-class-date">
       Time: <input type=time min=9:00 max=17:00 step=900> `,
       type: BootstrapDialog.TYPE_PRIMARY,
+      cssClass: 'bs-dialog',
       buttons: [{
         label: 'Close',
         action: function(dialogRef) {
@@ -369,6 +374,7 @@ let createEventListers = () => {
       }]
     });
   });
+
   $('.degree-card').on('click', (event) => {
     // qonsole.debug('app.js:194 - event:', event);
     let instClass, currClass, classesID, concatClasses = "";
@@ -383,11 +389,12 @@ let createEventListers = () => {
     BootstrapDialog.show({
       title: `<img src="${$(event.currentTarget).find('img').attr('src')}" width="65" height="90"> Instructor ${$(event.currentTarget).find('.inst-name')[0].innerHTML}`,
       message: `Degree: ${$.trim($(event.currentTarget).find('.inst-degree')[0].innerHTML)}
-      <br> Short Bio: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam consequat ornare mauris quis mollis. Nam quam magna, fermentum eget lacinia a, vehicula ut erat. Curabitur cursus ligula justo, nec feugiat leo rutrum eget. Morbi molestie lorem at sapien iaculis maximus. Morbi accumsan lacus et augue dignissim eleifend. Praesent erat arcu, blandit a enim sit amet, auctor hendrerit erat. Sed id lorem consequat, dapibus sem non, bibendum nunc. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum tristique vel ante a venenatis.
+      <br> Short Bio: ${$(event.currentTarget).find('.inst-bio').html()}
       <br> Class:
       ${concatClasses}
       <br>`,
       type: BootstrapDialog.TYPE_PRIMARY,
+      cssClass: 'bs-dialog',
       buttons: [{
           label: 'Close',
           action: function(dialogRef) {
@@ -433,6 +440,7 @@ let createEventListers = () => {
         message: `There was an error trying to load this instructor. Please try again.
     <br>`,
         type: BootstrapDialog.TYPE_PRIMARY,
+        cssClass: 'bs-dialog',
         buttons: [{
           label: 'Close',
           action: function(dialogRef) {
@@ -472,6 +480,7 @@ let createEventListers = () => {
         Degree: ${instInfo.degree}
     <br>`,
         type: BootstrapDialog.TYPE_PRIMARY,
+        cssClass: 'bs-dialog',
         buttons: [{
           label: 'Close',
           action: function(dialogRef) {
@@ -521,6 +530,7 @@ let createEventListers = () => {
               Date: <input type=date class="new-class-date" value="${dateStr}">
               Time: <input type=time min=9:00 max=17:00 step=900 value="${timeStr}"> `,
               type: BootstrapDialog.TYPE_PRIMARY,
+              cssClass: 'bs-dialog',
               buttons: [{
                 label: 'Close',
                 action: function(dialogRef) {

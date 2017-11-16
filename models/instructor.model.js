@@ -40,7 +40,8 @@ const instructorSchema = new Schema({
   "calendarRef": [{
     type: mongoose.Schema.ObjectId,
     ref: "Calendar"
-  }]
+  }],
+  "bio": 'String'
 })
 
 instructorSchema.methods.apiRepr = function() {
