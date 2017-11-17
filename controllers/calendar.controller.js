@@ -28,10 +28,20 @@ exports.getCalendar = (req, res) => {
     }
 
     let allClasses = data.map(generateClasses);
-    let instructorsInfo = JSON.stringify(data);
-
+    // let instructorsInfo = JSON.stringify(data); check this one out
+    let calData = data;
+    let fullCalendarData = [];
+    calData.forEach(item => {
+      var calDate = new Date(item.dateOccurrence);
+      var fullCalDate = item.dateOccurrence;
+      var description
+      fullCalendarData.push(`{title: '${item.content}', start: '${fullCalDate}'}`)
+    });
+    console.log(fullCalendarData);
+    //fullCalendarData.push(`{title: '${item.content}', start: '${fullCalDate}', description: '${item._id}' }`)
     // console.log('instructorsInfo:', instructorsInfo);
-    res.status(200).render('../views/calendar', { "calendarData": data, allClasses });
+    //calDate.toISOString().substring(0, 10);
+    res.status(200).render('../views/calendar', { "calendarData": data, allClasses, fullCalendarData });
   });
 };
 

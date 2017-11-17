@@ -6,7 +6,8 @@ body {
   background-image: url('../img/zen-circle-aikido-3.png');
 }
 
-.calendar {
+.calendar,
+#cal {
   min-width: 350px;
   max-width: 95%;
   margin: 1em auto;
@@ -18,7 +19,8 @@ body {
   border-top: 33px solid #3c4145;
 }
 
-.sub-calendar {
+.sub-calendar,
+#sub-cal {
   background-color: #eee;
   border-left: 10px solid #3c4145;
   border-right: 10px solid #3c4145;
