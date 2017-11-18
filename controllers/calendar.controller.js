@@ -32,15 +32,23 @@ exports.getCalendar = (req, res) => {
     let calData = data;
     let fullCalendarData = [];
     calData.forEach(item => {
-      var calDate = new Date(item.dateOccurrence);
-      var fullCalDate = item.dateOccurrence;
-      var description
-      fullCalendarData.push(`{title: '${item.content}', start: '${fullCalDate}'}`)
+      // var calDate = new Date(item.dateOccurrence);
+      // var calDate = new Date(item.dateOccurrence);
+      // calDate.setMinutes(calDate.getMinutes() - calDate.getTimezoneOffset());
+      var fullCalDate = item.dateOccurrence.toISOString().substring(0, 19);
+      //moment.utc('2016-05-14T08:33:14-03:00').format()
+      // console.log(utcDate + '!')
+      //&timezone=UTC
+      // console.log('calDate:', calDate);
+      console.log('fullCalDate:', fullCalDate, item.dateOccurrence);
+      fullCalendarData.push(`{title: '${item.content}', start: '${fullCalDate}', className: 'event'}`)
     });
     console.log(fullCalendarData);
+
     //fullCalendarData.push(`{title: '${item.content}', start: '${fullCalDate}', description: '${item._id}' }`)
     // console.log('instructorsInfo:', instructorsInfo);
     //calDate.toISOString().substring(0, 10);
+    //fullCalendarData.push(`{title: '${item.content}', start: '${String(fullCalDate).replace(/0\d{3}/,'0000')}'}`)
     res.status(200).render('../views/calendar', { "calendarData": data, allClasses, fullCalendarData });
   });
 };

@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/css/bootstrap-dialog.css" type="text/css" />
 
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.7.0/fullcalendar.min.css ">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.7.0/fullcalendar.print.css"> -->
+   -->
 
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel=" stylesheet " href="/font-awesome-4.7.0/css/font-awesome.css " type="text/css " />
@@ -19,7 +19,9 @@
   <link rel="stylesheet " href="/css/nav-bar.css ">
   <!-- <link rel="stylesheet " href="/css/bg-video.css "> -->
   <link rel="stylesheet " href="/css/cal.css ">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.7.0/fullcalendar.print.css" media="print">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.7.0/fullcalendar.css">
+
   <title>Tekkojuku-Calendar</title>
 </head>
 
@@ -27,7 +29,8 @@
   <div class="main-content">
     <%- include navbar.ejs %>
       <!-- <%= calendarData %> -->
-      <!-- <div id="cal">
+
+      <div id="cal">
         <div id="sub-cal">
 
           <div class="row">
@@ -51,7 +54,7 @@
 
               <% } %>
         </div>
-      </div> -->
+      </div>
 
       <div class="calendar">
 
@@ -80,6 +83,21 @@
         // console.log(<%= fullCalendarData %>);
         // page is now ready, initialize the calendar...
 
+        // $('.fc-event-container').on('click', (event) => {
+        //   BootstrapDialog.show({
+        //     title: `trd`,
+        //     message: ``,
+        //     type: BootstrapDialog.TYPE_PRIMARY,
+        //     cssClass: 'bs-dialog',
+        //     buttons: [{
+        //       label: 'Close',
+        //       action: function(dialogRef) {
+        //         dialogRef.close();
+        //       }
+        //     }]
+        //   });
+        // });
+
         $('.sub-calendar').fullCalendar({
           header: {
             left: 'prev,next today',
@@ -88,17 +106,31 @@
           },
           defaultDate: '2017-11-12',
           navLinks: true, // can click day/week names to navigate views
-          editable: true,
+          editable: false,
+          timezone: 'local',
           events: [<%- fullCalendarData %>],
           eventRender: function(event, element) {
             // element.qtip({
             //   content: event.description
             // });
-            console.log('event test:', );
+            // console.log('event test:', );
             $(element).click(e => {
               console.log(e);
             })
-          }
+          },
+          eventAfterRender: function(event, element, view) {
+
+            if (event.title === "Aikido") {
+              //event.color = "#"; //
+              element.css('background-color', '#e74c3c');
+            } else if (event.title === "Iaido") {
+              //event.color = "#"; //
+              element.css('background-color', '#27ae60');
+            } else if (event.title === "Weapons") {
+              //event.color = "#"; //
+              element.css('background-color', '#3498db');
+            }
+          },
         })
 
       });
