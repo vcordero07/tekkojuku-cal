@@ -109,6 +109,12 @@
           editable: false,
           timezone: 'local',
           events: [<%- fullCalendarData %>],
+          eventLimit: true, // for all non-agenda views
+          views: {
+            month: {
+              eventLimit: 4 // adjust to 6 only for agendaWeek/agendaDay
+            }
+          },
           eventRender: function(event, element) {
             // element.qtip({
             //   content: event.description
