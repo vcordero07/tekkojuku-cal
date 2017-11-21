@@ -15,22 +15,21 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel=" stylesheet " href="/font-awesome-4.7.0/css/font-awesome.css " type="text/css " />
   <link rel="stylesheet " href="/font-awesome-4.7.0/css/font-awesome.min.css " type="text/css " />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.7.0/fullcalendar.print.css" media="print">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.7.0/fullcalendar.css">
   <link rel="stylesheet " href="/css/main.css ">
   <link rel="stylesheet " href="/css/nav-bar.css ">
   <!-- <link rel="stylesheet " href="/css/bg-video.css "> -->
   <link rel="stylesheet " href="/css/cal.css ">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.7.0/fullcalendar.print.css" media="print">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.7.0/fullcalendar.css">
-
   <title>Tekkojuku-Calendar</title>
 </head>
 
 <body class="calendar-body">
   <div class="main-content">
     <%- include navbar.ejs %>
-      <!-- <%= calendarData %> -->
 
-      <div id="cal">
+      <!-- <div id="cal">
         <div id="sub-cal">
 
           <div class="row">
@@ -54,12 +53,24 @@
 
               <% } %>
         </div>
-      </div>
+      </div> -->
 
       <div class="calendar">
 
         <div class="sub-calendar">
-          <div class="btn btn-primary  add-event-btn ">Add Event</div>
+          <% if (classDataByID.render) {%>
+            <div class="full-cal-event-listener" style="display: none">
+              <a href="#" data-userid="" data-evdt="" id="" class="event ">
+                <div class="event_icon">
+                  <div class="event_month Aikido"></div>
+                  <div class="event_day"></div>
+                </div>
+                <div class="inst-info"></div>
+                <div class="event-type-title"><span class="event_type"></span>&nbsp;-&nbsp;<span class="event_title"></span></div>
+              </a>
+            </div>
+            <%} %>
+              <div class="btn btn-primary  add-event-btn " style="display: none">Add Event</div>
         </div>
       </div>
   </div>
@@ -82,34 +93,44 @@
       $(document).ready(function() {
         // console.log(<%= fullCalendarData %>);
         // page is now ready, initialize the calendar...
+        let getClassByID = (classID) => {
+          $.ajax({
+              type: "get",
+              url: `/calendar/${classID}`,
+              headers: {
+                "Accept": "application/json",
+              },
+            })
+            .done((data) => {
+              qonsole.debug('msg: ClassID data', data);
 
-        // $('.fc-event-container').on('click', (event) => {
-        //   BootstrapDialog.show({
-        //     title: `trd`,
-        //     message: ``,
-        //     type: BootstrapDialog.TYPE_PRIMARY,
-        //     cssClass: 'bs-dialog',
-        //     buttons: [{
-        //       label: 'Close',
-        //       action: function(dialogRef) {
-        //         dialogRef.close();
-        //       }
-        //     }]
-        //   });
-        // });
+            });
+        }
+
 
         $('.sub-calendar').fullCalendar({
+          customButtons: {
+            addEventBtn: {
+              text: 'Add Event',
+              click: function() {
+                // alert('clicked the custom button!');
+                $('.add-event-btn').click();
+              }
+            }
+          },
           header: {
-            left: 'prev,next today',
+            left: 'prev,next today addEventBtn',
             center: 'title',
             right: 'month, agendaWeek, listWeek'
           },
+          defaultTimedEventDuration: '01:00:00',
           defaultDate: '2017-11-12',
           navLinks: true, // can click day/week names to navigate views
           editable: false,
           timezone: 'local',
           events: [<%- fullCalendarData %>],
           eventLimit: true, // for all non-agenda views
+
           views: {
             month: {
               eventLimit: 4 // adjust to 6 only for agendaWeek/agendaDay
@@ -122,19 +143,48 @@
             // console.log('event test:', );
             $(element).click(e => {
               console.log(e);
+              let currID = e.currentTarget.classList.value.match(/full-cal-event-[a-zA-Z0-9]*/);
+              currID = currID[0].replace('full-cal-event-', '');
+              console.log('currID:', currID);
+              getClassByID(currID);
+
+
+              // $('.full-cal-event-listener').click();
+              // BootstrapDialog.show({
+              //   title: `trd`,
+              //   message: ``,
+              //   type: BootstrapDialog.TYPE_PRIMARY,
+              //   cssClass: 'bs-dialog',
+              //   buttons: [{
+              //     label: 'Close',
+              //     action: function(dialogRef) {
+              //       dialogRef.close();
+              //     }
+              //   }]
+              // });
+
             })
           },
           eventAfterRender: function(event, element, view) {
 
             if (event.title === "Aikido") {
               //event.color = "#"; //
-              element.css('background-color', '#e74c3c');
+              element.css({
+                'background-color': '#e74c3c',
+                'border-color': '#e74c3c'
+              });
             } else if (event.title === "Iaido") {
               //event.color = "#"; //
-              element.css('background-color', '#27ae60');
+              element.css({
+                'background-color': '#27ae60',
+                'border-color': '#27ae60'
+              });
             } else if (event.title === "Weapons") {
               //event.color = "#"; //
-              element.css('background-color', '#3498db');
+              element.css({
+                'background-color': '#3498db',
+                'border-color': '#3498db'
+              });
             }
           },
         })

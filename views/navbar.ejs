@@ -1,31 +1,17 @@
-<header class="nav-bar">
+<header class="header">
   <div class="nav-bar-logo">
-    <img src="/img/tekkojuku-logo.png" alt="Aikido Tekkojuku logo">
+    <a href="#" class="logo"><img src="/img/tekkojuku-logo.png" alt="Aikido Tekkojuku logo"></a>
   </div>
-  <nav>
-    <ul class="nav-bar-item">
-      <li><a alt="Calendar" class="login-cal-lnk" href="/calendar">Calendar</a></li>
-      <li><a alt="Instructors" class="login-inst-lnk" href="/instructors">Instructors</a></li>
-      <li><a alt="Info" class="info-btn" href="#">Info</a></li>
-      <li><a alt="Login" class="login-nb" href="/login">Login</a></li>
-    </ul>
-
-    <div class="small-nav-bar">
-      <a class="btn btn-default" href="/calendar">
-      <i class="fa fa-calendar" title="Calendar"></i>
-    </a>
-      <a class="btn btn-default" href="/instructors">
-      <i class="fa fa-users" title="Instructors"></i>
-    </a>
-      <a class="btn btn-default info-btn" href="#">
-      <i class="fa fa-info-circle" title="Info"></i>
-    </a>
-      <a class="btn btn-default" href="/login">
-      <i class="fa fa-sign-in" title="Login"></i>
-    </a>
-    </div>
-  </nav>
+  <input class="menu-btn" type="checkbox" id="menu-btn" />
+  <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+  <ul class="menu">
+    <li><a alt="Calendar" class="login-cal-lnk" href="/calendar">Calendar</a></li>
+    <li><a alt="Instructors" class="login-inst-lnk" href="/instructors">Instructors</a></li>
+    <li><a alt="Info" class="info-btn" href="#">Info</a></li>
+    <li><a alt="Login" class="login-nb" href="/login">Login</a></li>
+  </ul>
 </header>
+
 <!--
 
   - fa-calendar - fa-users - fa-info-circle

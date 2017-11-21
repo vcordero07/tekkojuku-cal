@@ -30,37 +30,28 @@ exports.getCalendar = (req, res) => {
     let allClasses = data.map(generateClasses);
     // let instructorsInfo = JSON.stringify(data); check this one out
     let calData = data;
+    this.getClass.calData = data;
     let fullCalendarData = [];
     calData.forEach(item => {
-      // var calDate = new Date(item.dateOccurrence);
-      // var calDate = new Date(item.dateOccurrence);
-      // calDate.setMinutes(calDate.getMinutes() - calDate.getTimezoneOffset());
-      var fullCalDate = item.dateOccurrence.toISOString().substring(0, 19);
-      //moment.utc('2016-05-14T08:33:14-03:00').format()
-      // console.log(utcDate + '!')
-      //&timezone=UTC
-      // console.log('calDate:', calDate);
-      console.log('fullCalDate:', fullCalDate, item.dateOccurrence);
-      fullCalendarData.push(`{title: '${item.content}', start: '${fullCalDate}', className: 'event'}`)
+
+      var startFullCalDate = item.dateOccurrence.toISOString().substring(0, 19);
+
+      console.log('startFullCalDate:', startFullCalDate, item.dateOccurrence);
+      // console.log('endFullCalDate:', endFullCalDate);
+      fullCalendarData.push(`{id: '${item._id}', title: '${item.content}', start: '${startFullCalDate}', className: 'full-cal-event-${item._id}'}`)
     });
     console.log(fullCalendarData);
-
-    //fullCalendarData.push(`{title: '${item.content}', start: '${fullCalDate}', description: '${item._id}' }`)
-    // console.log('instructorsInfo:', instructorsInfo);
-    //calDate.toISOString().substring(0, 10);
-    //fullCalendarData.push(`{title: '${item.content}', start: '${String(fullCalDate).replace(/0\d{3}/,'0000')}'}`)
-    res.status(200).render('../views/calendar', { "calendarData": data, allClasses, fullCalendarData });
+    let classDataByID = { "render": false };
+    //todo: reconfigure exports.getclass to be a function based on conditionals of ClassByID set classDataByID equals to this
+    res.status(200).render('../views/calendar', { "calendarData": data, allClasses, fullCalendarData, classDataByID });
   });
 };
 
 exports.getClass = (req, res) => {
-  console.log('calendar.controller.js:7 - getClass:');
-  calendar
-    .findById(req.params.id)
-    .then((data) => {
-      res.status(200).render('..view/calendar', {
-        "calendarData": data
-      });
+  console.log('calendar.controller.js:7 - getClass:', this.calData);
+  // Calendar.find().sort({ dateOccurrence: 1 }).populate({ path: "_instructor" }).exec()
+  Calendar.findById(req.params.id).populate({ path: "_instructor" }).exec().then((data) => {
+      res.status(200).render('../views/calendar', { "calendarData": this.calData, "classDataByID": data });
     })
     .catch(err => {
       console.error('calendar.controller.js:16 - error get class', err);

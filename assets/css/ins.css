@@ -14,7 +14,7 @@ body {
 .inst-content {
   min-width: 350px;
   max-width: 95%;
-  margin: 1em auto;
+  margin: 8em auto;
   /*padding: 1em;*/
   padding-left: 20px;
   padding-right: 20px;
@@ -106,7 +106,7 @@ div.KYU-team {
 .degree-card figure img {
   display: block;
   position: relative;
-  z-index: 10;
+  z-index: 2;
 }
 
 .degree-card figure img {

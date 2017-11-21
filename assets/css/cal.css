@@ -10,8 +10,8 @@ body {
 #cal {
   min-width: 350px;
   max-width: 95%;
-  margin: 1em auto;
-  /*padding: 1em;*/
+  margin: 8em auto;
+  /*padding: 1em;  was 1em margin*/
   padding-left: 20px;
   padding-right: 20px;
   /*box-shadow: 0 0 0.1em rgba(0, 0, 0, 0.5);*/
