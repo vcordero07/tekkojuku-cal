@@ -117,20 +117,25 @@ body {
   background: white;
 }*/
 
-.btn-primary {
+.btn-primary,
+.fc-addEventBtn-button {
   color: #fff;
   background-color: #3c4145;
   border-color: #27282d;
+  background-image: none;
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.fc-addEventBtn-button:hover {
   color: #fff;
   background-color: #605d66;
   border-color: #27282d;
 }
 
 .btn-primary.focus,
-.btn-primary:focus {
+.btn-primary:focus,
+.fc-addEventBtn-button.focus,
+.fc-addEventBtn-button:focus {
   color: #fff;
   background-color: #3c4145;
   border-color: #27282d;
@@ -138,6 +143,7 @@ body {
 
 .btn-primary.active,
 .btn-primary:active,
+.fc-addEventBtn-button:active,
 .open>.dropdown-toggle.btn-primary {
   color: #fff;
   background-color: #3c4145;

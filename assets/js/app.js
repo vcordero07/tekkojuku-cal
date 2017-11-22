@@ -430,7 +430,7 @@ let createEventListers = () => {
 
 
   });
-  console.log($('.full-cal-event-listener'));
+  // console.log($('.full-cal-event-listener'));
   $('.event, .full-cal-event-listener').on('click', (event) => {
     let instInfo = JSON.parse($(event.currentTarget).find('.inst-info').html());
     let eventID = $(event.currentTarget).attr('id');

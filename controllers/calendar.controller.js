@@ -30,28 +30,31 @@ exports.getCalendar = (req, res) => {
     let allClasses = data.map(generateClasses);
     // let instructorsInfo = JSON.stringify(data); check this one out
     let calData = data;
-    this.getClass.calData = data;
-    let fullCalendarData = [];
+
+    let fullCalendarEvents = [];
+    let calendarData = {};
+
     calData.forEach(item => {
 
       var startFullCalDate = item.dateOccurrence.toISOString().substring(0, 19);
 
       console.log('startFullCalDate:', startFullCalDate, item.dateOccurrence);
       // console.log('endFullCalDate:', endFullCalDate);
-      fullCalendarData.push(`{id: '${item._id}', title: '${item.content}', start: '${startFullCalDate}', className: 'full-cal-event-${item._id}'}`)
+      fullCalendarEvents.push(`{id: '${item._id}', title: '${item.content}', start: '${startFullCalDate}', className: 'full-cal-event-${item._id}'}`)
     });
-    console.log(fullCalendarData);
+    console.log(fullCalendarEvents);
     let classDataByID = { "render": false };
-    //todo: reconfigure exports.getclass to be a function based on conditionals of ClassByID set classDataByID equals to this
-    res.status(200).render('../views/calendar', { "calendarData": data, allClasses, fullCalendarData, classDataByID });
+    calendarData = data;
+    res.status(200).render('../views/calendar', { calendarData, allClasses, fullCalendarEvents, classDataByID });
   });
 };
 
 exports.getClass = (req, res) => {
-  console.log('calendar.controller.js:7 - getClass:', this.calData);
+  console.log('calendar.controller.js:7 - getClass:');
   // Calendar.find().sort({ dateOccurrence: 1 }).populate({ path: "_instructor" }).exec()
   Calendar.findById(req.params.id).populate({ path: "_instructor" }).exec().then((data) => {
-      res.status(200).render('../views/calendar', { "calendarData": this.calData, "classDataByID": data });
+      // res.status(200).json({ calendarData, "classDataByID": data, fullCalendarEvents });
+      res.status(200).json({ "classDataByID": data });
     })
     .catch(err => {
       console.error('calendar.controller.js:16 - error get class', err);
