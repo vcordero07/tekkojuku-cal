@@ -144,3 +144,8 @@ h1 {
   background-color: #fff;
   color: #3c4145;
 }
+
+.fc-scroller {
+  height: auto!important;
+  overflow-y: auto;
+}

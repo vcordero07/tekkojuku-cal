@@ -154,10 +154,10 @@ body {
   background-color: #3c4145;
 }
 
-.bs-dialog .modal-dialog {
+/*.bs-dialog .modal-dialog {
   width: auto;
   height: auto;
   max-height: 100%;
-}
+}*/
 
 /*width:'auto',height:'auto', 'max-height':'100%'*/

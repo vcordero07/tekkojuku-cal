@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "cross-env MONGO_USE_TEST=true mocha",
+    "test": "cross-env MONGO_USE_TEST=true mocha ./tests",
     "start": "cross-env NODE_ENV=production node server.js",
     "dev": "nodemon server.js"
   },

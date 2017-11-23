@@ -63,7 +63,7 @@ let doSignup = (auth, role = usRole) => {
       // datatype: "jsonp",
     })
     .done((data) => {
-      qonsole.debug('Signup: Successful', data);
+      // qonsole.debug('Signup: Successful', data);
       if (role === usRole) {
         doLogin(auth)
       }
@@ -81,7 +81,7 @@ let deleteUser = (userID) => {
       },
     })
     .done((data) => {
-      qonsole.debug('msg: User deleted', data);
+      // qonsole.debug('msg: User deleted', data);
       // alert('msg: User deleted', data);
       $(location).attr('href', '/instructors');
     });
@@ -112,7 +112,7 @@ let deleteClassByID = (classID) => {
       },
     })
     .done((data) => {
-      qonsole.debug('msg: Class deleted', data);
+      // qonsole.debug('msg: Class deleted', data);
       $(location).attr('href', '/calendar');
     });
 }
@@ -167,7 +167,7 @@ let addClassEvent = () => {
       }
     })
     .done((data) => {
-      qonsole.debug('msg: class added', data);
+      // qonsole.debug('msg: class added', data);
       // alert('msg: User deleted', data);
       $(location).attr('href', '/calendar');
     });
@@ -326,14 +326,14 @@ let createEventListers = () => {
         datatype: "json",
       })
       .done((data) => {
-        qonsole.debug('data: Successful', data);
+        // qonsole.debug('data: Successful', data);
         let instructorOpts = "";
         data.forEach(item => {
           instructorOpts += ` <option value="${item._id}">${item.username}</option>`
         })
         setTimeout(function() {
           $('select[name="instructors"]').html(instructorOpts)
-          qonsole.debug('select: ', $('select'));
+          // qonsole.debug('select: ', $('select'));
         }, 500)
       });
 
@@ -504,14 +504,14 @@ let createEventListers = () => {
                 datatype: "json",
               })
               .done((data) => {
-                qonsole.debug('data: Successful', data);
+                // qonsole.debug('data: Successful', data);
                 let instructorOpts = "";
                 data.forEach(item => {
                   instructorOpts += ` <option value="${item._id}">${item.username}</option>`
                 })
                 setTimeout(function() {
                   $('select[name="instructors"]').html(instructorOpts)
-                  qonsole.debug('select: ', $('select'));
+                  // qonsole.debug('select: ', $('select'));
                 }, 500)
               });
 
@@ -571,7 +571,7 @@ let createEventListers = () => {
 
 
   });
-  qonsole.debug('test qonsole.debug')
+  // qonsole.debug('test qonsole.debug')
 }
 
 

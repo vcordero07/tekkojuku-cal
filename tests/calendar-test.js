@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 const should = chai.should();
 
-const { Instructor } = require('../models/instructor.model')
+const { calendar } = require('../models/calendar.model')
 
 const { app, runServer, closeServer } = require('../app');
 const { DATABASE_URL } = require('../config');
@@ -13,8 +13,8 @@ const { TEST_DATABASE_URL } = require('../config');
 
 chai.use(chaiHttp);
 
-function seedTekkojukuCalData() {
-  qonsole.debug('test-instructor.js:29 - seeding Tekkojuku cal app data');
+function seedCalendarData() {
+  qonsole.debug('test-Calendar.js:29 - seeding Tekkojuku cal app data');
   let seedData = [];
   for (let i = 1; i <= 10; i++) {
     seedData.push({
@@ -23,47 +23,47 @@ function seedTekkojukuCalData() {
       email: faker.internet.email()
     });
   }
-  return Instructor.insertMany(seedData);
+  return Calendar.insertMany(seedData);
 }
 
 function tearDownDb() {
-  console.warn('test-instructor.js:42 - Deleting database');
+  console.warn('test-Calendar.js:42 - Deleting database');
   return mongoose.connection.dropDatabase();
 }
 
-describe('Instructor CRUD Methods', function() {
+describe('Calendar CRUD Methods', function() {
   before(function() {
-    qonsole.debug('test-instructor.js:48 - 1a');
+    qonsole.debug('test-Calendar.js:48 - 1a');
     return runServer(TEST_DATABASE_URL);
   });
 
   beforeEach(function() {
-    qonsole.debug('test-instructor.js:53 - 1b');
-    return seedTekkojukuCalData();
+    qonsole.debug('test-Calendar.js:53 - 1b');
+    return seedCalendarData();
   });
 
   afterEach(function() {
-    qonsole.debug('test-instructor.js:58 - 1c');
+    qonsole.debug('test-Calendar.js:58 - 1c');
     return tearDownDb();
   });
 
   after(function() {
-    qonsole.debug('test-instructor.js:63 - 1d');
+    qonsole.debug('test-Calendar.js:63 - 1d');
     return closeServer();
   })
 
   describe('GET endpoint', function() {
 
-    it('should return all existing instructors', function() {
+    it('should return all existing calendar', function() {
 
       let res;
       return chai.request(app)
-        .get('/instructors/')
+        .get('/calendar/')
         .then(_res => {
           res = _res;
           res.should.have.status(200);
           res.body.should.have.length.of.at.least(1);
-          return Instructor.count();
+          return Calendar.count();
         })
         .then(count => {
           res.body.should.have.lengthOf(count);
@@ -73,50 +73,50 @@ describe('Instructor CRUD Methods', function() {
 
   });
 
-  it('should return instructors with right fields', function() {
+  it('should return calendar with right fields', function() {
 
-    let resInstructor;
+    let cal;
     return chai.request(app)
-      .get('/instructors/')
+      .get('/calendar/')
       .then(res => {
         res.should.have.status(200);
         res.should.be.json;
         res.body.should.be.a('array');
         res.body.should.have.length.of.at.least(1);
 
-        res.body.forEach(post => {
-          post.should.be.a('object');
-          post.should.include.keys('_id', 'username', 'password', 'email', 'created');
+        res.body.forEach(item => {
+          item.should.be.a('object');
+          item.should.include.keys('_id', 'content', '_instructor', 'dateOccurrence', 'created');
         });
 
-        resInstructor = res.body[0];
-        return Instructor.findById(resInstructor._id);
+        cal = res.body[0];
+        return Calendar.findById(cal._id);
       })
-      .then(post => {
-        resInstructor.username.should.equal(post.username);
-        resInstructor.password.should.equal(post.password);
-        resInstructor.email.should.equal(post.email);
+      .then(data => {
+        cal.username.should.equal(data.username);
+        cal.password.should.equal(data.password);
+        cal.email.should.equal(data.email);
       });
     //  return true;
   });
 
   describe('DELETE endpoint', function() {
-    it('delete a Instructor by id', function() {
+    it('delete a Calendar by id', function() {
 
-      let post;
+      let inst;
 
-      return Instructor
+      return Calendar
         .findOne()
-        .then(_post => {
-          post = _post;
-          return chai.request(app).delete(`/instructors/${post._id}`);
+        .then(data => {
+          inst = data;
+          return chai.request(app).delete(`/calendar/${inst._id}`);
         })
         .then(res => {
           res.should.have.status(204);
-          return Instructor.findById(post._id);
+          return Calendar.findById(inst._id);
         })
-        .then(_post => {
-          should.not.exist(_post);
+        .then(data => {
+          should.not.exist(data);
         });
       // return true;
     });

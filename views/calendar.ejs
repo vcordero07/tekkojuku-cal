@@ -98,8 +98,7 @@
         $(document).ready(function() {
 
           // page is now ready, initialize the calendar...
-
-          $('.sub-calendar').fullCalendar({
+          let calOptions = {
             customButtons: {
               addEventBtn: {
                 text: 'Add Event',
@@ -120,8 +119,16 @@
             editable: false,
             timezone: 'local',
             events: [<%- fullCalendarEvents %>],
+            height: 'auto',
             eventLimit: true, // for all non-agenda views
-
+            allDaySlot: false,
+            businessHours: [ // specify an array instead
+              {
+                dow: [1, 2, 3, 4, 5, 6, 7], // Monday, Tuesday, Wednesday
+                start: '07:00', // 8am
+                end: '20:00' // 6pm
+              }
+            ],
             views: {
               month: {
                 eventLimit: 4 // adjust to 6 only for agendaWeek/agendaDay
@@ -169,29 +176,18 @@
                     // console.log(data.classDataByID._instructor);
                     // console.log(data.classDataByID._instructor.username);
                     // console.log(data.classDataByID.dateOccurrence);
-                    let content =
-                      `
-                      <a href="#" data-userid="${data.classDataByID._id}" data-evdt="${data.classDataByID.dateOccurrence}" id="" class="event ">
-                      <div class="event_icon">
-                      <div class="event_month Aikido"></div>
-                      <div class="event_day"></div>
-                      </div>
-                      <div class="inst-info">${data.classDataByID._instructor}</div>
-                      <div class="event-type-title"><span class="event_type">${data.classDataByID.content}</span>&nbsp;-&nbsp;<span class="event_title">${data.classDataByID._instructor.username}</span></div>
-                      </a>`;
 
                     BootstrapDialog.show({
                       title: `Event Info: `,
                       message: `${data.classDataByID.content} Class:
                       <div class="event_icon"><div class="event_month "></div><div class="event_day"></div></div>
 
-
                       Instructor:
                       <img src="${data.classDataByID._instructor.img}" width="65" height="90">
                       ${data.classDataByID._instructor.username}
                       Degree: ${data.classDataByID._instructor.degree}
                       Bio: ${data.classDataByID._instructor.bio}
-                      <br>`,
+                      `,
                       type: BootstrapDialog.TYPE_PRIMARY,
                       cssClass: 'bs-dialog',
                       buttons: [{
@@ -224,7 +220,7 @@
                               })
                               setTimeout(function() {
                                 $('select[name="instructors"]').html(instructorOpts)
-                                qonsole.debug('select: ', $('select'));
+                                // qonsole.debug('select: ', $('select'));
                               }, 500)
                             });
 
@@ -287,8 +283,45 @@
 
 
             },
-          })
+          };
 
+          var $fc = $('.sub-calendar').fullCalendar(calOptions);
+
+          function recreateFC(screenWidth) {
+            if (screenWidth < 500) {
+              calOptions.header = {
+                left: 'prev,next today',
+                center: 'title',
+                right: ''
+              };
+              calOptions.defaultView = 'listWeek';
+              // calOptions.contentHeight: '600';
+            } else {
+              calOptions.customButtons = {
+                addEventBtn: {
+                  text: 'Add Event',
+                  click: function() {
+                    // alert('clicked the custom button!');
+                    $('.add-event-btn').click();
+                  }
+                }
+              }
+              calOptions.header = {
+                left: 'prev,next today addEventBtn',
+                center: 'title',
+                right: 'month, agendaWeek, listWeek'
+              };
+              calOptions.defaultView = 'month';
+            }
+            $fc.fullCalendar('destroy');
+            $fc.fullCalendar(calOptions);
+          }
+
+          $(window).resize(function() {
+            recreateFC($(window).width());
+          });
+
+          recreateFC($(window).width());
         });
       </script>
 </body>
