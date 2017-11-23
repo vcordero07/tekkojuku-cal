@@ -10,7 +10,7 @@ body {
 #cal {
   min-width: 350px;
   max-width: 95%;
-  margin: 8em auto;
+  margin: 1em auto;
   /*padding: 1em;  was 1em margin*/
   padding-left: 20px;
   padding-right: 20px;
@@ -148,4 +148,17 @@ h1 {
 .fc-scroller {
   height: auto!important;
   overflow-y: auto;
+}
+
+.fc-list-item {
+  color: #fff;
+}
+
+.fc-list-item:hover {
+  color: #000;
+  /*background-color: #f1c40f;*/
+}
+
+.fc-unthemed .fc-list-item:hover td {
+  background-color: #fff;
 }

@@ -97,6 +97,28 @@
       <script type="text/javascript">
         $(document).ready(function() {
 
+          let getCurrTime = (myDate) => {
+            let time = new Date(myDate);
+            let hours = time.getUTCHours() > 12 ? time.getUTCHours() - 12 : time.getUTCHours();
+            let am_pm = time.getUTCHours() >= 12 ? "PM" : "AM";
+            hours = hours < 10 ? "0" + hours : hours;
+            let minutes = time.getUTCMinutes() < 10 ? "0" + time.getUTCMinutes() : time.getUTCMinutes();
+            //   let seconds = time.getUTCSeconds() < 10 ? "0" + time.getUTCSeconds() : time.getUTCSeconds();
+            time = hours + ":" + minutes + am_pm;
+            return time;
+          };
+
+          let generateClass = (item) => {
+            let monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+            let d = new Date(item.dateOccurrence);
+            let dateM = monthNames[d.getMonth()];
+            let dateD = d.getDate();
+            let dateT = getCurrTime(item.dateOccurrence);
+            let currClass = `<div class="event_icon"><div class="event_month ${item.content}">${dateD} ${dateM}</div><div class="event_day">${dateT}</div></div>`;
+            // qonsole.debug('generateClasses currClass:', currClass);
+            return currClass;
+          }
+
           // page is now ready, initialize the calendar...
           let calOptions = {
             customButtons: {
@@ -114,12 +136,12 @@
               right: 'month, agendaWeek, listWeek'
             },
             defaultTimedEventDuration: '01:00:00',
-            defaultDate: '2017-11-12',
+            defaultDate: `${new Date().toISOString().substring(0,10)}`,
             navLinks: true, // can click day/week names to navigate views
             editable: false,
             timezone: 'local',
             events: [<%- fullCalendarEvents %>],
-            height: 'auto',
+            // height: 'auto',
             eventLimit: true, // for all non-agenda views
             allDaySlot: false,
             businessHours: [ // specify an array instead
@@ -132,6 +154,10 @@
             views: {
               month: {
                 eventLimit: 4 // adjust to 6 only for agendaWeek/agendaDay
+              },
+              agendaWeek: {
+                minTime: "07:00:00",
+                maxTime: "20:00:00"
               }
             },
             eventAfterRender: function(event, element, view) {
@@ -170,6 +196,9 @@
                     },
                   })
                   .done((data) => {
+
+                    let eventID = data.classDataByID._id;
+                    let instID = data.classDataByID._instructor._id;
                     // console.log('msg: ClassID data', data);
                     // console.log(data.classDataByID.content);
                     // console.log(data.classDataByID._id);
@@ -179,15 +208,8 @@
 
                     BootstrapDialog.show({
                       title: `Event Info: `,
-                      message: `${data.classDataByID.content} Class:
-                      <div class="event_icon"><div class="event_month "></div><div class="event_day"></div></div>
-
-                      Instructor:
-                      <img src="${data.classDataByID._instructor.img}" width="65" height="90">
-                      ${data.classDataByID._instructor.username}
-                      Degree: ${data.classDataByID._instructor.degree}
-                      Bio: ${data.classDataByID._instructor.bio}
-                      `,
+                      message: `<div style="display: block"><div style="float: left">${data.classDataByID.content} Class: <br> ${generateClass(data.classDataByID)}</div><div style="float: right"> Instructor: <br><img src="${data.classDataByID._instructor.img}" width="65" height="90"><br>${data.classDataByID._instructor.username}</div>
+                      <div style="clear: both"> Degree: ${data.classDataByID._instructor.degree}<br>  Bio: ${data.classDataByID._instructor.bio}</div></div>`,
                       type: BootstrapDialog.TYPE_PRIMARY,
                       cssClass: 'bs-dialog',
                       buttons: [{
@@ -216,7 +238,14 @@
                               qonsole.debug('data: Successful', data);
                               let instructorOpts = "";
                               data.forEach(item => {
-                                instructorOpts += ` <option value="${item._id}">${item.username}</option>`
+                                if (item._id === instID) {
+                                  // console.log(item._id === instID);
+                                  instructorOpts += ` <option value="${item._id}" selected>${item.username}</option>`
+                                } else {
+                                  // console.log(item._id === instID);
+                                  instructorOpts += ` <option value="${item._id}">${item.username}</option>`
+                                }
+
                               })
                               setTimeout(function() {
                                 $('select[name="instructors"]').html(instructorOpts)
@@ -234,7 +263,7 @@
 
                             Class Type:
                             <div class="btn-group" data-toggle="buttons">
-                            <label type="button" class="btn btn-secondary active class-content"><input type="radio" name="options" id="Aikido" autocomplete="off" checked>Aikido</label><label type="button" class="btn btn-secondary class-content"><input type="radio" name="options" id="Iaido" autocomplete="off">Iaido</label><label type="button" class="btn btn-secondary class-content"><input type="radio" name="options" id="Weapons" autocomplete="off">Weapons</label></div>
+                            <label type="button" class="btn btn-secondary class-content"><input type="radio" name="options" id="Aikido" autocomplete="off" checked>Aikido</label><label type="button" class="btn btn-secondary class-content"><input type="radio" name="options" id="Iaido" autocomplete="off">Iaido</label><label type="button" class="btn btn-secondary class-content"><input type="radio" name="options" id="Weapons" autocomplete="off">Weapons</label></div>
 
                             Date: <input type=date class="new-class-date" value="${dateStr}">
                             Time: <input type=time min=9:00 max=17:00 step=900 value="${timeStr}"> `,
@@ -266,7 +295,7 @@
                         title: 'Delete Event',
                         cssClass: 'btn-primary',
                         action: function(dialogRef) {
-                          deleteClassByID(data.classDataByID._id)
+                          deleteClassByID(eventID)
                           dialogRef.enableButtons(false);
                           dialogRef.setClosable(false);
                           dialogRef.getModalBody().html('Dialog closes in 5 seconds.');

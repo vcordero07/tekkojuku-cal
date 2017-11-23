@@ -390,8 +390,11 @@ let createEventListers = () => {
       title: `<img src="${$(event.currentTarget).find('img').attr('src')}" width="65" height="90"> Instructor ${$(event.currentTarget).find('.inst-name')[0].innerHTML}`,
       message: `Degree: ${$.trim($(event.currentTarget).find('.inst-degree')[0].innerHTML)}
       <br> Short Bio: ${$(event.currentTarget).find('.inst-bio').html()}
-      <br> Class:
+      Class:
       ${concatClasses}
+      <br>
+      <br>
+      <br>
       <br>`,
       type: BootstrapDialog.TYPE_PRIMARY,
       cssClass: 'bs-dialog',
@@ -413,11 +416,18 @@ let createEventListers = () => {
           title: 'Delete Instructor & Classes',
           cssClass: 'btn-primary',
           action: function(dialogRef) {
-            let instID = $(event.currentTarget).attr('id');
-            // deleteClasses(classesID)
-            deleteUser(instID)
-            dialogRef.enableButtons(false);
-            dialogRef.setClosable(false);
+            // let instID = $(event.currentTarget).attr('id');
+            // // deleteClasses(classesID)
+            // deleteUser(instID)
+            // dialogRef.enableButtons(false);
+            // dialogRef.setClosable(false);
+            dialogRef.close();
+            BootstrapDialog.show({
+              label: 'Warning',
+              title: 'Warning',
+              type: BootstrapDialog.TYPE_WARNING,
+              message: 'Only the super-user can delete an Instructor'
+            });
             dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
             setTimeout(function() {
               dialogRef.close();
