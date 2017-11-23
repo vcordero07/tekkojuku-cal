@@ -11,6 +11,7 @@ mongoose.Promise = global.Promise;
 
 router.get('/', calendarController.getCalendar);
 router.get('/:id', calendarController.getClass);
+// router.get('/json/', calendarController.getJSONCalendar);
 router.post('/class/', jsonParser, calendarController.newClass);
 router.put('/:id', jsonParser, calendarController.updateClass);
 router.delete('/:id', calendarController.deleteClass);

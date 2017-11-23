@@ -98,23 +98,6 @@
         $(document).ready(function() {
 
           // page is now ready, initialize the calendar...
-          let getClassByID = (classID) => {
-
-            $.ajax({
-                type: "get",
-                url: `/calendar/${classID}`,
-                headers: {
-                  "Accept": "application/json",
-                },
-              })
-              .done((data) => {
-                qonsole.debug('msg: ClassID data', data);
-
-              });
-          }
-
-
-
 
           $('.sub-calendar').fullCalendar({
             customButtons: {
@@ -144,15 +127,6 @@
                 eventLimit: 4 // adjust to 6 only for agendaWeek/agendaDay
               }
             },
-            eventRender: function(event, element) {
-              // element.qtip({
-              //   content: event.description
-              // });
-              // console.log('event test:', );
-
-
-
-            },
             eventAfterRender: function(event, element, view) {
 
               if (event.title === "Aikido") {
@@ -175,11 +149,139 @@
                 });
               }
               $(element).click(e => {
-                console.log(e);
+                // console.log(e);
                 let currID = e.currentTarget.classList.value.match(/full-cal-event-[a-zA-Z0-9]*/);
                 currID = currID[0].replace('full-cal-event-', '');
-                console.log('currID:', currID);
-                getClassByID(currID);
+                // console.log('currID:', currID);
+                // getClassByID(currID);
+
+                $.ajax({
+                    type: "get",
+                    url: `/calendar/${currID}`,
+                    headers: {
+                      "Accept": "application/json",
+                    },
+                  })
+                  .done((data) => {
+                    // console.log('msg: ClassID data', data);
+                    // console.log(data.classDataByID.content);
+                    // console.log(data.classDataByID._id);
+                    // console.log(data.classDataByID._instructor);
+                    // console.log(data.classDataByID._instructor.username);
+                    // console.log(data.classDataByID.dateOccurrence);
+                    let content =
+                      `
+                      <a href="#" data-userid="${data.classDataByID._id}" data-evdt="${data.classDataByID.dateOccurrence}" id="" class="event ">
+                      <div class="event_icon">
+                      <div class="event_month Aikido"></div>
+                      <div class="event_day"></div>
+                      </div>
+                      <div class="inst-info">${data.classDataByID._instructor}</div>
+                      <div class="event-type-title"><span class="event_type">${data.classDataByID.content}</span>&nbsp;-&nbsp;<span class="event_title">${data.classDataByID._instructor.username}</span></div>
+                      </a>`;
+
+                    BootstrapDialog.show({
+                      title: `Event Info: `,
+                      message: `${data.classDataByID.content} Class:
+                      <div class="event_icon"><div class="event_month "></div><div class="event_day"></div></div>
+
+
+                      Instructor:
+                      <img src="${data.classDataByID._instructor.img}" width="65" height="90">
+                      ${data.classDataByID._instructor.username}
+                      Degree: ${data.classDataByID._instructor.degree}
+                      Bio: ${data.classDataByID._instructor.bio}
+                      <br>`,
+                      type: BootstrapDialog.TYPE_PRIMARY,
+                      cssClass: 'bs-dialog',
+                      buttons: [{
+                        label: 'Close',
+                        action: function(dialogRef) {
+                          dialogRef.close();
+                        }
+                      }, {
+                        label: 'Edit',
+                        cssClass: 'btn-primary',
+                        action: function(dialogRef) {
+                          dialogRef.close();
+
+                          var date = new Date(data.classDataByID.dateOccurrence);
+                          date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+                          var dateStr = date.toISOString().substring(0, 10);
+                          var timeStr = getConvertTimeTo24(data.classDataByID.dateOccurrence);
+                          // console.log('dateStr:', dateStr);
+                          // console.log('timeStr:', timeStr);
+                          $.ajax({
+                              type: "get",
+                              url: "/instructors/data",
+                              datatype: "json",
+                            })
+                            .done((data) => {
+                              qonsole.debug('data: Successful', data);
+                              let instructorOpts = "";
+                              data.forEach(item => {
+                                instructorOpts += ` <option value="${item._id}">${item.username}</option>`
+                              })
+                              setTimeout(function() {
+                                $('select[name="instructors"]').html(instructorOpts)
+                                qonsole.debug('select: ', $('select'));
+                              }, 500)
+                            });
+
+
+                          BootstrapDialog.show({
+                            title: `Edit Class:`,
+                            message: `
+                            Select an Instructor:
+                            <select name="instructors">
+                            </select>
+
+                            Class Type:
+                            <div class="btn-group" data-toggle="buttons">
+                            <label type="button" class="btn btn-secondary active class-content"><input type="radio" name="options" id="Aikido" autocomplete="off" checked>Aikido</label><label type="button" class="btn btn-secondary class-content"><input type="radio" name="options" id="Iaido" autocomplete="off">Iaido</label><label type="button" class="btn btn-secondary class-content"><input type="radio" name="options" id="Weapons" autocomplete="off">Weapons</label></div>
+
+                            Date: <input type=date class="new-class-date" value="${dateStr}">
+                            Time: <input type=time min=9:00 max=17:00 step=900 value="${timeStr}"> `,
+                            type: BootstrapDialog.TYPE_PRIMARY,
+                            cssClass: 'bs-dialog',
+                            buttons: [{
+                              label: 'Close',
+                              action: function(dialogRef) {
+                                dialogRef.close();
+                              }
+                            }, {
+                              label: 'Submit',
+                              cssClass: 'btn-primary',
+                              autospin: true,
+                              action: function(dialogRef) {
+                                updateClassEventByID(eventID);
+                                dialogRef.enableButtons(false);
+                                dialogRef.setClosable(false);
+                                dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
+                                setTimeout(function() {
+                                  dialogRef.close();
+                                }, 1000);
+                              }
+                            }]
+                          });
+                        }
+                      }, {
+                        label: 'Delete',
+                        title: 'Delete Event',
+                        cssClass: 'btn-primary',
+                        action: function(dialogRef) {
+                          deleteClassByID(data.classDataByID._id)
+                          dialogRef.enableButtons(false);
+                          dialogRef.setClosable(false);
+                          dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
+                          setTimeout(function() {
+                            dialogRef.close();
+                          }, 1000);
+                        }
+                      }]
+                    });
+
+                  });
 
               })
 
