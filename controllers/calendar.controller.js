@@ -2,7 +2,7 @@ const { Calendar } = require('../models/calendar.model');
 const { Instructor } = require('../models/instructor.model');
 
 exports.getCalendar = (req, res) => {
-  console.log('calendar.controller.js:4 - getCalendar:');
+  //console.log('calendar.controller.js:4 - getCalendar:');
   Calendar.find().sort({ dateOccurrence: 1 }).populate({ path: "_instructor" }).exec().then(data => {
 
     let getCurrentTime = (myDate) => {
@@ -38,11 +38,11 @@ exports.getCalendar = (req, res) => {
 
       var startFullCalDate = item.dateOccurrence.toISOString().substring(0, 19);
 
-      console.log('startFullCalDate:', startFullCalDate, item.dateOccurrence);
+      //console.log('startFullCalDate:', startFullCalDate, item.dateOccurrence);
       // console.log('endFullCalDate:', endFullCalDate);
       fullCalendarEvents.push(`{id: '${item._id}', title: '${item.content}', start: '${startFullCalDate}', className: 'full-cal-event-${item._id}'}`)
     });
-    console.log(fullCalendarEvents);
+    //console.log(fullCalendarEvents);
     let classDataByID = { "render": false };
     calendarData = data;
     res.status(200).render('../views/calendar', { calendarData, allClasses, fullCalendarEvents, classDataByID });
@@ -50,7 +50,7 @@ exports.getCalendar = (req, res) => {
 };
 
 exports.getJSONCalendar = (req, res) => {
-  console.log('calendar.controller.js:4 - getCalendar:');
+  //console.log('calendar.controller.js:4 - getCalendar:');
   Calendar.find().sort({ dateOccurrence: 1 }).populate({ path: "_instructor" }).exec().then(data => {
 
     let getCurrentTime = (myDate) => {
@@ -86,11 +86,11 @@ exports.getJSONCalendar = (req, res) => {
 
       var startFullCalDate = item.dateOccurrence.toISOString().substring(0, 19);
 
-      console.log('startFullCalDate:', startFullCalDate, item.dateOccurrence);
+      //console.log('startFullCalDate:', startFullCalDate, item.dateOccurrence);
       // console.log('endFullCalDate:', endFullCalDate);
       fullCalendarEvents.push(`{id: '${item._id}', title: '${item.content}', start: '${startFullCalDate}', className: 'full-cal-event-${item._id}'}`)
     });
-    console.log(fullCalendarEvents);
+    //console.log(fullCalendarEvents);
     let classDataByID = { "render": false };
     calendarData = data;
     res.status(200).json({ calendarData, allClasses, fullCalendarEvents, classDataByID });
@@ -98,7 +98,7 @@ exports.getJSONCalendar = (req, res) => {
 };
 
 exports.getClass = (req, res) => {
-  console.log('calendar.controller.js:7 - getClass:');
+  //console.log('calendar.controller.js:7 - getClass:');
   // Calendar.find().sort({ dateOccurrence: 1 }).populate({ path: "_instructor" }).exec()
   Calendar.findById(req.params.id).populate({ path: "_instructor" }).exec().then((data) => {
       // res.status(200).json({ calendarData, "classDataByID": data, fullCalendarEvents });
@@ -112,9 +112,9 @@ exports.getClass = (req, res) => {
     });
 };
 exports.newClass = (req, res) => {
-  console.log('calendar.controller.js:27 - newClass:');
+  //console.log('calendar.controller.js:27 - newClass:');
   const requiredFields = ['content', 'dateOccurrence', 'instructorID'];
-  console.log('calendar.controller.js:29 - requiredFields', requiredFields);
+  //console.log('calendar.controller.js:29 - requiredFields', requiredFields);
   for (let i = 0; i < requiredFields.length; i++) {
     let field = requiredFields[i];
     if (!(field in req.body)) {
@@ -144,7 +144,7 @@ exports.newClass = (req, res) => {
     })
 };
 exports.updateClass = (req, res) => {
-  console.log('calendar.controller.js:13 - updateClass:');
+  //console.log('calendar.controller.js:13 - updateClass:');
   Calendar.findByIdAndUpdate(req.params.id, {
       content: req.body.content,
       _instructor: req.body.instructorID,
@@ -163,10 +163,10 @@ exports.updateClass = (req, res) => {
     });
 };
 exports.deleteClass = (req, res) => {
-  console.log('calendar.controller.js:16 - deleteClass:');
+  //console.log('calendar.controller.js:16 - deleteClass:');
   Calendar.findByIdAndRemove(req.params.id)
     .then(() => {
-      console.log(`Deleted class with id \`${req.params.ID}\``);
+      //console.log(`Deleted class with id \`${req.params.ID}\``);
       res.status(204).json({ msg: 'success' });
     })
     .catch(err => {

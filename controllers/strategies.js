@@ -22,11 +22,11 @@ const opts = {
 
 const basicStrategy = new BasicStrategy((username, password, callback) => {
   let user;
-  console.log('strategies.js:22 - username', username);
+  //console.log('strategies.js:22 - username', username);
   Instructor.findOne({ username: username })
     .then(_user => {
       user = _user;
-      console.log('strategies.js:29 - _user:', _user);
+      //console.log('strategies.js:29 - _user:', _user);
       if (!user) {
         // Return a rejected promise so we break out of the chain of .thens.
         // Any errors like this will be handled in the catch block.
@@ -35,11 +35,11 @@ const basicStrategy = new BasicStrategy((username, password, callback) => {
           message: 'Incorrect username or password'
         });
       }
-      console.log("strategies.js:38 - user.validatePassword", user.validatePassword(password));
+      //console.log("strategies.js:38 - user.validatePassword", user.validatePassword(password));
       return user.validatePassword(password);
     })
     .then(isValid => {
-      console.log('strategies.js:42 - isValid:', isValid);
+      //console.log('strategies.js:42 - isValid:', isValid);
       if (!isValid) {
         return Promise.reject({
           reason: 'LoginError',
@@ -49,7 +49,7 @@ const basicStrategy = new BasicStrategy((username, password, callback) => {
       return callback(null, user);
     })
     .catch(err => {
-      console.log('strategies.js:52 - err:', err);
+      //console.log('strategies.js:52 - err:', err);
       if (err.reason === 'LoginError') {
         return callback(null, false, err);
       }
@@ -58,10 +58,10 @@ const basicStrategy = new BasicStrategy((username, password, callback) => {
 });
 
 const jwtStrategy = new JwtStrategy(opts, (payload, done) => {
-  console.log('strategies.js:68 - payload:', payload);
+  //console.log('strategies.js:68 - payload:', payload);
   Instructor.findById(payload.user._id, (err, user) => {
-    console.log('strategies.js:80 - err:', err);
-    console.log('strategies.js:81 - user:', user);
+    //console.log('strategies.js:80 - err:', err);
+    //console.log('strategies.js:81 - user:', user);
     if (err) {
       return done(err, false);
     }

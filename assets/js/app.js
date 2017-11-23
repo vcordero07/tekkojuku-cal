@@ -11,7 +11,7 @@ let hideShow = (toHide = [], toShow = []) => {
   });
 };
 let doLogin = (auth) => {
-  console.log('app.js doLogin auth:', auth);
+  //console.log('app.js doLogin auth:', auth);
   let doLoginJSONData = {
     "username": $('#username').val(),
     "password": $('#password').val(),
@@ -28,13 +28,13 @@ let doLogin = (auth) => {
       // datatype: "jsonp",
     })
     .done((data) => {
-      console.log('data:', data);
+      //console.log('data:', data);
       $.ajax({
         type: "GET",
         url: "/auth/getAuthToken",
       }).done(
         function(responseData) {
-          console.log('app.js responseData:', responseData);
+          //console.log('app.js responseData:', responseData);
           localStorage.setItem("token", responseData.tkn);
           localStorage.setItem("uid", responseData.instructorID);
           // qonsole.debug('app.js:62 - responseData:', responseData);
@@ -45,7 +45,7 @@ let doLogin = (auth) => {
 };
 
 let doSignup = (auth, role = usRole) => {
-  console.log('app.js doSignup:', auth, role);
+  //console.log('app.js doSignup:', auth, role);
   let doSignupJSONData = {
     "username": $('#username').val(),
     "password": $('#password').val(),
@@ -72,7 +72,7 @@ let doSignup = (auth, role = usRole) => {
 }
 
 let deleteUser = (userID) => {
-  console.log('app.js deleteUser:', userID);
+  //console.log('app.js deleteUser:', userID);
   $.ajax({
       type: "delete",
       url: `/instructors/${userID}`,
@@ -97,7 +97,7 @@ let deleteClasses = (list) => {
         },
       })
       .done((data) => {
-        qonsole.debug('msg: Classes deleted', data);
+        //qonsole.debug('msg: Classes deleted', data);
       });
   })
 
@@ -118,14 +118,14 @@ let deleteClassByID = (classID) => {
 }
 
 let updateClassEventByID = (classID) => {
-  console.log('classID:', classID);
+  //console.log('classID:', classID);
   let instID = $('select')["0"].value;
-  console.log($('input[type=date]')["0"].value);
-  console.log(`T${$('input[type=time]')["0"].value}:00.000Z`);
+  //console.log($('input[type=date]')["0"].value);
+  //console.log(`T${$('input[type=time]')["0"].value}:00.000Z`);
   // console.log('instID:', instID);
   let classDateTime = `${$('input[type=date]')["0"].value}T${$('input[type=time]')["0"].value}:00.000Z`;
   let classType = $('.active input').prop('id');
-  console.log('classType:', classType, classDateTime, instID);
+  //console.log('classType:', classType, classDateTime, instID);
   $.ajax({
       type: "PUT",
       url: `/calendar/${classID}`,
@@ -139,7 +139,7 @@ let updateClassEventByID = (classID) => {
       }
     })
     .done((data) => {
-      console.log('msg: class updated by id', data);
+      //console.log('msg: class updated by id', data);
       // alert('msg: User deleted', data);
       $(location).attr('href', '/calendar');
     });
@@ -152,7 +152,7 @@ let addClassEvent = () => {
   // qonsole.debug('instID:', instID);
   let classDateTime = `${$('input[type=date]')["0"].value}T${$('input[type=time]')["0"].value}:00.000Z`;
   let classType = $('.active input').prop('id');
-  console.log('classType:', classType);
+  //console.log('classType:', classType);
   // $('')
   $.ajax({
       type: "post",
@@ -184,14 +184,14 @@ let logoutUser = () => {
 }
 
 let getConvertTimeTo24 = (myDate) => {
-  console.log('mydate:', myDate);
+  //console.log('mydate:', myDate);
   let time = new Date(myDate);
   let hours = time.getUTCHours() > 12 ? time.getUTCHours() - 12 : time.getUTCHours();
   let am_pm = time.getUTCHours() >= 12 ? "PM" : "AM";
   hours = hours < 10 ? "0" + hours : hours;
   let minutes = time.getUTCMinutes() < 10 ? "0" + time.getUTCMinutes() : time.getUTCMinutes();
   time = hours + ":" + minutes + " " + am_pm;
-  console.log('time:', time);
+  //console.log('time:', time);
   const [ntime, nmodifier] = time.split(' ');
   let [nhours, nminutes] = ntime.split(':');
 
@@ -202,7 +202,7 @@ let getConvertTimeTo24 = (myDate) => {
   if (nmodifier === 'PM') {
     nhours = parseInt(nhours, 10) + 12;
   }
-  console.log("24time:", nhours + ':' + nminutes);
+  //console.log("24time:", nhours + ':' + nminutes);
   return nhours + ':' + nminutes;
 };
 
@@ -506,8 +506,8 @@ let createEventListers = () => {
             date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
             var dateStr = date.toISOString().substring(0, 10);
             var timeStr = getConvertTimeTo24($(event.currentTarget)["0"].attributes[2].value);
-            console.log('dateStr:', dateStr);
-            console.log('timeStr:', timeStr);
+            //console.log('dateStr:', dateStr);
+            //console.log('timeStr:', timeStr);
             $.ajax({
                 type: "get",
                 url: "/instructors/data",

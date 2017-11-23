@@ -59,7 +59,7 @@ app.use(function(req, res, next) {
 });
 
 app.use(express.static(path.resolve(__dirname, './assets')));
-console.log("server.js:53 - path", path.resolve(__dirname, './assets'));
+//console.log("server.js:53 - path", path.resolve(__dirname, './assets'));
 
 app.use(passport.initialize());
 passport.use(basicStrategy);
@@ -107,14 +107,14 @@ let server;
 
 function runServer(databaseUrl = DATABASE_URL, port = process.env.PORT || 3000) {
   return new Promise((resolve, reject) => {
-    console.log('server.js:92 - DATABASE_URL:', DATABASE_URL);
-    console.log('server.js:93 - mongoUrl', mongoUrl);
+    //console.log('server.js:92 - DATABASE_URL:', DATABASE_URL);
+    //console.log('server.js:93 - mongoUrl', mongoUrl);
     mongoose.connect(mongoUrl, { useMongoClient: true }, (err) => {
       if (err) {
         return reject(err);
       }
       server = app.listen(port, () => {
-          console.log(`server.js:101 - Your app is listening on port ${port}`);
+          //console.log(`server.js:101 - Your app is listening on port ${port}`);
           resolve();
         })
         .on('error', err => {
@@ -122,7 +122,7 @@ function runServer(databaseUrl = DATABASE_URL, port = process.env.PORT || 3000) 
           reject(err);
         });
     }).catch((err) => {
-      console.log("server.js:109", err);
+      //console.log("server.js:109", err);
     });
   });
 }
@@ -130,7 +130,7 @@ function runServer(databaseUrl = DATABASE_URL, port = process.env.PORT || 3000) 
 function closeServer() {
   return mongoose.disconnect().then(() => {
     return new Promise((resolve, reject) => {
-      console.log('server.js:117 - Closing server');
+      //console.log('server.js:117 - Closing server');
       server.close(err => {
         if (err) {
           return reject(err);

@@ -5,7 +5,7 @@ const instructorsRole = 2;
 const usersRole = 3;
 
 exports.newInstructor = (req, res) => {
-  console.log("instructor.controller.js:6", req.body);
+  //console.log("instructor.controller.js:6", req.body);
   req.body.role = parseInt(req.body.role);
   const requiredFields = ['username', 'email', 'password'];
   for (let i = 0; i < requiredFields.length; i++) {
@@ -38,7 +38,7 @@ exports.newInstructor = (req, res) => {
 exports.getAllInstructors = (req, res) => {
   let instInfo = {};
   Instructor.find({ "role": { $lt: usersRole } }).populate({ path: "calendarRef", options: { sort: { dateOccurrence: 1 } } }).exec().then(data => {
-    console.log('instructor.controller.js:34 -data', data);
+    //console.log('instructor.controller.js:34 -data', data);
     instInfo = data;
     res.status(200).render('../views/instructors', {
       "instructorData": instInfo
@@ -49,14 +49,14 @@ exports.getAllInstructors = (req, res) => {
 exports.getAllInstructorsData = (req, res) => {
   let instInfo = {};
   Instructor.find({ "role": { $lt: usersRole } }).exec().then(data => {
-    console.log('instructor.controller.js:34 -data', data);
+    //console.log('instructor.controller.js:34 -data', data);
     instInfo = data;
     res.status(200).json(instInfo);
   });
 };
 
 exports.getInstructorId = (req, res) => {
-  console.log('instructor.controller.js:56 - req, res:', req, res);
+  //console.log('instructor.controller.js:56 - req, res:', req, res);
   Instructor
     .findById(req.params.id)
     .then((data) => {
@@ -79,14 +79,14 @@ exports.updateInstructor = (req, res) => {
   }).then(data => {
     res.status(202).json(data);
   }).catch(err => {
-    console.log("instructor.controller.js:84 - err", err);
+    //console.log("instructor.controller.js:84 - err", err);
   });
 };
 
 
 exports.deleteInstructor = (req, res) => {
   Instructor.findByIdAndRemove(req.params.id).then(() => {
-    console.log(`instructor.controller.js:114 - Deleted instructor from the list \`${req.params.id}\``);
+    //console.log(`instructor.controller.js:114 - Deleted instructor from the list \`${req.params.id}\``);
     // res.status(204).end();
 
   }).then(() => {
