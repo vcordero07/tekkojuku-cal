@@ -29,35 +29,32 @@
   <%- include navbar.ejs %>
     <div class="main-content">
 
-
       <% if(false){ %>
-
         <!-- <div id="cal">
-        <div id="sub-cal">
+      <div id="sub-cal">
 
-          <div class="row">
-            <h2>Class Calendar</h2>
-            <div class="btn btn-primary  add-event-btn ">Add Event</div>
-          </div>
-          <br><br>
-          <% for(var i=0; i<calendarData.length; i++) {%>
-        <% var calArray=allClasses[i].split("|") %>
-          <a href="#" data-userid="<%= calendarData[i]._id%>" data-evdt="<%= calendarData[i].dateOccurrence %>" id="<%= calendarData[i]._id%>" class="event clearfix">
+      <div class="row">
+      <h2>Class Calendar</h2>
+      <div class="btn btn-primary  add-event-btn ">Add Event</div>
+      </div>
+      <br><br>
+      <% for(var i=0; i<calendarData.length; i++) {%>
+      <% var calArray=allClasses[i].split("|") %>
+      <a href="#" data-userid="<%= calendarData[i]._id%>" data-evdt="<%= calendarData[i].dateOccurrence %>" id="<%= calendarData[i]._id%>" class="event clearfix">
 
-            <%- calArray[0] %>
+      <%- calArray[0] %>
 
-              <%- calArray[1] %>
+      <%- calArray[1] %>
 
-                <div class="inst-info">
-                  <%= JSON.stringify(calendarData[i]._instructor) %>
-                </div>
-                <div class="event-type-title"><span class="event_type"><%= calendarData[i].content %></span>&nbsp;-&nbsp;<span class="event_title"><%= JSON.stringify(calendarData[i]._instructor).replace(/(.*username\":\")(\w.*)(",\"em.*)/g,"$2")%></span></div>
-          </a>
+      <div class="inst-info">
+      <%= JSON.stringify(calendarData[i]._instructor) %>
+      </div>
+      <div class="event-type-title"><span class="event_type"><%= calendarData[i].content %></span>&nbsp;-&nbsp;<span class="event_title"><%= JSON.stringify(calendarData[i]._instructor).replace(/(.*username\":\")(\w.*)(",\"em.*)/g,"$2")%></span></div>
+      </a>
 
-          <% } %>
-  </div>
-  </div> -->
-
+      <% } %>
+      </div>
+      </div> -->
         <% } %>
 
           <div class="calendar">
@@ -75,7 +72,7 @@
                   </a>
                 </div>
                 <%} %>
-                  <div class="btn btn-primary  add-event-btn " style="display: none">Add Event</div>
+                  <div class="btn btn-primary  add-event-btn " style="display: none">Add Class</div>
             </div>
           </div>
     </div>
@@ -123,7 +120,7 @@
           let calOptions = {
             customButtons: {
               addEventBtn: {
-                text: 'Add Event',
+                text: 'Add Class',
                 click: function() {
                   // alert('clicked the custom button!');
                   $('.add-event-btn').click();
@@ -328,7 +325,7 @@
             } else {
               calOptions.customButtons = {
                 addEventBtn: {
-                  text: 'Add Event',
+                  text: 'Add Class',
                   click: function() {
                     // alert('clicked the custom button!');
                     $('.add-event-btn').click();
