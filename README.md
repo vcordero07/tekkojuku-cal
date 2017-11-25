@@ -29,4 +29,4 @@ You can find Tekkojuku-Cal at [https://tekkojuku-cal.herokuapp.com/](https://tek
 ## Technical
 
 * The app was built using HTML, CSS, JavaScript, JQuery, Node.js, Express, MongoDB, Mongoose, Passport.js, etc.
-* Services by [mLab](https://mlab.com/), [Heroku](https://www.heroku.com/), [Travis CI](https://travis-ci.org/) | [FullCalendar](https://fullcalendar.io/)
+* Services by [mLab](https://mlab.com/) | [Heroku](https://www.heroku.com/) | [Travis CI](https://travis-ci.org/) | [FullCalendar](https://fullcalendar.io/)
