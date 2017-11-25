@@ -17,7 +17,7 @@ Aikido Tekkojuku Boston (ATJB) was founded to promote the practice and teaching 
 ---
 ## Screenshots
 
-![Screenshot-1](https://github.com/vcordero07/tekkojuku-cal/raw/master/assets/img/Screenshot-1-cal.png "Screenshot-1-Cal")
+![Screenshot-1](https://github.com/vcordero07/tekkojuku-cal/raw/master/assets/img/screenshot-1-cal.png "Screenshot-1-Cal")
 ![Screenshot-2](https://github.com/vcordero07/tekkojuku-cal/raw/master/assets/img/Screenshot-2-inst.png "Screenshot-2-Inst")
 
 ---
