@@ -1,4 +1,4 @@
-# <img src="https://github.com/vcordero07/tekkojuku-cal/raw/master/assets/img/tekkojuku-logo.png" width="75" height="75" /> [Tekkojuku-Cal](https://tekkojuku-cal.herokuapp.com/)
+# <img src="https://github.com/vcordero07/tekkojuku-cal/raw/master/assets/img/tekkojuku-logo.png" width="50" height="50" /> [Tekkojuku-Cal](https://tekkojuku-cal.herokuapp.com/)
 
 ---
 ## Table of Contents
