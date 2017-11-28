@@ -7,7 +7,7 @@ const should = chai.should();
 
 const { calendar } = require('../models/calendar.model')
 
-const { app, runServer, closeServer } = require('../app');
+const { app, runServer, closeServer } = require('../server');
 const { DATABASE_URL } = require('../config');
 const { TEST_DATABASE_URL } = require('../config');
 
