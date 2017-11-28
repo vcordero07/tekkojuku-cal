@@ -10,7 +10,7 @@ script:
 deploy:
   provider: heroku
   api_key:
-    secure: TEL7GWbXnzE/e9n+CdGY8wkMjudQgd4OEk4L1CuEnfPQs3U03L+8uwbVThbWUgmyQqeKBUPQRBQF2ch7UJO1YyTOKPhNn1HNK4LFjrtlCB9HVGFi4GqMZbRV6WJhZGcHe89MyUK+lJko+fJNdFQpIE84o0KS06Z9vWkWBs+OPvjEoQ5sSppqQrSXmzvLrq1ROmiKkQNYGC84LjCs7aXwhlyawVwgxS3qJzErhBuZMIggOZZEWvttIonwJfQGWze+3deKT9iJ504pdtVJCQzzTA1Ye9S+zEIod58Di2mm0d3HGSo098pO7hKBOsHIp99aCH21HkhB4tCoO7sSP3TnEGPi8hXaSyeuIXvcuPxe9XBnYYP0/GRbxsCkomCa/yBk/e5sjxAcdiMMk/YItExsbdCMDCxR0doT/UMOTMEAEtbKxnMzsfrM68NglAvASIFhH0W2ogLluIEOPXrLy+Id/cIvm+LFn7dGxGk7OCzbKnncMw4HZfBD6aJPpHBLBFTt2+GqgC9zqtBaH0kds5V1vbUi8wa7/tBeFndIUCGlg2va+25bmR9cTWDh2jkt204QEYQFvoxk+r9dsPM6wBk/GV6l1abLplsGaiEKqrS3pZZvObC+OvIuTtMdbx7b9xP/INuNr91aiXwI+2D+8I24rP0OxijxV/j69gzYnS7LzVk=
-  app: sleepy-reef-69636
+    secure: d7c50549-0e0b-4c87-913b-9831e1b94eff
+  app: tekkojuku-cal
   on:
     repo: vcordero07/tekkojuku-cal
