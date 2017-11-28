@@ -2,15 +2,15 @@ language: node_js
 node_js: node
 cache:
   directories:
-    - node_modules
+  - node_modules
 env:
-  - CI=true
+- CI=true
 script:
-  - npm test
+- npm test
 deploy:
   provider: heroku
   api_key:
-    secure: d7c50549-0e0b-4c87-913b-9831e1b94eff
+    secure: sRXUvV3q4/KQ8dB8Vj7DWC1TOkF1QCeXZg6YXeTplVhzV+gnkKuzCmf6yHH7x1U/F2TG+NGyJ5u4Cq9VcwHPwTStRcUIIeoV1R2SLmMhltuKdd9kyqMNc8PeINJuy8rfsrmHlSrpLYX2xgsNiGfnWoSGdE/QmO99LhjC1gKVRyaHQ06gEUoyUe7bB0b2vPs/vtPyzTXfAvQcG5pZZpOH4PyaMSO9ezIPiby5PtvkLaPb/HMUEeN54ydF94R9YlEHQolBmy4G5I3ARKvPgcfwyOYN3+mWhlyNba/ssOA1dhNX12rIiMTEXX3sPEVDVk1ZTYznxEpux70ZaMx36f0FoivvqITnNaTCzdtSp8HiQntAj8qVuovq/ST/BoA5f0obLvsgx2GJWU+X987yT2Mwng7gR0i3rVFyks6xDvDKMaZj52ElzwBEhvahIKWGJ06/oqC5C6NVDcqJwWH0/Bn9mE51PpqfPPh+9lVwtUyg7X9X94J2Ssbbpkakf8zHKp8fot5PqOhcKFqUdn12sg0xU2J5/na6Rzc907gsVoNTSKcXQt/3Ym+qPtczZYXwpgvVL9YAzf4wI7eioGg/GVXuScMsYxDrzyPwKFw2b8wjqyg6g8Vnyxz9YmE1PCOKaawKx2axRhpKUZqcsRpBDkBY/dfJVW6GooKox1HnkSn5jT0=
   app: tekkojuku-cal
   on:
     repo: vcordero07/tekkojuku-cal
