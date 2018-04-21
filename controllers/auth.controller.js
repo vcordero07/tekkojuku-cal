@@ -1,18 +1,20 @@
-const jwt = require('jsonwebtoken');
-const { Instructor } = require('../models/instructor.model');
-const passport = require('passport');
-const cookie = require('cookie');
+const jwt = require("jsonwebtoken");
+const { Instructor } = require("../models/instructor.model");
+const passport = require("passport");
+const cookie = require("cookie");
 let tkn;
 let instructorID;
 
 const createAuthToken = user => {
-  return jwt.sign({ user },
-    process.env.JWT_SECRET, {
+  return jwt.sign(
+    { user },
+    process.env.JWT_SECRET,
+    {
       subject: user.username,
       expiresIn: process.env.JWT_EXPIRY,
-      algorithm: 'HS256'
-    }, (err, token) => {
-
+      algorithm: "HS256"
+    },
+    (err, token) => {
       if (err) {
         //console.log('auth.controller.js:17 err:', err);
       } else {
@@ -26,8 +28,8 @@ const createAuthToken = user => {
         instructorID = user._id;
         //console.log('auth.controller.js:23 -user:', user);
       }
-
-    });
+    }
+  );
 };
 
 exports.login = (req, res) => {
@@ -36,7 +38,7 @@ exports.login = (req, res) => {
   // console.log("auth.controller.js:30", req.body);
   // console.log("auth.controller.js:31", req.user.apiRepr(), req.user.setToken());
   const authToken = createAuthToken(req.user);
-  return res.json({ "id": req.user._id }); // "msg": "Your log in request is in progress!"
+  return res.json({ id: req.user._id }); // "msg": "Your log in request is in progress!"
 };
 
 exports.getAuthToken = (req, res) => {
