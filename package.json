@@ -35,7 +35,7 @@
     "chai-http": "^3.0.0",
     "cross-env": "^5.1.1",
     "faker": "^4.1.0",
-    "mocha": "^3.5.0",
+    "mocha": "^8.3.0",
     "mockgoose": "^7.3.3"
   }
 }
